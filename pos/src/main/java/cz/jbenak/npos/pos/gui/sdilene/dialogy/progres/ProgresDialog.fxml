@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="700.0" styleClass="dialog" stylesheets="@progres_dialog.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.sdilene.dialogy.progres.ProgresDialogKontroler">
+   <effect>
+      <DropShadow />
+   </effect>
+   <top>
+      <HBox alignment="CENTER" prefHeight="67.0" prefWidth="600.0" styleClass="nadpis-titulek" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="nadpis-text" text="ČEKEJTE PROSÍM..." />
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <ProgressIndicator prefHeight="208.0" prefWidth="111.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="25.0" />
+         </BorderPane.margin>
+      </ProgressIndicator>
+   </left>
+   <center>
+      <Label fx:id="text" styleClass="text-zpravy" text="Label" wrapText="true" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="35.0" right="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </center>
+</BorderPane>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<GridPane fx:id="panelMenuDoklad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.registrace.hlavni.menu.dokladOtevren.MenuDokladOtevrenKontroler">
+  <columnConstraints>
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <stylesheets>
+      <URL value="@menu_doklad_otevren.css" />
+      <URL value="@../../../../hlavni.css" />
+   </stylesheets>
+   <padding>
+      <Insets bottom="15.0" />
+   </padding>
+   <children>
+      <Button minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlMnozstviStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="3">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zbozi_mnozstvi.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Upraví množství vybrané položky" />
+         </tooltip>
+      </Button>
+      <Button minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlStornoPolozkyStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zbozi_storno.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Stornuje (smaže) vybranou položku." />
+         </tooltip>
+      </Button>
+      <Button minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlPlatbaStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/doklad_zaplatit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Zaplatí rozpracovaný doklad." />
+         </tooltip>
+      </Button>
+      <Button minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlZahodDokladStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/doklad_zahozeni.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Zahodí rozpracovaný doklad." />
+         </tooltip>
+      </Button>
+      <Button layoutX="602.0" layoutY="15.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlOpakovatPolozkuStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="2">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zbozi_opakovat.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Zopakuje označenou položku." />
+         </tooltip>
+      </Button>
+      <Button layoutX="602.0" layoutY="124.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlRezimVratkyStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zbozi_vratka.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Aktivuje nebo deaktivuje režim vratky" />
+         </tooltip>
+      </Button>
+      <Button layoutX="602.0" layoutY="233.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlServerParkingStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/doklad_ulozit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Uloží právě rozpacovaný doklad na server." />
+         </tooltip>
+      </Button>
+      <Button layoutX="602.0" layoutY="341.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlParkovaniStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/doklad_parkovani.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Lokálně zaparkuje rozpracovaný doklad." />
+         </tooltip>
+      </Button>
+      <Button layoutX="435.0" layoutY="15.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlSlevaVybratStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="1">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zbozi_sleva_skupina.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Zobrazí výběr možných slev. Opakovaným stiskem lze výběr upravit." />
+         </tooltip>
+      </Button>
+      <Button layoutX="435.0" layoutY="124.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlSlevaOdebratStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zbozi_sleva_skupina_odebrat.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Odebere slevu u vybrané položky." />
+         </tooltip>
+      </Button>
+      <Button layoutX="435.0" layoutY="233.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlZmenaCenyStisknuta" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zmena_ceny.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Upraví celkovou, nebo jednotkovou cenu položky." />
+         </tooltip>
+      </Button>
+      <Button layoutX="435.0" layoutY="341.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlRegistrovatZakaznikaStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zakaznik.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Zaregistruje zákazníka" />
+         </tooltip>
+      </Button>
+      <Button layoutX="235.0" layoutY="15.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlHledatSortimnentStisknuto" prefHeight="100.0" prefWidth="150.0">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zbozi_hledat.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Zobrazí možnosti vyhledávání sortimentu." />
+         </tooltip>
+      </Button>
+      <Button layoutX="235.0" layoutY="124.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlInfoOPolozceStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.rowIndex="1">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zbozi_info.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="zobrazí informace o sortimentu." />
+         </tooltip>
+      </Button>
+      <Button layoutX="235.0" layoutY="233.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlZamknoutStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.rowIndex="2">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/zamek.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Zamkne pokladnu" />
+         </tooltip>
+      </Button>
+      <Button layoutX="235.0" layoutY="341.0" minHeight="100.0" minWidth="15.0" mnemonicParsing="false" onAction="#tlKalkulackaStisknuto" prefHeight="100.0" prefWidth="150.0" GridPane.rowIndex="3">
+         <graphic>
+            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/kalkulacka.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Zobrazí obchdonickou kalkulačku" />
+         </tooltip>
+      </Button>
+   </children>
+</GridPane>

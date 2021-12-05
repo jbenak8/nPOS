@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane onKeyPressed="#klavesaStisknuta" prefHeight="300.0" prefWidth="600.0" styleClass="dialog" stylesheets="@stav.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.start.stav.StavovyKontroler">
+   <children>
+      <ImageView fitHeight="88.0" fitWidth="249.0" layoutX="176.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../img/POSlogo.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="549.0" layoutY="6.0" mnemonicParsing="false" onAction="#tlZavritStisknuto" prefHeight="30.0" prefWidth="45.0" styleClass="tl-zavrit" stylesheets="@stav.css" text="×">
+         <tooltip>
+            <Tooltip text="Ukončit start programu a zavřít aplikaci." />
+         </tooltip>
+      </Button>
+      <Label fx:id="verze" alignment="CENTER" layoutX="200.0" layoutY="110.0" prefHeight="17.0" prefWidth="201.0" text="Verze:" textAlignment="CENTER">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <ProgressBar fx:id="stav" layoutX="16.0" layoutY="190.0" prefHeight="30.0" prefWidth="570.0" progress="0.21" styleClass="stav-ukazatel" />
+      <Label layoutX="16.0" layoutY="269.0" text="© 2019 Jan Benák" />
+      <Label fx:id="popisStav" layoutX="16.0" layoutY="161.0" prefHeight="17.0" prefWidth="570.0" text="Stav">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>

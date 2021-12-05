@@ -1,0 +1,357 @@
+/* fonty */
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: regular;
+    src: url("../../sdilene/fonty/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: medium;
+    src: url("../../sdilene/fonty/Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: bold;
+    src: url("../../sdilene/fonty/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url("../../sdilene/fonty/Roboto_Condensed/RobotoCondensed-Regular.ttf");
+}
+
+/*
+ * Empty Stylesheet file.
+ */
+.dialog {
+    /*-fx-effect: dropshadow(three-pass-box, derive(black, -20%), 10, 0, 4, 4);*/
+    -fx-background-insets: 6;
+    -fx-background-color: white;
+}
+/* záhlaví */
+.zahlavi {
+    -fx-background-insets: 6;
+    -fx-background-color: #EBEFF3;
+}
+
+/* zavírací tlačítko vpravo nahoře */
+.tl-zavrit {
+    -fx-background-insets: 6;
+    -fx-background-color: rgba(255,255,255,0);
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-style: solid;
+    -fx-border-color: #cc0000;
+    -fx-border-width: 3;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 26pt;
+    -fx-text-fill: #cc0000;
+}
+
+.tl-zavrit:hover {
+    -fx-background-color: #ff4d4d;
+    -fx-border-color: #ff4d4d;
+    -fx-font-size: 26pt;
+    -fx-text-fill: white;
+    -fx-transition:ease-in;
+    -fx-transition-duration:300ms
+}
+
+.tl-zavrit:pressed, .tl-zavrit:default:hover:pressed
+{
+    -fx-background-color: #990000;
+    -fx-border-color: #ff4d4d;
+    -fx-text-fill: white;
+}
+
+.tl-zavrit:focused
+{
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-zavrit:disabled, .tl-zavrit:default:disabled
+{
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255,255,255,0);
+    -fx-text-fill: #212121;
+}
+
+.tl-zavrit:default
+{
+    -fx-background-color: #990000;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-zavrit:default:hover{
+    -fx-background-color: #ff4d4d;
+    -fx-border-color: #ff4d4d;
+}
+/* Nadpis */
+.nadpis {
+    -fx-font-family: Roboto;
+    -fx-font-size: 20pt;
+    -fx-font-color: #3D4D65;
+}
+/* Vstupní pole */
+.pole {
+    -fx-font-family: Roboto;
+    -fx-font-size: 16pt;
+    -fx-font-color: #3D4D65;
+    -fx-background-insets: 2;
+    -fx-background-radius: 5;
+    -fx-background-color: #ECEFF4;
+    -fx-border-style: solid;
+    -fx-border-color: #C9D3DF;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
+
+.pole .content {
+    -fx-background-color: text-area-background ;
+    -fx-font-color: #3D4D65;
+}
+
+.pole:selected, .pole:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-width: 2;
+    -fx-border-width: 2;
+}
+
+.pole .content:focused {
+    -fx-background-color:  #ffffff ;
+}
+/*
+ * Potvrzovací tlačítko
+ */
+.tl-ok {
+    -fx-background-color: #03BD5B;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-border-color: #03BD5B;
+    -fx-font-size: 30pt;
+    -fx-text-fill: white;
+    -fx-font-family: Roboto;
+}
+
+.tl-ok:hover, tl-ok:focused:hover {
+    -fx-background-color: #04E06C;
+    -fx-text-fill: white;
+    -fx-transition: ease-in;
+    -fx-font-weight: bold;
+    -fx-transition-duration: 300ms;
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tl-ok:pressed, .tl-ok:focused:pressed, .tl-ok:default:hover:pressed, .tl-ok:focused:hover:pressed {
+    -fx-background-color: #029347;
+    -fx-text-fill: white;
+}
+
+.tl-ok:focused {
+    -fx-border-color: #004d00;
+    -fx-effect: dropshadow(three-pass-box, derive(#133926, 50%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-ok:focused:hover {
+    -fx-background-color: #04E06C;
+}
+
+.tl-ok:disabled, .tl-ok:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tl-ok:default {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-ok:default:hover {
+    -fx-background-color: #c6ecd9;
+}
+
+/*
+ * Storno tlačítko
+ */
+.tl-storno {
+    -fx-background-color: #D2335B;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-border-color: #800000;
+    -fx-font-size: 25pt;
+    -fx-text-fill: white;
+    -fx-font-family: Roboto;
+}
+
+.tl-storno:hover, tl-storno:focused:hover {
+    -fx-background-color: #ff6f85;
+    -fx-text-fill: white;
+    -fx-transition: ease-in;
+    -fx-font-weight: bold;
+    -fx-transition-duration: 300ms
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tl-storno:pressed, .tl-storno:focused:pressed, .tl-storno:focused:hover:pressed {
+    -fx-background-color: #922647;
+    -fx-text-fill: white;
+}
+
+.tl-storno:focused:hover {
+    -fx-background-color: #ff6f85;
+}
+
+.tl-storno:focused {
+    -fx-background-color: #D2335B;
+    -fx-effect: dropshadow(three-pass-box, derive(#b30000, 20%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-storno:disabled, .tl-storno:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tl-storno:default {
+    -fx-background-color: #D2335B;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-storno:default:hover {
+    -fx-background-color: #ffcccc;
+}
+
+/*
+ * Tlačítka čísel
+ */
+.tlacitko {
+    /*-fx-background-color: #ffffff;*/
+    -fx-background-color: #0082D5;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-style: solid;
+    /*-fx-border-width: 2;*/
+    -fx-border-width: 0;
+    -fx-border-color: #0082D5;
+    -fx-font-size: 20pt;
+    /*-fx-text-fill: #0082D5;*/
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Roboto Condensed";
+}
+
+#tl-klavesnice {
+    -fx-font-size: 60pt;
+}
+
+.tlacitko:hover, tlacitko:focused:hover {
+    -fx-background-color: #52bef7;
+    -fx-font-weight: bold;
+    -fx-transition: ease-in;
+    -fx-transition-duration: 300ms
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tlacitko:pressed, .tlacitko:focused:pressed, .tlacitko:default:hover:pressed, .tlacitko:focused:hover:pressed {
+    -fx-background-color: #0082D5;
+    -fx-font-weight: bold;
+}
+
+.tlacitko:focused {
+    -fx-border-color: #0082D5;
+    -fx-background-color: #0082D5;
+    -fx-effect: dropshadow(three-pass-box, derive(#00264d, 30%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tlacitko:focused:hover {
+    -fx-background-color: #52bef7;
+}
+
+.tlacitko:disabled, .tlacitko:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tlacitko:default {
+    -fx-background-color: #0082D5;
+    -fx-text-fill: #ffffff;
+}
+
+.tlacitko:default:hover {
+    -fx-background-color: #52bef7;
+}
+
+/*
+ * Mazací tlačítko
+ */
+.tl-umazat {
+    -fx-background-color: #e0c328;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-font-size: 18pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-family: Roboto;
+}
+
+.tl-umazat:hover, tl-umazat:focused:hover {
+    -fx-background-color: #f4d728;
+    -fx-text-fill: white;
+    -fx-transition: ease-in;
+    -fx-font-weight: bold;
+    -fx-transition-duration: 300ms;
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tl-umazat:pressed, .tl-umazat:focused:pressed, .tl-umazat:focused:hover:pressed {
+    -fx-background-color: #a28822;
+    -fx-text-fill: white;
+}
+
+.tl-umazat:focused:hover {
+    -fx-background-color: #f4d728;
+}
+
+.tl-umazat:focused {
+    -fx-border-color: #d2b300;
+    -fx-background-color: #e0c328;
+    -fx-effect: dropshadow(three-pass-box, derive(#4d4100, 90%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-umazat:disabled, .tl-umazat:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tl-umazat:default {
+    -fx-background-color: #e0c328;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-umazat:default:hover {
+    -fx-background-color: #fff7cc;
+}

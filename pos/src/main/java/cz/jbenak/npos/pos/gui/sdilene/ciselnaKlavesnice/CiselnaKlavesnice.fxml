@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="360.0" stylesheets="@cislena_klavesnice.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.sdilene.ciselnaKlavesnice.CiselnaKlavesniceKontroler">
+    <center>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="95.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="154.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="119.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Button mnemonicParsing="false" onAction="#tl_1_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="1" />
+                <Button mnemonicParsing="false" onAction="#tl_2_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="2" GridPane.columnIndex="1" />
+                <Button mnemonicParsing="false" onAction="#tl_3_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="3" GridPane.columnIndex="2" />
+                <Button mnemonicParsing="false" onAction="#tl_4_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="4" GridPane.rowIndex="1" />
+                <Button mnemonicParsing="false" onAction="#tl_5_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tl_6_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Button mnemonicParsing="false" onAction="#tl_7_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="7" GridPane.rowIndex="2" />
+                <Button mnemonicParsing="false" onAction="#tl_8_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Button mnemonicParsing="false" onAction="#tl_9_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <Button mnemonicParsing="false" onAction="#tl_0_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="0" GridPane.rowIndex="3" />
+                <Button mnemonicParsing="false" onAction="#tl_00_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="00" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Button mnemonicParsing="false" onAction="#tl_carka_stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-cislo" text="," GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            </children>
+        </GridPane>
+    </center>
+    <right>
+        <GridPane prefHeight="400.0" prefWidth="92.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="103.0" minHeight="90.0" prefHeight="90.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="128.0" minHeight="87.0" prefHeight="92.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="212.0" minHeight="10.0" prefHeight="174.0" valignment="TOP" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Button mnemonicParsing="false" onAction="#tlBackspaceStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-umazat" text="C">
+                    <GridPane.margin>
+                        <Insets top="5.0" />
+                    </GridPane.margin>
+                </Button>
+                <Button graphicTextGap="0.0" maxHeight="78.0" maxWidth="80.0" minHeight="75.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlSmazatStisknuto" prefHeight="75.0" prefWidth="80.0" styleClass="tl-storno" text="❌" wrapText="true" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets top="3.0" />
+                    </GridPane.margin>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#tlPotvrdStisknuto" prefHeight="170.0" prefWidth="80.0" styleClass="tl-ok" text="✓" GridPane.rowIndex="2" />
+            </children>
+        </GridPane>
+    </right>
+</BorderPane>

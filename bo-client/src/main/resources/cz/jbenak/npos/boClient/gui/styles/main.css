@@ -1,0 +1,21 @@
+/* Background */
+
+.dialog-main-background {
+    -fx-background-color: white;
+}
+
+.dialog-button-ok {
+    -fx-border-color: #008a1a;
+    -fx-border-radius: 5;
+    /*-fx-border-insets: 2;*/
+}
+
+.dialog-button-cancel {
+    -fx-border-color: #c30000;
+    -fx-border-radius: 5;
+}
+
+.dialog-button-ok:focused, .dialog-button-cancel:focused {
+    -fx-border-radius: 5;
+    -fx-border-width:3;
+}

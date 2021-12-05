@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#klavesaStisknuta" prefHeight="670.0" prefWidth="520.0" styleClass="dialog" stylesheets="@zadavaci_dialog.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.sdilene.zadavaciDialog.ZadavaciDialogKontroler">
+    <effect>
+        <DropShadow />
+    </effect>
+    <top>
+        <BorderPane prefHeight="180.0" prefWidth="520.0" styleClass="zahlavi" BorderPane.alignment="CENTER">
+            <left>
+                <ImageView fx:id="obrazek" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets bottom="5.0" left="16.0" right="5.0" top="16.0" />
+                    </BorderPane.margin>
+               <image>
+                  <Image url="@img/zbozi_mnozstvi_velke.png" />
+               </image>
+                </ImageView>
+            </left>
+            <center>
+                <Label fx:id="popis" alignment="CENTER" contentDisplay="CENTER" prefHeight="157.0" prefWidth="302.0" styleClass="nadpis" text="Zadejte prosím množství této položky" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="5.0" />
+                    </BorderPane.margin>
+                </Label>
+            </center>
+            <right>
+                <Button minHeight="50.0" mnemonicParsing="false" onAction="#tlZavritStisknuto" prefWidth="50.0" styleClass="tl-zavrit" text="×" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="22.0" />
+                    </BorderPane.margin>
+                </Button>
+            </right>
+        </BorderPane>
+    </top>
+    <center>
+        <GridPane prefHeight="495.0" prefWidth="520.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="77.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="380.0" vgrow="SOMETIMES" />
+            <RowConstraints />
+            </rowConstraints>
+            <children>
+                <fx:include fx:id="ciselnaKlavesnice" source="../ciselnaKlavesnice/CiselnaKlavesnice.fxml" GridPane.rowIndex="1" />
+            <GridPane prefHeight="106.0" prefWidth="488.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="419.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="69.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                      <TextField fx:id="pole" maxWidth="350.0" styleClass="pole" GridPane.rowIndex="0" />
+                  <Label fx:id="popisZadani" styleClass="nadpis" text="Label" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Label>
+               </children>
+            </GridPane>
+            </children>
+            <padding>
+                <Insets bottom="16.0" left="16.0" right="16.0" top="5.0" />
+            </padding>
+        </GridPane>
+    </center>
+</BorderPane>

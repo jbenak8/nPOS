@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#klavesaStisknuta" prefHeight="768.0" prefWidth="1024.0" styleClass="dialog" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.registrace.hlavni.zobrazeniSkupinSortimentu.ZobrazeniSkupinSortimentuKontroler">
+   <effect>
+      <DropShadow />
+   </effect>
+   <top>
+      <BorderPane prefHeight="100.0" styleClass="zahlavi" BorderPane.alignment="CENTER">
+         <center>
+            <Label styleClass="nadpis" text="Seznam skupin sortimentu" BorderPane.alignment="CENTER" />
+         </center>
+         <right>
+            <Button minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#tlZavritStisknuto" styleClass="tl-zavrit" text="×" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="16.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+         <left>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../vyhledaniSortimentu/img/hledat.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets left="16.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </left>
+      </BorderPane>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="106.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="712.0" layoutY="23.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlPolozkaDoluStisknuto" styleClass="tlacitko">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/polozka_dolu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlPolozkaNahoruStisknuto" styleClass="tlacitko">
+               <HBox.margin>
+                  <Insets right="175.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/polozka_nahoru.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minHeight="80.0" minWidth="140.0" mnemonicParsing="false" onAction="#tlOkStisknuto" styleClass="tl-ok" text="✓" />
+            <Button minHeight="80.0" minWidth="140.0" mnemonicParsing="false" onAction="#tlNeStisknuto" styleClass="tl-storno" text="❌">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button layoutX="332.0" layoutY="23.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlStranaDoluStisknuto" styleClass="tlacitko">
+               <HBox.margin>
+                  <Insets left="175.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/strana_dolu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="672.0" layoutY="23.0" minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlStranaNahoruStisknuto" styleClass="tlacitko">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/strana_nahoru.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="16.0" right="16.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="16.0" right="16.0" top="5.0" />
+         </BorderPane.margin>
+         <children>
+            <HBox alignment="CENTER" prefHeight="145.0" prefWidth="992.0">
+               <children>
+                  <TextField fx:id="poleFiltr" minHeight="80.0" prefHeight="80.0" prefWidth="826.0" styleClass="pole">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlSmazatStisknuto" styleClass="tlacitko">
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../seznamSortimentu/img/obnovit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlZobrazitKlavesniciStisknuto" styleClass="tlacitko">
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../vyhledaniSortimentu/img/klavesnice.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <TableView fx:id="tabulka" onMouseClicked="#tabulkaKliknuto" prefHeight="455.0" prefWidth="992.0" styleClass="tabulka">
+              <columns>
+                <TableColumn fx:id="slId" prefWidth="225.0" text="ID skupiny" />
+                <TableColumn fx:id="slSubId" prefWidth="225.0" text="ID nadřazené skupiny" />
+                  <TableColumn fx:id="slNazev" prefWidth="540.0" text="Název" />
+              </columns>
+            </TableView>
+            <HBox prefHeight="22.0" prefWidth="992.0">
+               <children>
+                  <Label fx:id="popisPocetPolozek" styleClass="popis" text="Label" />
+                  <Label fx:id="popisFiltrDle" styleClass="popis" text="Label">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <stylesheets>
+      <URL value="@../../../hlavni.css" />
+      <URL value="@zobrazeni_skupin_sortimentu.css" />
+   </stylesheets>
+</BorderPane>

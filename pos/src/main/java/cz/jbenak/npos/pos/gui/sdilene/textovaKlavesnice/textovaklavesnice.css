@@ -1,0 +1,336 @@
+/* fonty */
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url("../fonty/Roboto_Condensed/RobotoCondensed-Regular.ttf");
+}
+
+.dialog {
+    /*-fx-effect: dropshadow(three-pass-box, derive(black, -20%), 10, 0, 4, 4);*/
+    -fx-background-insets: 6;
+    -fx-background-color: white;
+}
+
+.tl-storno {
+    -fx-background-color: #D2335B;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-border-color: #800000;
+    -fx-font-size: 25pt;
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto Condensed";
+}
+
+.tl-storno:hover, tl-storno:focused:hover {
+    -fx-background-color: #ff6f85;
+    -fx-text-fill: white;
+    -fx-transition: ease-in;
+    -fx-font-weight: bold;
+    -fx-transition-duration: 300ms
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tl-storno:pressed, .tl-storno:focused:pressed, .tl-storno:focused:hover:pressed {
+    -fx-background-color: #922647;
+    -fx-text-fill: white;
+}
+
+.tl-storno:focused:hover {
+    -fx-background-color: #ff6f85;
+}
+
+.tl-storno:focused {
+    -fx-background-color: #D2335B;
+    -fx-effect: dropshadow(three-pass-box, derive(#b30000, 20%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-storno:disabled, .tl-storno:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tl-storno:default {
+    -fx-background-color: #D2335B;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-storno:default:hover {
+    -fx-background-color: #ffcccc;
+}
+
+/*
+ * Mazací tlačítko
+ */
+.tl-navigace {
+    -fx-background-color: #e0c328;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-font-size: 18pt;
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto Condensed";
+}
+
+.tl-navigace:hover, tl-umazat:focused:hover {
+    -fx-background-color: #f4d728;
+    -fx-text-fill: white;
+    -fx-transition: ease-in;
+    -fx-font-weight: bold;
+    -fx-transition-duration: 300ms;
+}
+
+.tl-navigace:pressed, .tl-navigace:focused:pressed, .tl-navigace:focused:hover:pressed {
+    -fx-background-color: #a28822;
+    -fx-text-fill: white;
+}
+
+.tl-navigace:focused:hover {
+    -fx-background-color: #f4d728;
+}
+
+.tl-navigace:focused {
+    -fx-border-color: #d2b300;
+    -fx-background-color: #e0c328;
+    -fx-effect: dropshadow(three-pass-box, derive(#4d4100, 90%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-navigace:disabled, .tl-navigace:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tl-navigace:default {
+    -fx-background-color: #e0c328;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-navigace:default:hover {
+    -fx-background-color: #fff7cc;
+}
+
+/*
+ * Tlačítka čísel
+ */
+.tlacitko {
+    /*-fx-background-color: #ffffff;*/
+    -fx-background-color: #0082D5;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-style: solid;
+    /*-fx-border-width: 2;*/
+    -fx-border-width: 0;
+    -fx-border-color: #0082D5;
+    -fx-font-size: 20pt;
+    /*-fx-text-fill: #0082D5;*/
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Roboto Condensed";
+}
+
+.tlacitko:hover, tlacitko:focused:hover {
+    -fx-background-color: #52bef7;
+    -fx-font-weight: bold;
+    -fx-transition: ease-in;
+    -fx-transition-duration: 300ms
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tlacitko:pressed, .tlacitko:focused:pressed, .tlacitko:default:hover:pressed, .tlacitko:focused:hover:pressed {
+    -fx-background-color: #0082D5;
+    -fx-font-weight: bold;
+}
+
+.tlacitko:focused {
+    -fx-border-color: #0082D5;
+    -fx-background-color: #0082D5;
+    -fx-effect: dropshadow(three-pass-box, derive(#00264d, 30%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tlacitko:focused:hover {
+    -fx-background-color: #52bef7;
+}
+
+.tlacitko:disabled, .tlacitko:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tlacitko:default {
+    -fx-background-color: #0082D5;
+    -fx-text-fill: #ffffff;
+}
+
+.tlacitko:default:hover {
+    -fx-background-color: #52bef7;
+}
+
+/*
+ * Tlačítka zpět a vpřed
+ */
+.tlacitko-fce {
+    /*-fx-background-color: #ffffff;*/
+    -fx-background-color: #03BD5B;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-style: solid;
+    /*-fx-border-width: 2;*/
+    -fx-border-width: 0;
+    -fx-border-color: #03BD5B;
+    -fx-font-size: 20pt;
+    /*-fx-text-fill: #0082D5;*/
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Roboto Condensed";
+}
+
+.tlacitko-fce:hover, tlacitko-fce:focused:hover {
+    -fx-background-color: #04E06C;
+    -fx-font-weight: bold;
+    -fx-transition: ease-in;
+    -fx-transition-duration: 300ms
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tlacitko-fce:pressed, .tlacitko-fce:focused:pressed, .tlacitko-fce:default:hover:pressed, .tlacitko-fce:focused:hover:pressed {
+    -fx-background-color: #029347;
+    -fx-font-weight: bold;
+}
+
+.tlacitko-fce:focused {
+    -fx-border-color: #004d00;
+    -fx-effect: dropshadow(three-pass-box, derive(#133926, 30%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tlacitko-fce:focused:hover {
+    -fx-background-color: #04E06C;
+}
+
+.tlacitko-fce:disabled, .tlacitko-fce:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tlacitko-fce:default {
+    -fx-background-color: #03BD5B;
+    -fx-text-fill: #ffffff;
+}
+
+.tlacitko:default:hover {
+    -fx-background-color: #04E06C;
+}
+
+/*
+.mainFxmlClass {
+    -fx-font-weight: bolder;
+    -fx-font-size: 16pt;
+    -fx-margin: 5px;
+}
+
+.anchorPane {
+     -fx-effect: dropshadow(three-pass-box, derive(cadetblue, -20%), 10, 0, 4, 4);
+-fx-background-color: derive(cadetblue, -20%);
+-fx-background-insets: 12;
+-fx-background-radius: 6;
+}
+
+.mainFxmlClass .text {
+    -fx-effect: dropshadow( gaussian , white , 0, 0.0 , 0 , 1 );
+}
+
+#tl_esc {
+    -fx-background-color:
+        #f5496e,
+        linear-gradient(#fcd8d5, #f8a198),
+        linear-gradient(#ffb090 0%, #ff6050 100%);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+}
+
+#tl_esc:hover {
+    -fx-background-color:
+        #f5496e,
+        linear-gradient(#fcd8d5, #f8a198),
+        linear-gradient(#ffc8b2 0%, #ffa299 100%);
+}
+
+#tl_esc:armed {
+    -fx-background-color:
+        #f5496e,
+        linear-gradient(#fcd8d5, #f8a198),
+        linear-gradient(#ff8a5b 0%, #ff2e19 100%);
+}
+
+#tl_esc:focused {
+    -fx-background-color:
+        #f5496e,
+        linear-gradient(#fcd8d5, #f8a198),
+        linear-gradient(#ffb090 0%, #ff6050 100%);
+    -fx-background-insets: 0,2,4;
+}
+
+.tl_home_del {
+    -fx-font-size: 13pt;
+    -fx-background-color: 
+        #ffff99,
+        linear-gradient(#f5e345, #f5cf45),
+        linear-gradient(#f5f089 0%, #ffc149 100%);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+}
+
+.tl_home_del:hover {
+    -fx-font-size: 13pt;
+    -fx-background-color:
+        #ffff99,
+        linear-gradient(#f5e345, #f5cf45),
+        linear-gradient(#f7f3a5 0%, #ffcc6b 100%);
+}
+
+.tl_home_del:armed {
+    -fx-font-size: 13pt;
+    -fx-background-color:
+        #ffff99,
+        linear-gradient(#f5e345, #f5cf45),
+        linear-gradient(#f0e955 0%, #ffaf14 100%);
+}
+
+#tl_end {
+    -fx-background-color: 
+        #ffff99,
+        linear-gradient(#f5e345, #f5cf45),
+        linear-gradient(#f5f089 0%, #ffc149 100%);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+}
+
+#tl_end:hover {
+    -fx-background-color:
+        #ffff99,
+        linear-gradient(#f5e345, #f5cf45),
+        linear-gradient(#f7f3a5 0%, #ffcc6b 100%);
+}
+
+#tl_end:armed {
+    -fx-background-color:
+        #ffff99,
+        linear-gradient(#f5e345, #f5cf45),
+        linear-gradient(#f0e955 0%, #ffaf14 100%);
+}*/

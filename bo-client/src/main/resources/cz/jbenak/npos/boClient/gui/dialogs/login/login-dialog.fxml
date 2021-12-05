@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="400.0" prefWidth="400.0" styleClass="dialog-main-background" stylesheets="@../../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.dialogs.login.LoginDialogController">
+    <top>
+        <ImageView fitHeight="113.0" fitWidth="273.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <image>
+                <Image url="@../../img/BOlogo.png" />
+            </image>
+        </ImageView>
+    </top>
+    <bottom>
+        <Label fx:id="info" text="Klient nBO verze 1.0.0.0 © Jan Benák 2021" textFill="#656565" BorderPane.alignment="CENTER_LEFT">
+            <BorderPane.margin>
+                <Insets bottom="15.0" left="15.0" />
+            </BorderPane.margin>
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+        </Label>
+    </bottom>
+    <center>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Přihlaste se prosím">
+                            <GridPane.margin>
+                                <Insets left="75.0" />
+                            </GridPane.margin>
+                            <font>
+                                <Font size="23.0" />
+                            </font>
+                        </Label>
+                        <FontIcon iconLiteral="fth-user" iconSize="52" />
+                        <MFXTextField fx:id="fieldUserName" lineStrokeWidth="1.0" maxWidth="267.0" prefHeight="25.0" prefWidth="267.0" promptText="Vaše uživatelské jméno" validated="true" validatorTitle="Uživatelské jméno musí být vyplněno." viewOrder="1.0" GridPane.rowIndex="1" />
+                        <MFXPasswordField fx:id="fieldPassword" allowCopy="false" allowCut="false" lineStrokeWidth="1.0" maxWidth="267.0" onKeyTyped="#keyPressed" prefHeight="25.0" prefWidth="267.0" promptText="Vaše heslo" validated="true" validatorTitle="Heslo musí být vyplněno." GridPane.rowIndex="2" />
+                    </children>
+                </GridPane>
+                <HBox alignment="CENTER" prefHeight="55.0" prefWidth="300.0">
+               <children>
+                  <MFXButton fx:id="btnOK" buttonType="RAISED" defaultButton="true" minHeight="40.0" minWidth="100.0" onAction="#btnOkPressed" rippleAnimateShadow="true" rippleColor="#84d391" styleClass="dialog-button-ok" text="OK" textFill="#008a1a" viewOrder="3.0">
+                     <graphic>
+                        <FontIcon fill="#008a1a" iconLiteral="fth-check-circle" iconSize="24" wrappingWidth="30.0" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton buttonType="RAISED" cancelButton="true" minHeight="40.0" minWidth="100.0" onAction="#btnCancelPressed" rippleAnimateShadow="true" rippleColor="#d37979" styleClass="dialog-button-cancel" text="Storno" textFill="#c30000" viewOrder="4.0">
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon fill="#c30000" iconLiteral="fth-x-circle" iconSize="24" wrappingWidth="30.0" />
+                     </graphic>
+                  </MFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+                </HBox>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+            </BorderPane.margin>
+        </VBox>
+    </center>
+</BorderPane>

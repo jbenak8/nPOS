@@ -1,0 +1,117 @@
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url("../../sdilene/fonty/Roboto_Condensed/RobotoCondensed-Light.ttf");
+}
+
+/* Pruh s celkovou částkou */
+.panel-celkem {
+    -fx-background-color: #374355;
+    -fx-font-family: Roboto;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5;
+}
+
+.celkem-text {
+    -fx-font-size: 32pt;
+    -fx-text-fill: #ffffff;
+}
+
+.celkem-popis {
+    -fx-font-size: 18pt;
+    -fx-text-fill: #ffffff;
+}
+
+/* Informace o slevách */
+.panel-sleva {
+    -fx-border-color: #374355;
+    -fx-border-width: 2;
+    -fx-font-family: "Roboto Condensed";
+    -fx-border-radius: 5;
+}
+
+.nadpis-sleva-text {
+    font-family: Roboto;
+    -fx-font-size: 13pt;
+    -fx-text-fill: #374355;
+}
+
+.popis-sleva-text {
+    font-family: "Roboto Condensed";
+    -fx-font-size: 16pt;
+    -fx-text-fill: #374355;
+}
+
+.celkem-sleva-text {
+    font-family: "Roboto Condensed";
+    -fx-font-size: 24pt;
+    -fx-text-fill: #374355;
+}
+
+/* Registrační pole */
+.pole {
+    -fx-font-family: Roboto;
+    -fx-font-size: 16pt;
+    -fx-font-color: #3D4D65;
+    -fx-background-insets: 2;
+    -fx-background-radius: 5;
+    -fx-background-color: #ECEFF4;
+    -fx-border-style: solid;
+    -fx-border-color: #C9D3DF;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+}
+
+.pole:selected, .pole:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-width: 4;
+}
+
+/* Placeholder */
+.placeholder-doklad {
+    -fx-font-family: Roboto;
+    -fx-font-size: 48pt;
+    -fx-text-fill: #cccccc;
+}
+
+/* položky v dokladu */
+.list-cell:selected, .list-cell:selected:filled {
+    -fx-background-color: #3d4d65;
+
+}
+
+.list-cell:selected .text, .list-cell:selected:filled .text {
+    -fx-text-fill: #ffffff;
+}
+
+.list-cell:even {
+    -fx-background-color: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #cad3df;
+    -fx-text-fill: #374355;
+}
+
+.list-view:focused {
+    -fx-text-fill: #374355;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-border-width: 0px;
+    -fx-light-text-color: #ffffff;
+    -fx-mid-text-color: #374355;
+    -fx-dark-text-color: #374355;
+}
+
+.list-cell:selected {
+    -fx-background-color: #374355;
+    -fx-dark-text-color: #ffffff;
+    -fx-mid-text-color: #ffffff;
+}
+
+.list-cell:focused {
+    -fx-background-color: #374355;
+    -fx-border-width: 0px;
+}

@@ -1,0 +1,160 @@
+/* fonty */
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: regular;
+    src: url("../../fonty/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: medium;
+    src: url("../../fonty/Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: bold;
+    src: url("../../fonty/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url("../../fonty/Roboto_Condensed/RobotoCondensed-Regular.ttf");
+}
+
+.dialog {
+    /*-fx-effect: dropshadow(three-pass-box, derive(black, -20%), 10, 0, 4, 4);*/
+    -fx-background-insets: 6;
+    -fx-background-color: #ffffff;
+}
+
+.nadpis-titulek {
+    -fx-background-insets: 6;
+    -fx-background-color: #EBEFF3;
+    -fx-height: 72px;
+}
+
+.nadpis-text {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 20pt;
+    -fx-text-fill: #3D4D65;
+}
+
+.text-zpravy {
+    -fx-font-family: Roboto;
+    -fx-font-size: 16pt;
+    -fx-font-color: #4d4d4d;
+}
+
+/*
+ * Potvrzovací tlačítko
+ */
+.tl-ok {
+    -fx-background-color: #03BD5B;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-border-color: #03BD5B;
+    -fx-font-size: 30pt;
+    -fx-text-fill: white;
+    -fx-font-family: Roboto;
+}
+
+.tl-ok:hover, tl-ok:focused:hover {
+    -fx-background-color: #04E06C;
+    -fx-text-fill: white;
+    -fx-transition: ease-in;
+    -fx-font-weight: bold;
+    -fx-transition-duration: 300ms;
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tl-ok:pressed, .tl-ok:focused:pressed, .tl-ok:default:hover:pressed, .tl-ok:focused:hover:pressed {
+    -fx-background-color: #029347;
+    -fx-text-fill: white;
+}
+
+.tl-ok:focused {
+    -fx-border-color: #004d00;
+    -fx-effect: dropshadow(three-pass-box, derive(#133926, 50%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-ok:focused:hover {
+    -fx-background-color: #04E06C;
+}
+
+.tl-ok:disabled, .tl-ok:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tl-ok:default {
+    -fx-background-color: #03BD5B;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-ok:default:hover {
+    -fx-background-color: #04E06C;
+}
+
+.button:default:hover{
+    -fx-background-color: #03BD5B;
+}
+/* zavírací tlačítko vpravo nahoře */
+.tl-zavrit {
+    -fx-background-insets: 6;
+    -fx-background-color: rgba(255,255,255,0);
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-style: solid;
+    -fx-border-color: #cc0000;
+    -fx-border-width: 3;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 26pt;
+    -fx-text-fill: #cc0000;
+}
+
+.tl-zavrit:hover {
+    -fx-background-color: #ff4d4d;
+    -fx-border-color: #ff4d4d;
+    -fx-font-size: 26pt;
+    -fx-text-fill: white;
+    -fx-transition:ease-in;
+    -fx-transition-duration:300ms
+}
+
+.tl-zavrit:pressed, .tl-zavrit:default:hover:pressed
+{
+    -fx-background-color: #990000;
+    -fx-border-color: #ff4d4d;
+    -fx-text-fill: white;
+}
+
+.tl-zavrit:focused
+{
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-zavrit:disabled, .tl-zavrit:default:disabled
+{
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255,255,255,0);
+    -fx-text-fill: #212121;
+}
+
+.tl-zavrit:default
+{
+    -fx-background-color: #990000;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-zavrit:default:hover{
+    -fx-background-color: #ff4d4d;
+    -fx-border-color: #ff4d4d;
+}

@@ -1,0 +1,49 @@
+/* fonty */
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: regular;
+    src: url("../../../sdilene/fonty/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: medium;
+    src: url("../../../sdilene/fonty/Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: bold;
+    src: url("../../../sdilene/fonty/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url("../../../sdilene/fonty/Roboto_Condensed/RobotoCondensed-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Condensed Light";
+    -fx-font-weight: bold;
+    src: url("../../../sdilene/fonty/Roboto_Condensed/RobotoCondensed-Light.ttf");
+}
+
+/* Globální */
+.polozka {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 16pt;
+    /*-fx-text-fill: #374355;*/
+}
+
+/* Cena celkem */
+.celkem {
+    -fx-font-size: 24pt;
+    -fx-font-family: "Roboto Condensed";
+}
+
+/* Popis položky */
+.polozka-popis {
+    -fx-font-family: "Roboto Condensed Light";
+    -fx-font-size: 12pt;
+    /*-fx-text-fill: #374355;*/
+}

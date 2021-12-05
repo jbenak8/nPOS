@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<?import java.net.URL?>
+<BorderPane onKeyPressed="#klavesaStisknuta" prefHeight="600.0" prefWidth="800.0" styleClass="dialog" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.zakaznik.registracniFunkce.FunkceRegistrovanehoZakaznikaKontroler">
+   <stylesheets>
+      <URL value="@../../hlavni.css" />
+      <URL value="@funkce_registrovaneho_zakaznika.css" />
+   </stylesheets>
+   <effect>
+      <DropShadow />
+   </effect>
+   <top>
+      <BorderPane prefHeight="100.0" prefWidth="200.0" styleClass="zahlavi" BorderPane.alignment="CENTER">
+         <right>
+            <Button mnemonicParsing="false" onAction="#zavriDialog" prefHeight="60.0" prefWidth="60.0" styleClass="tl-zavrit" text="x" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="16.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+         <left>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../../registrace/hlavni/menu/registracePripravena/img/zakaznik.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets left="16.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </left>
+         <center>
+            <Label styleClass="nadpis" text="ZAREGISTROVANÝ ZÁKAZNÍK" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="tlInfo" mnemonicParsing="false" onAction="#tlInfoStisknuto" prefHeight="80.0" prefWidth="140.0">
+               <HBox.margin>
+                  <Insets right="25.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/zakaznik_info.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="tlOdregistrovat" mnemonicParsing="false" onAction="#tlOdregistrovatStisknuto" prefHeight="80.0" prefWidth="140.0">
+               <graphic>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/zakaznik_odregistrace.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="16.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="16.0" right="16.0" />
+         </BorderPane.margin>
+         <children>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="665.0" minWidth="10.0" prefWidth="656.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="popisky" text="Číslo:" />
+                  <Label styleClass="popisky" text="Firma:" GridPane.rowIndex="1" />
+                  <Label fx:id="popisCislo" styleClass="detail-hlavni" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="popisFirma" styleClass="detail-hlavni" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="280.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="120.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="280.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="popisky" text="Jméno:" />
+                  <Label styleClass="popisky" text="IČ:" GridPane.rowIndex="1" />
+                  <Label fx:id="popisJmeno" styleClass="detail-hlavni" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="popisIc" styleClass="detail-vedlejsi" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label styleClass="popisky" text="Příjmení:" GridPane.columnIndex="2" />
+                  <Label styleClass="popisky" text="DIČ:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="popisPrijmeni" styleClass="detail-hlavni" text="Label" GridPane.columnIndex="3" />
+                  <Label fx:id="popisDic" styleClass="detail-vedlejsi" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </GridPane>
+            <Line endX="650.0" startX="-90.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </VBox.margin>
+            </Line>
+            <GridPane>
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="120.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="popisky" text="Ulice:" />
+                  <Label styleClass="popisky" text="Město:" GridPane.rowIndex="1" />
+                  <Label fx:id="popisUlice" styleClass="detail-vedlejsi" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="popisMesto" styleClass="detail-vedlejsi" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label styleClass="popisky" text="Č.p./č.or.:" GridPane.columnIndex="2" />
+                  <Label styleClass="popisky" text="PSČ:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="popisCpCor" styleClass="detail-vedlejsi" text="Label" GridPane.columnIndex="3" />
+                  <Label fx:id="popisPsc" styleClass="detail-vedlejsi" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="popisky" text="Stát:" />
+                  <Label fx:id="popisStat" styleClass="detail-vedlejsi" text="Label" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

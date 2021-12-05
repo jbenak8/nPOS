@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuration file for Log4J 2 API, which is used for application logging. -->
+<!-- IMPORTANT INFORMATION FOR FURTHER CONSULTANTS: Neser se do toho, pokud tomu nerozumíš a nech to jak to je, nebo rozjebeš celý logování! -->
+<Configuration>
+    <Properties>
+        <Property name="baseDir">log</Property>
+        <Property name="stdLog">standard.log</Property>
+        <Property name="errLog">error.log</Property>
+        <Property name="boLog">bo.log</Property>
+        <Property name="terminalLog">terminal.log</Property>
+    </Properties>
+    <Appenders>
+		<param name="encoding" value="UTF-8" />
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--PatternLayout pattern="%highlight{%d{dd.MM.yyyy HH:mm:ss.SSS} [%t] %-5level %logger{36}: %msg%n}{INFO=normal, ERROR=red, WARN=yellow, FATAL=magenta, DEBUG=green}" charset="CP852"/-->
+			<PatternLayout pattern="%highlight{%d{dd.MM.yyyy HH:mm:ss.SSS} [%t] %-5level %logger{36}: %msg%n}{INFO=normal, ERROR=red, WARN=yellow, FATAL=magenta, DEBUG=green}"/>
+        </Console>
+        <RollingFile name="normalLog" fileName="${baseDir}/${stdLog}" filePattern="${baseDir}/${stdLog}-%d{yyyy-MM-dd}-%i.zip" ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} %-5level %logger{1}: %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+        <RollingFile name="errorLog" fileName="${baseDir}/${errLog}" filePattern="${baseDir}/${errLog}-%d{yyyy-MM-dd}-%i.zip" ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} %-5level %logger{1}: %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+        <RollingFile name="boCommLog" fileName="${baseDir}/${boLog}" filePattern="${baseDir}/${boLog}-%d{yyyy-MM-dd}-%i.zip" ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} %-5level %logger{1}: %msg%n</Pattern>
+            </PatternLayout>
+            <MarkerFilter marker="BO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+        <RollingFile name="terminalCommlLog" fileName="${baseDir}/${terminalLog}" filePattern="${baseDir}/${terminalLog}-%d{yyyy-MM-dd}-%i.zip" ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} %-5level %logger{1}: %msg%n</Pattern>
+            </PatternLayout>
+            <MarkerFilter marker="EFT" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="Console" level="DEBUG"/>
+            <AppenderRef ref="normalLog" level="INFO"/>
+            <AppenderRef ref="errorLog" level="ERROR"/>
+            <AppenderRef ref="boCommLog" level="INFO"/>
+            <AppenderRef ref="terminalCommlLog" level="INFO"/>
+        </Root>
+    </Loggers>
+</Configuration>

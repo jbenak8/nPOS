@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#klavesaStisknuta" prefHeight="825.0" prefWidth="1024.0" styleClass="dialog" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.zakaznik.vyhledani.VyhledaniZakaznikuKontroler">
+   <top>
+      <BorderPane prefHeight="100.0" prefWidth="200.0" styleClass="zahlavi" BorderPane.alignment="CENTER">
+         <center>
+            <Label styleClass="nadpis" text="VYHLEDAT ZÁKAZNÍKA" BorderPane.alignment="CENTER" />
+         </center>
+         <right>
+            <Button minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#tlZavritStisknuto" styleClass="tl-zavrit" text="×" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="16.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <left>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../img/zakaznik_hledat.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets left="16.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </left>
+      </BorderPane>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="tlZobrazitKlavesnici" mnemonicParsing="false" onAction="#tlZobrazitKlavesniciStisknuto" prefHeight="80.0" prefWidth="120.0">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../sdilene/zadaniPopisu/img/klavesnice.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="tlVymazatPole" mnemonicParsing="false" onAction="#tlSmazatPoleStisknuto" prefHeight="80.0" prefWidth="120.0" styleClass="tl-smazat" text="C">
+               <HBox.margin>
+                  <Insets right="100.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="tlOk" mnemonicParsing="false" onAction="#tlOkStisknuto" prefHeight="80.0" prefWidth="120.0">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/zakaznik_hledat.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="tlResetFormulare" mnemonicParsing="false" onAction="#tlResetFormulareStisknuto" prefHeight="80.0" prefWidth="120.0">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../registrace/hlavni/kartaSortimentu/img/storno2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="tlPridatZakaznia" mnemonicParsing="false" onAction="#tlPridatZakaznikaStisknuto" prefHeight="80.0" prefWidth="120.0">
+               <HBox.margin>
+                  <Insets left="100.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/zakaznik_novy.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="25.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <stylesheets>
+      <URL value="@../../hlavni.css" />
+      <URL value="@vyhledani_zakazniku.css" />
+   </stylesheets>
+   <center>
+      <VBox prefHeight="514.0" prefWidth="1004.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="poleCisloZakaznika" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" promptText="Číslo zákazníka" styleClass="pole" />
+            <HBox>
+               <TextField fx:id="poleJmeno" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" prefHeight="63.0" prefWidth="500.0" promptText="Jméno" styleClass="pole">
+                  <HBox.margin>
+                     <Insets top="20.0" />
+                  </HBox.margin>
+               </TextField>
+               <TextField fx:id="polePrijmeni" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" prefWidth="500.0" promptText="Příjmení" styleClass="pole">
+                  <HBox.margin>
+                     <Insets left="20.0" top="20.0" />
+                  </HBox.margin>
+               </TextField>
+            </HBox>
+            <TextField fx:id="poleNazev" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" promptText="Firma" styleClass="pole">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox prefHeight="51.0" prefWidth="1004.0">
+               <children>
+                  <TextField fx:id="poleIC" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" prefHeight="63.0" prefWidth="500.0" promptText="IČ" styleClass="pole">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="poleDIC" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" prefHeight="63.0" prefWidth="500.0" promptText="DIČ" styleClass="pole">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="23.0" prefWidth="1004.0">
+               <children>
+                  <TextField fx:id="poleUlice" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" prefHeight="63.0" prefWidth="663.0" promptText="Ulice" styleClass="pole">
+                     <HBox.margin>
+                        <Insets right="20.0" top="20.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="poleCp" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" prefHeight="63.0" prefWidth="150.0" promptText="Č. p." styleClass="pole">
+                     <HBox.margin>
+                        <Insets right="20.0" top="20.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="poleCor" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" prefHeight="63.0" prefWidth="150.0" promptText="Č. or." styleClass="pole">
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="polePSC" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" prefHeight="63.0" prefWidth="250.0" promptText="PSČ" styleClass="pole">
+                     <HBox.margin>
+                        <Insets right="20.0" top="20.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="poleMesto" onKeyPressed="#klavesaStisknuta" onMouseClicked="#poleKliknuto" prefHeight="63.0" prefWidth="737.0" promptText="Město" styleClass="pole">
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <CheckBox fx:id="zatrJenNeblokovane" mnemonicParsing="false" onKeyPressed="#klavesaStisknuta" prefHeight="63.0" prefWidth="457.0" styleClass="nadpis" text="Pouze neblokované" />
+                  <Label prefHeight="63.0" prefWidth="327.0" styleClass="nadpis" text="Zobrazit max. záznamů:">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="vyberPocetZaznamu" prefHeight="63.0" prefWidth="209.0" promptText="500" styleClass="pole" />
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </center>
+   <effect>
+      <DropShadow />
+   </effect>
+</BorderPane>

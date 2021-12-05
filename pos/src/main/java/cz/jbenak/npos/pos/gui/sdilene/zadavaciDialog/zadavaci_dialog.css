@@ -1,0 +1,113 @@
+/* fonty */
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: regular;
+    src: url("../fonty/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: medium;
+    src: url("../fonty/Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: bold;
+    src: url("../fonty/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url("../fonty/Roboto_Condensed/RobotoCondensed-Regular.ttf");
+}
+
+.dialog {
+    /*-fx-effect: dropshadow(three-pass-box, derive(black, -20%), 10, 0, 4, 4);*/
+    -fx-background-insets: 6;
+    -fx-background-color: white;
+}
+/* záhlaví */
+.zahlavi {
+    -fx-background-insets: 6;
+    -fx-background-color: #EBEFF3;
+}
+
+/* zavírací tlačítko vpravo nahoře */
+.tl-zavrit {
+    -fx-background-insets: 6;
+    -fx-background-color: rgba(255,255,255,0);
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-style: solid;
+    -fx-border-color: #cc0000;
+    -fx-border-width: 3;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 26pt;
+    -fx-text-fill: #cc0000;
+}
+
+.tl-zavrit:hover {
+    -fx-background-color: #ff4d4d;
+    -fx-border-color: #ff4d4d;
+    -fx-font-size: 26pt;
+    -fx-text-fill: white;
+    -fx-transition:ease-in;
+    -fx-transition-duration:300ms
+}
+
+.tl-zavrit:pressed, .tl-zavrit:default:hover:pressed
+{
+    -fx-background-color: #990000;
+    -fx-border-color: #ff4d4d;
+    -fx-text-fill: white;
+}
+
+.tl-zavrit:focused
+{
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-zavrit:disabled, .tl-zavrit:default:disabled
+{
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255,255,255,0);
+    -fx-text-fill: #212121;
+}
+
+.tl-zavrit:default
+{
+    -fx-background-color: #990000;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-zavrit:default:hover{
+    -fx-background-color: #ff4d4d;
+    -fx-border-color: #ff4d4d;
+}
+/* Nadpis */
+.nadpis {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 20pt;
+    -fx-font-color: #3D4D65;
+}
+
+/* Vstupní pole */
+.pole {
+    -fx-font-family: Roboto;
+    -fx-font-size: 16pt;
+    -fx-font-color: #3D4D65;
+    -fx-background-insets: 2;
+    -fx-background-radius: 5;
+    -fx-background-color: #ECEFF4;
+    -fx-border-style: solid;
+    -fx-border-color: #C9D3DF;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
+
+.pole:selected, .pole:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-width: 3;
+}
