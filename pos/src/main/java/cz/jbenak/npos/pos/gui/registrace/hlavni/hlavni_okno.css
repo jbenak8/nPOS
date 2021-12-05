@@ -1,0 +1,148 @@
+/* fonty */
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: regular;
+    src: url("../../sdilene/fonty/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: medium;
+    src: url("../../sdilene/fonty/Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: bold;
+    src: url("../../sdilene/fonty/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url("../../sdilene/fonty/Roboto_Condensed/RobotoCondensed-Regular.ttf");
+}
+
+.okno {
+    /*-fx-effect: dropshadow(three-pass-box, derive(black, -20%), 10, 0, 4, 4);*/
+    /*-fx-background-insets: 6;*/
+    -fx-background-color: #ffffff;
+}
+.dolni-panel {
+    -fx-background-color: #004d99;
+    -fx-text-fill: #ffffff;
+}
+/* Pruh s celkovou částkou */
+.panel-celkem {
+    -fx-background-color:#374355;
+    -fx-font-family: Roboto;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5;
+}
+.celkem-text {
+    -fx-font-size: 52pt;
+    -fx-text-fill: #ffffff;
+}
+.celkem-popis {
+    -fx-font-size: 24pt;
+    -fx-text-fill: #ffffff;
+}
+/* Registrační pole */
+.pole {
+    -fx-font-family: Roboto;
+    -fx-font-size: 16pt;
+    -fx-font-color: #3D4D65;
+    -fx-background-insets: 2;
+    -fx-background-radius: 5;
+    -fx-background-color: #ECEFF4;
+    -fx-border-style: solid;
+    -fx-border-color: #C9D3DF;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+}
+
+.pole:selected, .pole:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-width: 4;
+}
+/* Dokladový placeholder */
+.placeholder-doklad {
+    -fx-font-family: Roboto;
+    -fx-font-size: 48pt;
+    -fx-text-fill: #cccccc;
+}
+/* Hodiny */
+.datum {
+    -fx-font-family: Roboto;
+    -fx-font-size: 16pt;
+    -fx-text-fill: #ffffff;
+}
+.cas {
+    -fx-font-family: Roboto;
+    -fx-font-size: 20pt;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+/* informativní pole */
+.info-tucne {
+    -fx-font-family: Roboto;
+    -fx-font-size: 12pt;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+.info-normalne {
+    -fx-font-family: Roboto;
+    -fx-font-size: 12pt;
+    -fx-text-fill: #ffffff;
+}
+/* Infromace o režimu vratky */
+.info-vratka {
+    -fx-font-family: Roboto;
+    -fx-font-size: 24pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: #D1335B;
+    -fx-padding: 10;
+    -fx-border-style: solid;
+    -fx-border-color: #D1335B;
+    -fx-background-color: #F8E1E7;
+    -fx-background-radius: 10;
+    -fx-border-width: 3;
+    -fx-border-radius: 10;
+}
+/* položky v dokladu */
+.list-cell:selected, .list-cell:selected:filled {
+    -fx-background-color: #3d4d65;
+    
+}
+
+.list-cell:selected .text, .list-cell:selected:filled .text {
+    -fx-text-fill: #ffffff;
+}
+
+.list-cell:even {
+    -fx-background-color: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #cad3df;
+    -fx-text-fill: #374355;
+}
+.list-view:focused {
+    -fx-text-fill: #374355;
+}
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-border-width: 0px;
+    -fx-light-text-color: #ffffff ;
+    -fx-mid-text-color:   #374355;
+    -fx-dark-text-color:  #374355 ;
+}
+.list-cell:selected {
+    -fx-background-color: #374355;
+    -fx-dark-text-color:  #ffffff;
+    -fx-mid-text-color:   #ffffff;
+}
+.list-cell:focused {
+    -fx-background-color: #374355;
+    -fx-border-width: 0px; 
+}

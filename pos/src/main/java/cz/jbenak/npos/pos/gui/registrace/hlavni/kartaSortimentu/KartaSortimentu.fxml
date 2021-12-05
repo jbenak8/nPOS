@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<?import java.net.URL?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#klavesaStisknuta" prefHeight="774.0" prefWidth="1200.0" styleClass="dialog" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.registrace.hlavni.kartaSortimentu.KartaSortimentuKontroler">
+   <top>
+      <BorderPane prefHeight="100.0" prefWidth="600.0" styleClass="zahlavi" BorderPane.alignment="CENTER">
+         <center>
+            <Label fx:id="nadpis" styleClass="nadpis" text="Label" BorderPane.alignment="CENTER" />
+         </center>
+         <right>
+            <Button mnemonicParsing="false" onAction="#tlZavritStisknuto" prefHeight="60.0" prefWidth="60.0" styleClass="tl-zavrit" text="×" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="16.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+         <left>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="16.0" />
+               </BorderPane.margin>
+               <image>
+                  <Image url="@../seznamSortimentu/img/zbozi_info.png" />
+               </image>
+            </ImageView>
+         </left>
+      </BorderPane>
+   </top>
+   <effect>
+      <DropShadow />
+   </effect>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#tlOkStisknuto" prefHeight="60.0" prefWidth="140.0" styleClass="tl-ok">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fx:id="obrTlOk" fitHeight="44.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/zbozi_registrace.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+   <right>
+      <VBox prefHeight="600.0" prefWidth="575.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="256.0" prefWidth="320.0">
+                     <children>
+                        <GridPane prefHeight="186.0" prefWidth="299.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="156.0" />
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="143.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="92.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="25.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label styleClass="nadpis-data" text="Prodejní cena:" />
+                              <Label fx:id="prodejniCena" styleClass="data" text="45.999,90" GridPane.columnIndex="1" />
+                              <Label styleClass="nadpis-data" text="Maximální sleva:" GridPane.rowIndex="1" />
+                              <Label styleClass="nadpis-data" text="Minimální prodejné množství:" wrapText="true" GridPane.rowIndex="2" />
+                              <Label styleClass="nadpis-data" text="Maximální prodejné množství:" wrapText="true" GridPane.rowIndex="3" />
+                              <Label fx:id="maxSleva" styleClass="data-nromalne" text="label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="minProdejneMnozstvi" styleClass="data-nromalne" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="maxProdejneMnozstvi" styleClass="data-nromalne" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                           </children>
+                        </GridPane>
+                        <Label styleClass="nadpis-data" text="Hlavní čárový kód:">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="hlavniCK" styleClass="data-nromalne" text="8594001234567" />
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="obrazek" fitHeight="256.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/neni_foto.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Label styleClass="nadpis-data" text="Dodavatel:">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="dodavatel" alignment="TOP_LEFT" prefHeight="60.0" prefWidth="575.0" styleClass="data-nromalne" text="Label" wrapText="true" />
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" prefWidth="199.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="150.0" minWidth="30.0" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <children>
+                  <Label styleClass="nadpis-data" text="Neskladová položka:" />
+                  <ImageView fx:id="neskladova" fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                     <image>
+                        <Image url="@img/storno.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="10.0" layoutY="14.0" styleClass="nadpis-data" text="Aktuální stav skladu:" GridPane.rowIndex="1" />
+                  <Label layoutX="10.0" layoutY="44.0" styleClass="nadpis-data" text="Datum posledního příjmu:" GridPane.rowIndex="2" />
+                  <Label layoutX="10.0" layoutY="74.0" styleClass="nadpis-data" text="Poslední nákupní cena:" GridPane.rowIndex="3" />
+                  <ProgressIndicator fx:id="indikaceStavSkladu" maxHeight="26.0" maxWidth="26.0" minHeight="26.0" minWidth="26.0" prefHeight="26.0" prefWidth="26.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </ProgressIndicator>
+                  <Label fx:id="stavSkladu" styleClass="data-nromalne" text="Zjišťuje se..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="datumPoslPrijmu" layoutX="240.0" layoutY="43.0" styleClass="data-nromalne" text="Zjišťuje se..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="posledniNC" layoutX="240.0" layoutY="73.0" styleClass="data-nromalne" text="Zjišťuje se..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ProgressIndicator fx:id="indikaceDatumPrijmu" layoutX="437.0" layoutY="42.0" maxHeight="26.0" maxWidth="26.0" minHeight="26.0" minWidth="26.0" prefHeight="26.0" prefWidth="26.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <ProgressIndicator fx:id="indikacePosledniNC" layoutX="437.0" layoutY="72.0" maxHeight="26.0" maxWidth="26.0" minHeight="26.0" minWidth="26.0" prefHeight="26.0" prefWidth="26.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+         </children>
+         <BorderPane.margin>
+            <Insets right="26.0" />
+         </BorderPane.margin>
+      </VBox>
+   </right>
+   <left>
+      <VBox prefHeight="600.0" prefWidth="570.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="26.0" />
+         </BorderPane.margin>
+         <children>
+            <GridPane prefHeight="90.0" prefWidth="570.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="173.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="397.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="65.0" valignment="TOP" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="nadpis-data" text="Registr:" />
+                  <Label styleClass="nadpis-data" text="Název:" GridPane.columnIndex="1" />
+                  <Label fx:id="registr" styleClass="data" text="123456" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="nazev" alignment="TOP_LEFT" prefHeight="63.0" prefWidth="388.0" styleClass="data" text="Nějaký sortiment&#10;na dvě řádky&#10;" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+               </children>
+            </GridPane>
+            <Line endX="450.0" startX="-100.0" stroke="#3d4d65" strokeWidth="2.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="5.0" />
+               </VBox.margin>
+            </Line>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="336.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="35.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="nadpis-data" text="Skupina:" />
+                  <Label fx:id="skupinaID" styleClass="data-nromalne" text="Label" GridPane.rowIndex="1" />
+                  <Label fx:id="skupinaText" styleClass="data-nromalne" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label styleClass="nadpis-data" text="PLU:" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="plu" styleClass="data-nromalne" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label styleClass="nadpis-data" text="Měrná jednotka:" GridPane.rowIndex="3" />
+                  <Label styleClass="nadpis-data" text="DPH:" GridPane.rowIndex="4" />
+                  <Label fx:id="mj" styleClass="data-nromalne" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="dph" styleClass="data-nromalne" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            <GridPane>
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.0" minWidth="10.0" prefWidth="190.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.0" minWidth="10.0" prefWidth="53.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="190.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="78.0" minWidth="10.0" prefWidth="49.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="nadpis-data" text="Prodej povolen:" />
+                  <Label styleClass="nadpis-data" text="Vratka povolena:" GridPane.rowIndex="1" />
+                  <Label styleClass="nadpis-data" text="Sleva povolena:" GridPane.rowIndex="2" />
+                  <Label styleClass="nadpis-data" text="Služba:" GridPane.columnIndex="2" />
+                  <Label styleClass="nadpis-data" text="Platební poukaz:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label styleClass="nadpis-data" text="Nedělitelné:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label styleClass="nadpis-data" text="Změna ceny povolena:" GridPane.rowIndex="3" />
+                  <Label styleClass="nadpis-data" text="Nutno zadat cenu:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label styleClass="nadpis-data" text="Nutno zadat popis:" GridPane.rowIndex="4" />
+                  <Label styleClass="nadpis-data" text="Nutno zadat množství:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <ImageView fx:id="prodejPovolen" fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                     <image>
+                        <Image url="@img/tlOk2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="vratkaPovolena" fitHeight="26.0" fitWidth="26.0" layoutX="213.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@img/storno2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="slevaPovolena" fitHeight="26.0" fitWidth="26.0" layoutX="213.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../../sdilene/img/tlOk.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="zmenaCenyPovolena" fitHeight="26.0" fitWidth="26.0" layoutX="213.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@img/storno.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="nutnoZadatPopis" fitHeight="26.0" fitWidth="26.0" layoutX="213.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@img/tlOk.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="sluzba" fitHeight="26.0" fitWidth="26.0" layoutX="213.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                     <image>
+                        <Image url="@img/storno.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="platebniPoukaz" fitHeight="26.0" fitWidth="26.0" layoutX="506.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@img/tlOk.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="nedelitelne" fitHeight="26.0" fitWidth="26.0" layoutX="506.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@img/tlOk.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="nutnoZadatCenu" fitHeight="26.0" fitWidth="26.0" layoutX="506.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@img/tlOk.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="nutnoZadatMnozstvi" fitHeight="26.0" fitWidth="26.0" layoutX="506.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@img/tlOk.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+            </GridPane>
+            <Label styleClass="nadpis-data" text="Popis:">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="popis" alignment="TOP_LEFT" prefHeight="134.0" prefWidth="565.0" styleClass="data-nromalne" text="Label" wrapText="true" />
+         </children>
+      </VBox>
+   </left>
+   <stylesheets>
+      <URL value="@karta_sortimentu.css" />
+      <URL value="@../../../hlavni.css" />
+   </stylesheets>
+</BorderPane>

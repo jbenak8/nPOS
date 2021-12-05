@@ -1,0 +1,246 @@
+/* fonty */
+@font-face {
+    font-family: Roboto;
+    font-weight: regular;
+    src: url("../fonty/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: medium;
+    src: url("../fonty/Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: bold;
+    src: url("../fonty/Roboto/Roboto-Bold.ttf");
+}
+
+/*
+ * Potvrzovací tlačítko
+ */
+.tl-ok {
+    -fx-background-color: #03BD5B;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-border-color: #03BD5B;
+    -fx-font-size: 42pt;
+    -fx-text-fill: white;
+    -fx-font-family: Roboto;
+}
+
+.tl-ok:hover, tl-ok:focused:hover {
+    -fx-background-color: #04E06C;
+    -fx-text-fill: white;
+    -fx-transition: ease-in;
+    -fx-font-weight: bold;
+    -fx-transition-duration: 300ms;
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tl-ok:pressed, .tl-ok:focused:pressed, .tl-ok:default:hover:pressed, .tl-ok:focused:hover:pressed {
+    -fx-background-color: #029347;
+    -fx-text-fill: white;
+}
+
+.tl-ok:focused {
+    -fx-border-color: #004d00;
+    -fx-effect: dropshadow(three-pass-box, derive(#133926, 50%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-ok:focused:hover {
+    -fx-background-color: #04E06C;
+}
+
+.tl-ok:disabled, .tl-ok:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tl-ok:default {
+    -fx-background-color: #03BD5B;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-ok:default:hover {
+    -fx-background-color: #c6ecd9;
+}
+
+/*
+ * Storno tlačítko
+ */
+.tl-storno {
+    -fx-background-color: #D2335B;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-border-color: #800000;
+    -fx-font-size: 30pt;
+    -fx-text-fill: white;
+    -fx-font-family: Roboto;
+}
+
+.tl-storno:hover, tl-storno:focused:hover {
+    -fx-background-color: #ff6f85;
+    -fx-text-fill: white;
+    -fx-transition: ease-in;
+    -fx-font-weight: bold;
+    -fx-transition-duration: 300ms
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tl-storno:pressed, .tl-storno:focused:pressed, .tl-storno:focused:hover:pressed {
+    -fx-background-color: #922647;
+    -fx-text-fill: white;
+}
+
+.tl-storno:focused:hover {
+    -fx-background-color: #ff6f85;
+}
+
+.tl-storno:focused {
+    -fx-background-color: #D2335B;
+    -fx-effect: dropshadow(three-pass-box, derive(#b30000, 20%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-storno:disabled, .tl-storno:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tl-storno:default {
+    -fx-background-color: #D2335B;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-storno:default:hover {
+    -fx-background-color: #ffcccc;
+}
+
+/*
+ * Mazací tlačítko
+ */
+.tl-umazat {
+    -fx-background-color: #e0c328;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-font-size: 35pt;
+    -fx-text-fill: white;
+    -fx-font-family: Roboto;
+}
+
+.tl-umazat:hover, tl-umazat:focused:hover {
+    -fx-background-color: #f4d728;
+    -fx-text-fill: white;
+    -fx-transition: ease-in;
+    -fx-font-weight: bold;
+    -fx-transition-duration: 300ms;
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tl-umazat:pressed, .tl-umazat:focused:pressed, .tl-umazat:focused:hover:pressed {
+    -fx-background-color: #a28822;
+    -fx-text-fill: white;
+}
+
+.tl-umazat:focused:hover {
+    -fx-background-color: #f4d728;
+}
+
+.tl-umazat:focused {
+    -fx-border-color: #d2b300;
+    -fx-background-color: #e0c328;
+    -fx-effect: dropshadow(three-pass-box, derive(#4d4100, 90%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-umazat:disabled, .tl-umazat:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tl-umazat:default {
+    -fx-background-color: #e0c328;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-umazat:default:hover {
+    -fx-background-color: #fff7cc;
+}
+
+/*
+ * Tlačítka čísel
+ */
+.tl-cislo {
+    /*-fx-background-color: #ffffff;*/
+    -fx-background-color: #0082D5;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-style: solid;
+    /*-fx-border-width: 2;*/
+    -fx-border-width: 0;
+    -fx-border-color: #0082D5;
+    -fx-font-size: 40pt;
+    /*-fx-text-fill: #0082D5;*/
+    -fx-text-fill: #ffffff;
+    -fx-font-family: Roboto;
+}
+
+.tl-cislo:hover, tl-cislo:focused:hover {
+    -fx-background-color: #52bef7;
+    -fx-font-weight: bold;
+    -fx-transition: ease-in;
+    -fx-transition-duration: 300ms
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.tl-cislo:pressed, .tl-cislo:focused:pressed, .tl-cislo:default:hover:pressed, .tl-cislo:focused:hover:pressed {
+    -fx-background-color: #0082D5;
+    -fx-font-weight: bold;
+}
+
+.tl-cislo:focused {
+    -fx-border-color: #0082D5;
+    -fx-background-color: #0082D5;
+    -fx-effect: dropshadow(three-pass-box, derive(#00264d, 30%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 0;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-cislo:focused:hover {
+    -fx-background-color: #52bef7;
+}
+
+.tl-cislo:disabled, .tl-cislo:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-text-fill: #212121;
+}
+
+.tl-cislo:default {
+    -fx-background-color: #0082D5;
+    -fx-text-fill: #ffffff;
+}
+
+.tl-cislo:default:hover {
+    -fx-background-color: #52bef7;
+}

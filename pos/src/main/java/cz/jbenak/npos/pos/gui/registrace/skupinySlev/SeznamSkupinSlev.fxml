@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#klavesaStisknuta" prefHeight="768.0" prefWidth="1024.0" styleClass="dialog" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.registrace.skupinySlev.SeznamSkupinSlevKontroler">
+   <stylesheets>
+      <URL value="@../../hlavni.css" />
+      <URL value="@../../sdilene/styly/seznamy.css" />
+   </stylesheets>
+   <top>
+      <BorderPane prefHeight="100.0" prefWidth="200.0" styleClass="zahlavi" BorderPane.alignment="CENTER">
+         <left>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../hlavni/menu/dokladOtevren/img/zbozi_sleva_skupina.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets left="16.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </left>
+         <center>
+            <Label styleClass="nadpis" text="SEZNAM SKUPIN SLEV" BorderPane.alignment="CENTER" />
+         </center>
+         <right>
+            <Button mnemonicParsing="false" onAction="#tlZavritStisknuto" prefHeight="60.0" prefWidth="60.0" styleClass="tl-zavrit" text="×" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="16.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+      </BorderPane>
+   </top>
+   <effect>
+      <DropShadow />
+   </effect>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <padding>
+                  <Insets bottom="10.0" left="16.0" right="16.0" top="10.0" />
+               </padding>
+               <children>
+                  <TextField fx:id="poleFiltr" prefHeight="75.0" prefWidth="826.0" styleClass="pole" />
+                  <Button mnemonicParsing="false" onAction="#tlSmazatStisknuto" prefHeight="75.0" prefWidth="75.0">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../hlavni/seznamSortimentu/img/obnovit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#tlZobrazitKlavesniciStisknuto" prefHeight="75.0" prefWidth="75.0">
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../hlavni/vyhledaniSortimentu/img/klavesnice.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <VBox prefHeight="472.0" prefWidth="1024.0">
+               <padding>
+                  <Insets left="16.0" right="16.0" />
+               </padding>
+               <children>
+                  <TableView fx:id="tabulka" onMouseClicked="#tabulkaKliknuto" prefHeight="439.0" prefWidth="992.0" styleClass="tabulka">
+                    <columns>
+                      <TableColumn fx:id="slCislo" prefWidth="112.0" text="Číslo" />
+                      <TableColumn fx:id="slNazev" prefWidth="604.0" text="Název" />
+                        <TableColumn fx:id="slCil" prefWidth="50.0" text="Cíl" />
+                        <TableColumn fx:id="slRozsah" prefWidth="50.0" text="Kdy" />
+                        <TableColumn fx:id="slHodnota" prefWidth="175.0" text="Hodnota" />
+                    </columns>
+                  </TableView>
+                  <BorderPane prefHeight="35.0" prefWidth="992.0">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                     <left>
+                        <HBox prefHeight="32.0" prefWidth="515.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="popisPocetPolozek" styleClass="popis" text="Label" />
+                              <Label fx:id="popisFiltrDle" styleClass="popis" text="Label">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </left>
+                     <right>
+                        <HBox alignment="TOP_RIGHT" prefHeight="32.0" prefWidth="396.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="375.0" styleClass="popis" text="R = Registr, S = Skupina, A = vždy, D = doklad" />
+                           </children>
+                        </HBox>
+                     </right>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </BorderPane>
+               </children>
+            </VBox>
+            <GridPane alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="86.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="271.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="206.0" minWidth="135.0" prefWidth="140.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="212.0" minWidth="73.0" prefWidth="140.0" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="282.0" minWidth="10.0" prefWidth="234.0" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="85.0" minWidth="85.0" prefWidth="75.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+               <children>
+                  <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlPolozkaNahoruStisknuto" prefHeight="80.0" prefWidth="80.0" GridPane.columnIndex="1">
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../hlavni/img/polozka_nahoru.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button minHeight="80.0" minWidth="140.0" mnemonicParsing="false" onAction="#tlInfoOPolozceStisknuto" prefHeight="80.0" prefWidth="120.0" GridPane.columnIndex="2">
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../sdilene/dialogy/zprava/img/info.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button minHeight="80.0" minWidth="140.0" mnemonicParsing="false" onAction="#tlOkStisknuto" prefHeight="80.0" prefWidth="120.0" GridPane.columnIndex="3">
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../hlavni/kartaSortimentu/img/zbozi_registrace.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlStranaDoluStisknuto" prefHeight="80.0" prefWidth="80.0" GridPane.columnIndex="4">
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../hlavni/img/strana_dolu.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlStranaNahoruStisknuto" prefHeight="80.0" prefWidth="80.0" GridPane.columnIndex="5">
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../hlavni/img/strana_nahoru.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlPolozkaDoluStisknuto" prefHeight="80.0" prefWidth="80.0">
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../hlavni/img/polozka_dolu.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="16.0" right="16.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

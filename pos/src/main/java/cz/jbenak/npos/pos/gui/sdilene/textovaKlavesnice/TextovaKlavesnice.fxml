@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.URL?>
+<AnchorPane id="AnchorPane" prefHeight="661.0" prefWidth="1651.0" styleClass="dialog" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.sdilene.textovaKlavesnice.TextovaKlavesniceKontroler">
+   <children>
+      <Button fx:id="tl_esc" layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#tl_escapeStisknuto" prefHeight="80.0" prefWidth="111.0" styleClass="tl-storno" text="Esc" />
+      <Button fx:id="tl_lang" layoutX="1302.0" layoutY="16.0" mnemonicParsing="false" onAction="#zmenJazyk" prefHeight="80.0" prefWidth="336.0" styleClass="tlacitko" text="CS" />
+      <Button fx:id="tl_strednik" layoutX="14.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_strednikStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text=";" />
+      <Button fx:id="tl_1" layoutX="99.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_1Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="+" />
+      <Button fx:id="tl_2" layoutX="184.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_2Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="ě" />
+      <Button fx:id="tl_3" layoutX="269.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_3Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="š" />
+      <Button fx:id="tl_4" layoutX="354.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_4Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="č" />
+      <Button fx:id="tl_5" layoutX="439.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_5Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="ř" />
+      <Button fx:id="tl_6" layoutX="524.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_6Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="ž" />
+      <Button fx:id="tl_7" layoutX="609.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_7Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="ý" />
+      <Button fx:id="tl_8" layoutX="694.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_8Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="á" />
+      <Button fx:id="tl_9" layoutX="779.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_9Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="í" />
+      <Button fx:id="tl_0" layoutX="864.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_0Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="é" />
+      <Button fx:id="tl_rovno" layoutX="949.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_rovnoStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="=" />
+      <Button fx:id="tl_akcent" layoutX="1034.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_akcentStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="´" />
+      <Button fx:id="tl_backspace" layoutX="1119.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_backspaceStisknuto" prefHeight="80.0" prefWidth="160.0" styleClass="tlacitko" text="← Backspace" />
+      <Button fx:id="tl_tab" layoutX="14.0" layoutY="311.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="111.0" styleClass="tlacitko" text="↹ Tab" />
+      <ToggleButton fx:id="tl_caps" layoutX="14.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_capsLockStisknuto" prefHeight="80.0" prefWidth="123.0" styleClass="tlacitko" text="Caps Lck" />
+      <ToggleButton fx:id="tl_lShift" layoutX="14.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_LevyShiftStisknuto" prefHeight="80.0" prefWidth="170.0" styleClass="tlacitko" text="⇧ Shift" />
+      <ToggleButton fx:id="tl_lCtrl" layoutX="14.0" layoutY="566.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="123.0" styleClass="tlacitko" text="Ctrl" />
+      <Button fx:id="tl_zavorka" layoutX="1064.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_zavorkaStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text=")" />
+      <Button fx:id="tl_dlU" layoutX="979.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_uDlStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="ú" />
+      <Button fx:id="tl_p" layoutX="894.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_pStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="p" />
+      <Button fx:id="tl_o" layoutX="809.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_oStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="o" />
+      <Button fx:id="tl_i" layoutX="724.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_iStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="i" />
+      <Button fx:id="tl_u" layoutX="639.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_uStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="u" />
+      <Button fx:id="tl_z" layoutX="554.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_zStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="z" />
+      <Button fx:id="tl_t" layoutX="469.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_tStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="t" />
+      <Button fx:id="tl_r" layoutX="384.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_rStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="r" />
+      <Button fx:id="tl_e" layoutX="299.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_eStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="e" />
+      <Button fx:id="tl_w" layoutX="214.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_wStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="w" />
+      <Button fx:id="tl_q" layoutX="129.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_qStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="q" />
+      <Button fx:id="tl_umlaut" layoutX="1148.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_umlautStisknuto" prefHeight="80.0" prefWidth="131.0" styleClass="tlacitko" text="¨" />
+      <Button fx:id="tl_a" layoutX="142.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_aStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="a" />
+      <Button fx:id="tl_s" layoutX="227.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_sStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="s" />
+      <Button fx:id="tl_d" layoutX="312.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_dStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="d" />
+      <Button fx:id="tl_f" layoutX="397.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_fStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="f" />
+      <Button fx:id="tl_g" layoutX="482.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_gStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="g" />
+      <Button fx:id="tl_h" layoutX="567.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_hStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="h" />
+      <Button fx:id="tl_j" layoutX="652.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_jStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="j" />
+      <Button fx:id="tl_k" layoutX="737.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_kStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="k" />
+      <Button fx:id="tl_l" layoutX="822.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_lStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="l" />
+      <Button fx:id="tl_uKrouzek" layoutX="907.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_uKrStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="ů" />
+      <Button fx:id="tl_paragraf" layoutX="992.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_paragrafStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="§" />
+      <Button fx:id="tl_enter" layoutX="1077.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_enterStisknuto" prefHeight="80.0" prefWidth="202.0" styleClass="tlacitko" text="↲ Enter" />
+      <Button fx:id="tl_y" layoutX="189.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_yStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="y" />
+      <Button fx:id="tl_x" layoutX="274.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_xStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="x" />
+      <Button fx:id="tl_c" layoutX="359.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_cStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="c" />
+      <Button fx:id="tl_v" layoutX="444.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_vStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="v" />
+      <Button fx:id="tl_b" layoutX="529.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_bStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="b" />
+      <Button fx:id="tl_n" layoutX="614.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_nStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="n" />
+      <Button fx:id="tl_m" layoutX="699.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_mStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="m" />
+      <Button fx:id="tl_carka" layoutX="784.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_carkaStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="," />
+      <Button fx:id="tl_tecka" layoutX="869.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_teckaStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="." />
+      <Button fx:id="tl_minus" layoutX="954.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_pomlckaStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="-" />
+      <ToggleButton fx:id="tl_pShift" layoutX="1038.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_PravyShiftStisknuto" prefHeight="80.0" prefWidth="240.0" styleClass="tlacitko" text="⇧ Shift" />
+      <ToggleButton fx:id="tl_alt" layoutX="141.0" layoutY="566.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" styleClass="tlacitko" text="Alt" />
+      <Button fx:id="tl_del" layoutX="1198.0" layoutY="566.0" mnemonicParsing="false" onAction="#tl_deleteStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-navigace" text="Delete" />
+      <Button fx:id="tl_end" layoutX="1114.0" layoutY="566.0" mnemonicParsing="false" onAction="#tl_endStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-navigace" text="End" />
+      <Button fx:id="tl_home" layoutX="1030.0" layoutY="566.0" mnemonicParsing="false" onAction="#tl_homeStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-navigace" text="Home" />
+      <ToggleButton fx:id="tl_pCtrl" layoutX="926.0" layoutY="566.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="100.0" styleClass="tlacitko" text="Ctrl" />
+      <ToggleButton fx:id="tl_altGr" layoutX="822.0" layoutY="566.0" mnemonicParsing="false" onAction="#tl_AltGrStisknuto" prefHeight="80.0" prefWidth="100.0" styleClass="tlacitko" text="Alt Gr" />
+      <Button fx:id="tl_mezernik" layoutX="245.0" layoutY="566.0" mnemonicParsing="false" onAction="#tl_mezeraStisknuto" prefHeight="80.0" prefWidth="573.0" styleClass="tlacitko" />
+      <TextArea fx:id="editacniPole" layoutX="155.0" layoutY="60.0" prefHeight="135.0" prefWidth="797.0" styleClass="pole" />
+      <Label fx:id="titulekPole" layoutX="154.0" layoutY="17.0" prefHeight="33.0" prefWidth="791.0" styleClass="nadpis" text="Popis" />
+      <Button layoutX="1388.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_numDelenoStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="/" />
+      <Button layoutX="1473.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_numKratStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="*" />
+      <Button layoutX="1303.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_num7Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="7" />
+      <Button layoutX="1388.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_num8Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="8" />
+      <Button layoutX="1473.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_num9Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="9" />
+      <Button layoutX="1303.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_num4Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="4" />
+      <Button layoutX="1388.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_num5Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="5" />
+      <Button layoutX="1473.0" layoutY="396.0" mnemonicParsing="false" onAction="#tl_num6Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="6" />
+      <Button layoutX="1558.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_numMinusStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="-" />
+      <Button layoutX="1558.0" layoutY="311.0" mnemonicParsing="false" onAction="#tl_numPlusStisknuto" prefHeight="165.0" prefWidth="80.0" styleClass="tlacitko" text="+" />
+      <Button layoutX="1303.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_num1Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="1" />
+      <Button layoutX="1388.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_num2Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="2" />
+      <Button layoutX="1473.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_num3Stisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="3" />
+      <Button layoutX="1558.0" layoutY="481.0" mnemonicParsing="false" onAction="#tl_enterStisknuto" prefHeight="165.0" prefWidth="80.0" styleClass="tlacitko" text="↲ Enter" />
+      <Button layoutX="1473.0" layoutY="566.0" mnemonicParsing="false" onAction="#tl_numCarkaStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="," />
+      <Button layoutX="1303.0" layoutY="566.0" mnemonicParsing="false" onAction="#tl_num0Stisknuto" prefHeight="80.0" prefWidth="165.0" styleClass="tlacitko" text="0" />
+      <Button fx:id="tl_dalsi" layoutX="1473.0" layoutY="111.0" mnemonicParsing="false" onAction="#tl_dalsiStisknuto" prefHeight="80.0" prefWidth="165.0" styleClass="tlacitko-fce" text="DALŠÍ" />
+      <Button fx:id="tl_predchozi" layoutX="1301.0" layoutY="111.0" mnemonicParsing="false" onAction="#tl_predchoziStisknuto" prefHeight="80.0" prefWidth="165.0" styleClass="tlacitko-fce" text="PŘEDCHOZÍ" />
+      <Button fx:id="tl_sipkaDoleva" layoutX="976.0" layoutY="111.0" mnemonicParsing="false" onAction="#tl_sipkaDolevaStisknuto" prefHeight="80.0" prefWidth="100.0" styleClass="tlacitko" text="🠄" />
+      <Button fx:id="tl_sipkaDolu" layoutX="1088.0" layoutY="111.0" mnemonicParsing="false" onAction="#tl_sipkaDoluStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="🠇" />
+      <Button fx:id="tl_sipkaDoprava" layoutX="1178.0" layoutY="111.0" mnemonicParsing="false" onAction="#tl_sipkaDopravaStisknuto" prefHeight="80.0" prefWidth="100.0" styleClass="tlacitko" text="🠆" />
+      <Button fx:id="tl_sipkaNahoru" layoutX="1088.0" layoutY="20.0" mnemonicParsing="false" onAction="#tl_sipkaNahoruStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tlacitko" text="🠅" />
+      <Button layoutX="14.0" layoutY="111.0" mnemonicParsing="false" onAction="#tl_smazVseStisknuto" prefHeight="80.0" prefWidth="111.0" styleClass="tl-navigace" text="SMAŽ VŠE" />
+      <Button layoutX="1303.0" layoutY="226.0" mnemonicParsing="false" onAction="#tl_VybratVseStisknuto" prefHeight="80.0" prefWidth="80.0" styleClass="tl-navigace" text="Označ&#10;vše" textAlignment="CENTER" />
+      <Button layoutX="976.0" layoutY="20.0" mnemonicParsing="false" onAction="#tl_kopirovatStisknuto" prefHeight="80.0" prefWidth="100.0" styleClass="tl-navigace" text="Kopírovat" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="1178.0" layoutY="20.0" mnemonicParsing="false" onAction="#tl_vlozitStisknuto" prefHeight="80.0" prefWidth="100.0" styleClass="tl-navigace" text="Vložit" textAlignment="CENTER" />
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+   <stylesheets>
+      <URL value="@../../hlavni.css" />
+      <URL value="@textovaklavesnice.css" />
+   </stylesheets>
+</AnchorPane>

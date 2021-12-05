@@ -1,0 +1,24 @@
+/* Popisky */
+.popisky {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 16pt;
+    -fx-text-fill: #3D4D65;
+}
+
+/* Detaily */
+.detail-hlavni {
+    -fx-font-family: Roboto;
+    -fx-font-size: 24pt;
+    -fx-font-weight: normal;
+}
+
+.detail-vedlejsi {
+    -fx-font-family: Roboto;
+    -fx-font-size: 18pt;
+    -fx-font-weight: normal;
+}
+
+/* Oddělovače */
+.linka {
+    -fx-text-fill: #8393A7;
+}

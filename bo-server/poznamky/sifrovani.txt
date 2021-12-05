@@ -1,0 +1,23 @@
+Šifrování BO:
+
+jbena@BENAK-PC2 MINGW64 /d/JAVA/KNIHOVNY/šifrování
+$ java -cp jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input=Bo123 password=PosC_srv1369a,82 algorithm=PBEWITHHMACSHA512ANDAES_256 ivGeneratorClassName=org.jasypt.iv.RandomIvGenerator
+
+----ENVIRONMENT-----------------
+
+Runtime: Oracle Corporation OpenJDK 64-Bit Server VM 16+36-2231
+
+
+
+----ARGUMENTS-------------------
+
+input: Bo123
+password: PosC_srv1369a,82
+ivGeneratorClassName: org.jasypt.iv.RandomIvGenerator
+algorithm: PBEWITHHMACSHA512ANDAES_256
+
+
+
+----OUTPUT----------------------
+
+dfg1727iPlWXpOxHQcY0j08Hqj+pu2nnmlemJY+3Ry21Yc7fyIxhmEcDGf55rsth

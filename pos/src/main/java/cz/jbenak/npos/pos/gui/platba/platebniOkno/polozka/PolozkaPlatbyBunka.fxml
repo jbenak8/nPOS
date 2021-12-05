@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="440.0" stylesheets="@polozka_platby_bunka.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.platba.platebniOkno.polozka.PolozkaPlatbyBunkaKontroler">
+   <right>
+      <Label fx:id="castka" styleClass="celkem" text="20000 Kč" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </Label>
+   </right>
+   <center>
+      <VBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+         <children>
+            <Label fx:id="nazevPolozky" styleClass="polozka" text="Hotovost 150 €">
+               <VBox.margin>
+                  <Insets bottom="3.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="popisPolozky" styleClass="polozka-popis" text="1 EUR = 25,654 CZK" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

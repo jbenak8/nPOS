@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#klavesaStisknuta" prefHeight="600.0" prefWidth="470.0" styleClass="dialog" stylesheets="@zamek.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.zamek.ZamekKontroler">
+    <effect>
+        <DropShadow />
+    </effect>
+    <top>
+        <BorderPane prefHeight="156.0" prefWidth="470.0" styleClass="zahlavi" BorderPane.alignment="CENTER">
+            <left>
+                <ImageView fitHeight="100.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                    <image>
+                        <Image url="@img/zamek_velke.png" />
+                    </image>
+                    <BorderPane.margin>
+                        <Insets left="6.0" />
+                    </BorderPane.margin>
+                </ImageView>
+            </left>
+            <center>
+                <Label fx:id="nadpis" alignment="CENTER" contentDisplay="CENTER" prefHeight="135.0" prefWidth="357.0" styleClass="nadpis" text="Systém zamknut. &#10;Pro odemčení prosím zadejte heslo uživatele  1234" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="16.0" top="10.0" />
+                    </BorderPane.margin>
+                </Label>
+            </center>
+        </BorderPane>
+    </top>
+    <center>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="231.0" minHeight="10.0" prefHeight="73.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="401.0" minHeight="10.0" prefHeight="401.0" valignment="CENTER" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <PasswordField fx:id="pole" maxWidth="350.0" styleClass="pole" GridPane.rowIndex="0" />
+                <fx:include fx:id="ciselnaKlavesnice" source="../sdilene/ciselnaKlavesnice/CiselnaKlavesnice.fxml" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+    </center>
+</BorderPane>

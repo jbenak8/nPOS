@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#klavesaStisknuta" prefHeight="600.0" prefWidth="399.0" styleClass="dialog" stylesheets="@login_dialog.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.prihlaseni.LoginDialogKontroler">
+    <top>
+        <BorderPane prefHeight="100.0" prefWidth="399.0" styleClass="zahlavi" BorderPane.alignment="CENTER">
+            <left>
+                <ImageView fitHeight="70.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                    <image>
+                        <Image url="@img/uzivatele.png" />
+                    </image>
+                    <BorderPane.margin>
+                        <Insets left="20.0" top="6.0" />
+                    </BorderPane.margin>
+                </ImageView>
+            </left>
+            <center>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="92.0" prefWidth="254.0" styleClass="nadpis" text="PŘIHLASTE SE PROSÍM" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets top="5.0" />
+                    </BorderPane.margin>
+                </Label>
+            </center>
+            <right>
+                <Button mnemonicParsing="false" onAction="#tlZavritStisknuto" prefHeight="50.0" prefWidth="50.0" styleClass="tl-zavrit" text="×" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="22.0" />
+                    </BorderPane.margin>
+                </Button>
+            </right>
+        </BorderPane>
+    </top>
+    <center>
+        <GridPane prefHeight="512.0" prefWidth="277.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="2500.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="320.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="322.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="385.0" minHeight="0.0" prefHeight="385.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <TextField fx:id="poleID" onMouseClicked="#poleOznaceno" prefHeight="25.0" prefWidth="168.0" styleClass="pole" GridPane.rowIndex="0">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0" />
+                    </GridPane.margin>
+                </TextField>
+                <PasswordField fx:id="poleHeslo" onMouseClicked="#poleOznaceno" styleClass="pole" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0" />
+                    </GridPane.margin>
+                </PasswordField>
+                <fx:include fx:id="ciselnaKlavesnice" source="../sdilene/ciselnaKlavesnice/CiselnaKlavesnice.fxml" GridPane.rowIndex="2" />
+            </children>
+            <BorderPane.margin>
+                <Insets left="15.0" right="15.0" />
+            </BorderPane.margin>
+        </GridPane>
+    </center>
+    <effect>
+        <DropShadow />
+    </effect>
+</BorderPane>

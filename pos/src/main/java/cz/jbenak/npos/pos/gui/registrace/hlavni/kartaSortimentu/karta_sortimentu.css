@@ -1,0 +1,25 @@
+/* Nadpisy polí */
+.nadpis-data {
+    -fx-text-fill: #3D4D65;
+   /* -fx-font-style: italic;*/
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 13pt;
+}
+/* jednotlivá datová pole */
+.data {
+    -fx-text-fill: #3D4D65;
+    -fx-font-weight: bold;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 18pt;
+}
+/* jednotlivá datová pole normálně */
+.data-nromalne {
+    -fx-text-fill: #3D4D65;
+    -fx-font-weight: bold;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 15pt;
+}
+/* záporné skladové množství */
+.zaporny-sklad {
+    -fx-text-fill: #800000;
+}

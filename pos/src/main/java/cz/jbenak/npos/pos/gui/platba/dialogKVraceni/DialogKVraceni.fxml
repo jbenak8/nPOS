@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#klavesaStisknuta" prefHeight="400.0" prefWidth="600.0" styleClass="dialog" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.platba.dialogKVraceni.DialogKVraceniKontroler">
+   <stylesheets>
+      <URL value="@../../sdilene/dialogy/zprava/dialog_zpravy.css" />
+      <URL value="@dialog_k_vraceni.css" />
+   </stylesheets>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="popis_zavritSuplik" styleClass="zaplatit-zaplaceno-text" text="Label" />
+            <Button fx:id="tlOk" focusTraversable="false" mnemonicParsing="false" onAction="#tlOkStisknuto" prefHeight="60.0" prefWidth="140.0" styleClass="tl-ok" text="✓">
+               <HBox.margin>
+                  <Insets bottom="15.0" top="15.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+   <effect>
+      <DropShadow />
+   </effect>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane prefHeight="100.0" prefWidth="540.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="zaplatit-zaplaceno-text" text="K zaplacení:" />
+                  <Label styleClass="zaplatit-zaplaceno-text" text="Zaplaceno:" GridPane.rowIndex="1" />
+                  <Label fx:id="popis_hodnota" styleClass="zaplatit-zaplaceno-text" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="popis_zaplaceno" styleClass="zaplatit-zaplaceno-text" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </GridPane>
+            <HBox prefHeight="60.0" prefWidth="540.0">
+               <children>
+                  <GridPane maxHeight="60.0" prefHeight="60.0" prefWidth="540.0" styleClass="panel-vratit">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label styleClass="vratit-text" text="Vrátit:">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="popis_vratit" styleClass="vratit-text" text="Label" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets right="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </GridPane>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets left="30.0" right="30.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <top>
+      <BorderPane prefHeight="100.0" prefWidth="200.0" styleClass="nadpis-titulek" BorderPane.alignment="CENTER">
+         <left>
+            <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="16.0" />
+               </BorderPane.margin>
+               <image>
+                  <Image url="@img/platba_vratit.png" />
+               </image>
+            </ImageView>
+         </left>
+         <center>
+            <Label fx:id="nadpis" styleClass="nadpis-text" text="Nadpis" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </top>
+</BorderPane>

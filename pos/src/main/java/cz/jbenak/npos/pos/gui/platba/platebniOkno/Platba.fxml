@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#klavesaStisknuta" prefHeight="820.0" prefWidth="1224.0" styleClass="dialog" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.pos.gui.platba.platebniOkno.PlatbaKontroler">
+   <effect>
+      <DropShadow />
+   </effect>
+   <top>
+      <BorderPane prefHeight="100.0" prefWidth="1224.0" styleClass="zahlavi" BorderPane.alignment="CENTER">
+         <center>
+            <Label styleClass="nadpis" text="ZAPLATIT NÁKUP" BorderPane.alignment="CENTER" />
+         </center>
+         <right>
+            <Button minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#tlZavritStisknuto" styleClass="tl-zavrit" text="×" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="16.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+         <left>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="16.0" />
+               </BorderPane.margin>
+               <image>
+                  <Image url="@img/doklad_zaplatit.png" />
+               </image>
+            </ImageView>
+         </left>
+         <stylesheets>
+            <URL value="@../../hlavni.css" />
+            <URL value="@platba.css" />
+         </stylesheets>
+      </BorderPane>
+   </top>
+   <left>
+      <VBox prefHeight="661.0" prefWidth="452.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="16.0" left="16.0" top="8.0" />
+         </BorderPane.margin>
+         <children>
+            <AnchorPane minHeight="64.0" prefHeight="124.0" prefWidth="452.0" styleClass="panel-sleva">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <children>
+                  <Label layoutX="10.0" layoutY="9.0" styleClass="nadpis-sleva-text" text="Sleva:" />
+                  <Label fx:id="popisSleva" layoutX="9.0" layoutY="27.0" prefHeight="28.0" prefWidth="230.0" styleClass="popis-sleva-text" text="Popis slevy" />
+                  <Label fx:id="hodnotaSleva" alignment="CENTER_RIGHT" layoutX="302.0" layoutY="10.0" prefHeight="46.0" prefWidth="137.0" styleClass="celkem-sleva-text" text="100 Kč" textAlignment="RIGHT" />
+               </children>
+            </AnchorPane>
+            <ListView fx:id="lvPolozky" prefHeight="606.0" prefWidth="452.0" />
+            <BorderPane prefHeight="92.0" prefWidth="578.0">
+               <left>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlPolozkaNahoruStisknuto" styleClass="tlacitko">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../registrace/hlavni/img/polozka_nahoru.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlPolozkaDoluStisknuto" styleClass="tlacitko">
+                           <graphic>
+                              <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../registrace/hlavni/img/polozka_dolu.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                  </HBox>
+               </left>
+               <right>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlStranaNahoruStisknuto" styleClass="tlacitko">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../registrace/hlavni/img/strana_nahoru.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button minHeight="80.0" minWidth="80.0" mnemonicParsing="false" onAction="#tlStranaDoluStisknuto" styleClass="tlacitko">
+                           <graphic>
+                              <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../registrace/hlavni/img/strana_dolu.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                  </HBox>
+               </right>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </BorderPane>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox maxWidth="740.0" prefHeight="661.0" prefWidth="740.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="16.0" left="10.0" right="16.0" top="12.0" />
+         </BorderPane.margin>
+         <children>
+            <AnchorPane maxWidth="731.0" prefHeight="70.0" prefWidth="731.0" styleClass="panel-celkem">
+               <children>
+                  <Label fx:id="celkem" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="221.0" layoutY="6.0" prefHeight="58.0" prefWidth="503.0" styleClass="celkem-text" text="0,00 Kč" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nadpisZaplatit" layoutX="14.0" layoutY="22.0" prefHeight="33.0" prefWidth="375.0" styleClass="celkem-popis" text="Zaplatit:" />
+               </children>
+            </AnchorPane>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="410.0" prefWidth="373.0">
+                     <HBox.margin>
+                        <Insets bottom="5.0" right="10.0" top="20.0" />
+                     </HBox.margin>
+                     <children>
+                        <GridPane alignment="CENTER" layoutY="-1.0" prefHeight="409.0" prefWidth="363.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#tlKartaStisknuto" prefHeight="80.0" prefWidth="160.0">
+                                 <graphic>
+                                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/platba_kartou.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Platební karta" />
+                                 </tooltip>
+                              </Button>
+                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="80.0" prefWidth="160.0" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/platba_dl.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Jako dodací list (na fakturu)" />
+                                 </tooltip>
+                              </Button>
+                              <Button fx:id="tlPoukaz" alignment="CENTER" mnemonicParsing="false" prefHeight="80.0" prefWidth="160.0" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/platba_poukaz.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Poukaz" />
+                                 </tooltip>
+                              </Button>
+                              <Button fx:id="tlZmenaMeny" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#tlZmenaMenyStisknuto" prefHeight="80.0" prefWidth="160.0" textAlignment="CENTER" GridPane.rowIndex="3">
+                                 <graphic>
+                                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/platba_mena.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Jiná měna" />
+                                 </tooltip>
+                              </Button>
+                              <ToggleButton alignment="CENTER" mnemonicParsing="false" prefHeight="80.0" prefWidth="160.0" GridPane.columnIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/platba_tisk_faktury.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Tisk faktury" />
+                                 </tooltip>
+                              </ToggleButton>
+                              <Button fx:id="tlPridatSlevu" alignment="CENTER" mnemonicParsing="false" prefHeight="80.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/doklad_sleva_skupina.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Sleva na doklad" />
+                                 </tooltip>
+                              </Button>
+                              <Button fx:id="tlOdebratSlevu" alignment="CENTER" mnemonicParsing="false" prefHeight="80.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <graphic>
+                                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/doklad_sleva_skupina_odebrat.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Odebrat slevu" />
+                                 </tooltip>
+                              </Button>
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#tlOdebratPolozkuStisknuto" prefHeight="80.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <graphic>
+                                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/platba_odebrat.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Odebrat platbu" />
+                                 </tooltip>
+                              </Button>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </Pane>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="435.0" prefWidth="339.0">
+                     <children>
+                        <TextField fx:id="poleVstup" prefHeight="45.0" prefWidth="332.0" styleClass="pole">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="5.0" right="5.0" top="20.0" />
+                           </VBox.margin></TextField>
+                        <fx:include fx:id="ciselnaKlavesnice" source="../../sdilene/ciselnaKlavesnice/CiselnaKlavesnice.fxml" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <GridPane>
+              <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button id="tlHotovost1" minHeight="75.0" minWidth="160.0" mnemonicParsing="false" styleClass="tlacitko" text="20">
+                     <graphic>
+                        <ImageView id="obrHotovost1" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
+                  <Button id="tlHotovost5" layoutX="17.0" layoutY="13.0" minHeight="75.0" minWidth="160.0" mnemonicParsing="false" styleClass="tlacitko" text="500" GridPane.rowIndex="1">
+                     <graphic>
+                        <ImageView id="obrHotovost5" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
+                  <Button id="tlHotovost3" layoutX="17.0" layoutY="13.0" minHeight="75.0" minWidth="160.0" mnemonicParsing="false" styleClass="tlacitko" text="100" GridPane.columnIndex="2">
+                     <graphic>
+                        <ImageView id="obrHotovost3" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
+                  <Button id="tlHotovost2" layoutX="200.0" layoutY="13.0" minHeight="75.0" minWidth="160.0" mnemonicParsing="false" styleClass="tlacitko" text="50" GridPane.columnIndex="1">
+                     <graphic>
+                        <ImageView id="obrHotovost2" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
+                  <Button id="tlHotovost4" layoutX="383.0" layoutY="13.0" minHeight="75.0" minWidth="160.0" mnemonicParsing="false" styleClass="tlacitko" text="200" GridPane.columnIndex="3">
+                     <graphic>
+                        <ImageView id="obrHotovost4" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
+                  <Button id="tlHotovost6" layoutX="17.0" layoutY="93.0" minHeight="75.0" minWidth="160.0" mnemonicParsing="false" styleClass="tlacitko" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <graphic>
+                        <ImageView id="obrHotovost6" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
+                  <Button id="tlHotovost7" layoutX="17.0" layoutY="13.0" minHeight="75.0" minWidth="160.0" mnemonicParsing="false" styleClass="tlacitko" text="2000" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <graphic>
+                        <ImageView id="obrHotovost7" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
+                  <Button id="tlHotovost8" layoutX="17.0" layoutY="13.0" minHeight="75.0" minWidth="160.0" mnemonicParsing="false" styleClass="tlacitko" text="5000" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <graphic>
+                        <ImageView id="obrHotovost8" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic></Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </GridPane>
+         </children>
+      </VBox>
+   </right>
+   <stylesheets>
+      <URL value="@../../hlavni.css" />
+      <URL value="@platba.css" />
+   </stylesheets>
+</BorderPane>

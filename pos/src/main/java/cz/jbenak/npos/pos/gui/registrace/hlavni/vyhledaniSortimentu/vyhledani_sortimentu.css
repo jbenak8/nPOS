@@ -1,0 +1,36 @@
+/* tlačítko pro mazání textu z polí */
+.tl-smazat {
+    -fx-border-color: #e0c328;
+    -fx-text-fill: #e0c328;
+}
+
+.tl-smazat:default:hover, .tl-smazat:hover:pressed {
+    -fx-border-color: #f4d728;
+    -fx-text-fill: #f4d728;
+    -fx-background-color: #fcffe0;
+}
+
+.tl-smazat:pressed, .tl-smazat:focused:pressed, .tl-smazat:default:hover:pressed, .tl-smazat:focused:hover:pressed {
+    -fx-border-color: #a28822;
+    -fx-text-fill: #a28822;
+    -fx-font-weight: bold;
+    -fx-background-color: #fcffe0;
+}
+
+.tl-smazat:focused {
+    -fx-border-color: #a28822;
+    -fx-background-color: #fcffe0;
+    -fx-effect: dropshadow(three-pass-box, derive(#a28822, 30%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 3;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tl-smazat:focused:hover {
+    -fx-background-color: #fcffe0;
+}
+
+/* Vstupní pole */
+.pole {
+    -fx-font-size: 24pt;
+}

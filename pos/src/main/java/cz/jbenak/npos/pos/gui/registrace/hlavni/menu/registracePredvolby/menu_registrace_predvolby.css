@@ -1,0 +1,142 @@
+/* fonty */
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: regular;
+    src: url("../../../../sdilene/fonty/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: medium;
+    src: url("../../../../sdilene/fonty/Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: Roboto;
+    -fx-font-weight: bold;
+    src: url("../../../../sdilene/fonty/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    src: url("../../../../sdilene/fonty/Roboto_Condensed/RobotoCondensed-Regular.ttf");
+}
+/* Ouška */
+
+.tab .tab-label {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 18pt;
+    -fx-text-fill: #3D4D65;
+    -fx-padding: 10 10 10 10;
+}
+.tab {
+    -fx-background-color: transparent;
+    -fx-padding: 1em 1em 1em 1em;
+    -fx-focus-color: transparent;
+    -fx-background-radius: 10;
+}
+
+.tab-pane {
+    -fx-tab-min-height: 80px;  
+    -fx-tab-max-height: 80px; 
+    -fx-tab-min-width: 220px;  
+    -fx-tab-max-width: 220px;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0 0 0 0; 
+}
+
+.tab-pane .tab-header-area .headers-region .tab {
+    -fx-padding: 0 0 1 0;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0 10 10 0;
+}
+
+.tab-pane *.tab-header-area *.tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tab-pane > .tab-content-area {
+    -fx-border-style: solid;
+    -fx-border-color: #8493a8;
+    -fx-border-width: 1;
+    -fx-focus-color: transparent;
+    -fx-border-radius: 10;
+}
+
+.tab:selected .tab-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+}
+.tab:selected {
+    -fx-background-color: #0081D5;
+}
+.tab:hover {
+    -fx-background-color: #226399;
+}
+
+.tab:hover .tab-label {
+    -fx-text-fill: #ffffff;
+}
+/* Tlačítka voleb */
+.button {
+    -fx-background-color: #ffffff;
+    -fx-padding: 1 2 1 2;
+    -fx-background-radius: 10;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+    -fx-font-size: 16pt;
+    -fx-text-fill: #3d4d65;
+    -fx-border-radius: 10;
+    -fx-border-color: #0082D5;
+    -fx-font-family: "Roboto Condensed";
+}
+
+.button:hover, button:focused:hover {
+    -fx-background-color: #e6f2ff;
+    -fx-font-weight: bold;
+    -fx-transition:ease-in;
+    -fx-transition-duration:300ms
+    /*-fx-effect: dropshadow(three-pass-box, derive(#00264d, 40%), 0, 0, 5, 5);*/
+}
+
+.button:pressed, .button:focused:pressed, .button:default:hover:pressed, .button:focused:hover:pressed {
+    -fx-background-color: #cce6ff;
+    -fx-font-weight: bold;
+}
+
+.button:focused
+{
+    -fx-border-color: #0082D5;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, derive(#00264d, 30%), 0, 0, 3, 3);
+    -fx-border-style: solid;
+    -fx-border-width: 3;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:focused:hover
+{
+    -fx-background-color: #e6f2ff;
+}
+
+.button:disabled, .button:default:disabled
+{
+    -fx-opacity: 0.4;
+    -fx-background-color: rgba(255,255,255,0);
+    -fx-text-fill: #212121;
+}
+
+.button:default
+{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #00264d;
+}
+
+.button:default:hover{
+    -fx-background-color: #f2f2f2;
+}
+

@@ -1,0 +1,21 @@
+.zaplatit-zaplaceno-text {
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 18pt;
+    -fx-text-fill: #3D4D65;
+}
+
+.vratit-text {
+    -fx-font-family: "Roboto";
+    -fx-font-weight: bold;
+    -fx-font-size: 20pt;
+    -fx-text-fill: #3D4D65;
+}
+
+.panel-vratit {
+    -fx-border-color: #374355;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-font-family: Roboto;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5;
+}
