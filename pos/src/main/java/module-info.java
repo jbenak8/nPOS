@@ -10,6 +10,7 @@ module cz.jbenak.npos.pos {
     requires org.apache.commons.lang3;
     requires com.google.gson;
     requires openeet.lite;
+    requires api;
 
     exports cz.jbenak.npos.pos.system;
     exports cz.jbenak.npos.pos.system.util;

@@ -20,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class SeznamZakazniku extends Stage {
@@ -89,8 +90,7 @@ public class SeznamZakazniku extends Stage {
             }
         } else {
             vybranyZakaznik = nactiDetailZakaznika(vybranyZakaznik);
-            assert vybranyZakaznik != null;
-            progres.setText("Vybraný zákazník s číslem {} je registrován do aktuálního dokladu.", new String[]{vybranyZakaznik.getCislo()});
+            progres.setText("Vybraný zákazník s číslem {} je registrován do aktuálního dokladu.", new String[]{Objects.requireNonNull(vybranyZakaznik).getCislo()});
             RegistracniProcesor.getInstance().zaregistrujZakaznika(vybranyZakaznik);
             progres.zavriDialog();
             LOGER.info("Proces registrace vybraného zákazníka s číslem {} do aktuálního dokladu byl dokončen. Dialog bude nyní uzavřen.", vybranyZakaznik.getCislo());
