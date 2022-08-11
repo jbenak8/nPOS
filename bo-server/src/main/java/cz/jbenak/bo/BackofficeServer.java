@@ -1,13 +1,14 @@
 package cz.jbenak.bo;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@EnableEncryptableProperties
 public class BackofficeServer {
 
     public static void main(String[] args) {
-        System.setProperty("jasypt.encryptor.password", "PosC_srv1369a,82");
         SpringApplication.run(BackofficeServer.class, args);
     }
 

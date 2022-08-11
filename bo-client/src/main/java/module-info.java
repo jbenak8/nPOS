@@ -15,6 +15,7 @@ module cz.jbenak.npos.boClient {
     requires org.apache.logging.log4j;
     requires MaterialFX;
     requires api;
+    requires java.net.http;
 
     uses org.apache.logging.log4j.spi.Provider;
 
