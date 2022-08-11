@@ -85,7 +85,7 @@ public class LoginDialogController implements Initializable {
                         .build();
 
                 String password = new String(hash);
-                String basicAuth = "Basic " + Base64.getEncoder().encodeToString(("BoClient" + ":" + password).getBytes());
+                String basicAuth = "Basic " + Base64.getEncoder().encodeToString(("BoClient" + ":" + "Client123").getBytes());
 
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(new URI("http://localhost:7422/test/test"))
