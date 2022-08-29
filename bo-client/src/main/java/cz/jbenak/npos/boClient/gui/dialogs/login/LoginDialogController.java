@@ -2,6 +2,7 @@ package cz.jbenak.npos.boClient.gui.dialogs.login;
 
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.gui.helpers.Helpers;
+import cz.jbenak.npos.boClient.engine.Connection;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -14,18 +15,13 @@ import javafx.scene.input.KeyEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.security.SecureRandom;
-import java.security.spec.KeySpec;
 import java.time.Duration;
 import java.time.Year;
-import java.util.Base64;
 import java.util.ResourceBundle;
 
 /**
@@ -71,24 +67,12 @@ public class LoginDialogController implements Initializable {
         if (fieldUserName.getValidator().isValid() && fieldPassword.getValidator().isValid()) {
             LOGGER.info("Login of user with user name {} will be performed.", fieldUserName.getText());
             try {
-                SecureRandom random = new SecureRandom();
-                byte[] salt = new byte[8];
-                random.nextBytes(salt);
-                KeySpec spec = new PBEKeySpec("Client123".toCharArray(), salt, 185000, 256);
-                SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-                byte[] hash = factory.generateSecret(spec).getEncoded();
-
-                HttpClient client = HttpClient.newBuilder()
-                        .version(HttpClient.Version.HTTP_1_1)
-                        .followRedirects(HttpClient.Redirect.NEVER)
-                        .connectTimeout(Duration.ofSeconds(5))
-                        .build();
-
-                String password = new String(hash);
-                String basicAuth = "Basic " + Base64.getEncoder().encodeToString(("BoClient" + ":" + "Client123").getBytes());
+                Connection connection = new Connection();
+                String basicAuth = connection.getBasicAuthBoServer();
+                HttpClient client = connection.getBoHttpClient();
 
                 HttpRequest request = HttpRequest.newBuilder()
-                        .uri(new URI("http://localhost:7422/test/test"))
+                        .uri(new URI("https://localhost:7422/test/test"))
                         .timeout(Duration.ofSeconds(5))
                         .header("Content-Type", "application/json")
                         .header("Authorization", basicAuth)

@@ -1,5 +1,6 @@
 package cz.jbenak.npos.boClient;
 
+import cz.jbenak.npos.api.shared.Utils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,7 @@ public class BoClient extends Application {
     private static final Logger LOGGER = LogManager.getLogger(BoClient.class);
     private static volatile BoClient instance;
     private Properties appProperties;
+    private Utils apiUtils;
 
     /**
      * Static instance initialization constructor.
@@ -55,6 +57,10 @@ public class BoClient extends Application {
         return appProperties;
     }
 
+    public Utils getApiUtils() {
+        return apiUtils;
+    }
+
     private boolean loadSettings() {
         boolean loaded = true;
         LOGGER.info("Application nBOS BO client is starting. Loading application settings.");
@@ -72,10 +78,19 @@ public class BoClient extends Application {
         return loaded;
     }
 
+    private void initLogging() {
+        if (Boolean.parseBoolean(appProperties.getProperty("connection.log"))) {
+            System.setProperty("jdk.httpclient.HttpClient.log", "all");
+        }
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         if (loadSettings()) {
-            LOGGER.info("Application settings has been loaded. Application version is {}. Login dialog will be shown.", appProperties.getProperty("app.version", "<N/A>"));
+            LOGGER.info("Application settings has been loaded. Application version is {}. Additional logging and API utilities will be initialized.", appProperties.getProperty("app.version", "<N/A>"));
+            initLogging();
+            apiUtils = new Utils();
+            LOGGER.info("Login dialog will be shown.");
             FXMLLoader loader = new FXMLLoader(BoClient.class.getResource("gui/dialogs/login/login-dialog.fxml"));
             stage.setScene(new Scene(loader.load()));
             stage.setTitle("Přihlašte se do nBO klienta");

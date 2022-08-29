@@ -27,7 +27,7 @@ public class User implements Comparable<User> {
     private List<String> userGroupIds;
     private int restLoginAttempts;
     private String initPassword;
-    private boolean changeInitPassword;
+    private boolean changePassword;
     private boolean userLocked;
     private LocalDateTime lastLoginTimestamp;
     private String lastLoginFrom;
@@ -47,7 +47,7 @@ public class User implements Comparable<User> {
                 @JsonProperty(value = "userGroupIds") List<String> userGroupIds,
                 @JsonProperty(value = "restLoginAttempts") int restLoginAttempts,
                 @JsonProperty(value = "initPassword") String initPassword,
-                @JsonProperty(value = "initPasswordChangeRequired") boolean changeInitPassword,
+                @JsonProperty(value = "passwordChangeRequired") boolean changePassword,
                 @JsonProperty(value = "userLocked") boolean userLocked,
                 @JsonProperty(value = "LastLoginTimestamp") LocalDateTime lastLoginTimestamp,
                 @JsonProperty(value = "lastLoggedFrom") String lastLoginFrom) {
@@ -61,7 +61,7 @@ public class User implements Comparable<User> {
         this.userGroupIds = userGroupIds;
         this.restLoginAttempts = restLoginAttempts;
         this.initPassword = initPassword;
-        this.changeInitPassword = changeInitPassword;
+        this.changePassword = changePassword;
         this.userLocked = userLocked;
         this.lastLoginTimestamp = lastLoginTimestamp;
         this.lastLoginFrom = lastLoginFrom;
@@ -162,13 +162,13 @@ public class User implements Comparable<User> {
         this.initPassword = initPassword;
     }
 
-    @JsonProperty("initPasswordChangeRequired")
-    public boolean isChangeInitPassword() {
-        return changeInitPassword;
+    @JsonProperty("passwordChangeRequired")
+    public boolean isChangePassword() {
+        return changePassword;
     }
 
-    public void setChangeInitPassword(boolean changeInitPassword) {
-        this.changeInitPassword = changeInitPassword;
+    public void setChangePassword(boolean changePassword) {
+        this.changePassword = changePassword;
     }
 
     @JsonProperty("LastLoginTimestamp")

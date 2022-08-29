@@ -45,4 +45,5 @@ module cz.jbenak.npos.pos {
     opens cz.jbenak.npos.pos.gui.zakaznik.seznam to javafx.fxml;
     opens cz.jbenak.npos.pos.gui.zakaznik.vyhledani to javafx.fxml;
     opens cz.jbenak.npos.pos.gui.zamek to javafx.fxml;
+    opens cz.jbenak.npos.pos.objekty.tiskoveSestavy.paragon;
 }
