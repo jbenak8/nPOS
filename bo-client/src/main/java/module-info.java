@@ -16,15 +16,21 @@ module cz.jbenak.npos.boClient {
     requires MaterialFX;
     requires api;
     requires java.net.http;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
 
     uses org.apache.logging.log4j.spi.Provider;
 
     exports cz.jbenak.npos.boClient;
+    exports cz.jbenak.npos.boClient.api;
+    exports cz.jbenak.npos.boClient.exceptions;
     exports cz.jbenak.npos.boClient.gui.main;
     exports cz.jbenak.npos.boClient.gui.dialogs.login;
     exports cz.jbenak.npos.boClient.engine;
 
     opens cz.jbenak.npos.boClient to javafx.fxml;
+    opens cz.jbenak.npos.boClient.api to javafx.fxml;
+    opens cz.jbenak.npos.boClient.exceptions to javafx.fxml;
     opens cz.jbenak.npos.boClient.engine to javafx.fxml;
     opens cz.jbenak.npos.boClient.gui.main to javafx.fxml;
     opens cz.jbenak.npos.boClient.gui.dialogs.login to javafx.fxml;

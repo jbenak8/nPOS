@@ -1,6 +1,8 @@
 package cz.jbenak.npos.boClient.gui.dialogs.login;
 
+import cz.jbenak.npos.api.client.LoginStatus;
 import cz.jbenak.npos.boClient.BoClient;
+import cz.jbenak.npos.boClient.api.UserOperations;
 import cz.jbenak.npos.boClient.gui.helpers.Helpers;
 import cz.jbenak.npos.boClient.engine.Connection;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -67,30 +69,9 @@ public class LoginDialogController implements Initializable {
         if (fieldUserName.getValidator().isValid() && fieldPassword.getValidator().isValid()) {
             LOGGER.info("Login of user with user name {} will be performed.", fieldUserName.getText());
             try {
-                Connection connection = new Connection();
-                String basicAuth = connection.getBasicAuthBoServer();
-                HttpClient client = connection.getBoHttpClient();
-
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(new URI("https://localhost:7422/test/test"))
-                        .timeout(Duration.ofSeconds(5))
-                        .header("Content-Type", "application/json")
-                        .header("Authorization", basicAuth)
-                        .GET()
-                        .build();
-
-                client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                        .thenApply(response -> {
-                            if (response.statusCode() != 200) {
-                                System.out.println(response.statusCode());
-                                System.out.println(response.body());
-                            }
-                            return response.body();
-                        })
-                        .thenApply(body -> {
-                            System.out.println(body);
-                            return null;
-                        });
+                UserOperations operations = new UserOperations();
+                LoginStatus status = operations.loginUser("1", "1").join();
+                System.out.println(status.status()+" -> "+status.user().getUserId());
             } catch (Exception e) {
                 e.printStackTrace();
             }

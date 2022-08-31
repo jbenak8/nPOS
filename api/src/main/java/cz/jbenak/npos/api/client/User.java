@@ -30,7 +30,6 @@ public class User implements Comparable<User> {
     private boolean changePassword;
     private boolean userLocked;
     private LocalDateTime lastLoginTimestamp;
-    private String lastLoginFrom;
 
     public User(String userId) {
         this.userId = userId;
@@ -49,8 +48,7 @@ public class User implements Comparable<User> {
                 @JsonProperty(value = "initPassword") String initPassword,
                 @JsonProperty(value = "passwordChangeRequired") boolean changePassword,
                 @JsonProperty(value = "userLocked") boolean userLocked,
-                @JsonProperty(value = "LastLoginTimestamp") LocalDateTime lastLoginTimestamp,
-                @JsonProperty(value = "lastLoggedFrom") String lastLoginFrom) {
+                @JsonProperty(value = "LastLoginTimestamp") LocalDateTime lastLoginTimestamp) {
         this.userId = userId;
         this.userName = userName;
         this.userSurname = userSurname;
@@ -64,7 +62,6 @@ public class User implements Comparable<User> {
         this.changePassword = changePassword;
         this.userLocked = userLocked;
         this.lastLoginTimestamp = lastLoginTimestamp;
-        this.lastLoginFrom = lastLoginFrom;
     }
 
     @JsonProperty("userId")
@@ -178,15 +175,6 @@ public class User implements Comparable<User> {
 
     public void setLastLoginTimestamp(LocalDateTime lastLoginTimestamp) {
         this.lastLoginTimestamp = lastLoginTimestamp;
-    }
-
-    @JsonProperty("lastLoggedFrom")
-    public String getLastLoginFrom() {
-        return lastLoginFrom;
-    }
-
-    public void setLastLoginFrom(String lastLoginFrom) {
-        this.lastLoginFrom = lastLoginFrom;
     }
 
     @Override

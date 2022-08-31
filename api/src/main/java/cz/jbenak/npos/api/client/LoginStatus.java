@@ -3,15 +3,11 @@ package cz.jbenak.npos.api.client;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class LoginStatus {
+public record LoginStatus(cz.jbenak.npos.api.client.LoginStatus.Status status, User user, int leftAttempts) {
 
     public enum Status {
         OK, FAILED, USER_BLOCKED, ID_UNKNOWN
     }
-
-    private final Status status;
-    private final User user;
-    private final int leftAttempts;
 
     @JsonCreator
     public LoginStatus(@JsonProperty(value = "loginStatus", required = true) Status status,
@@ -22,18 +18,21 @@ public class LoginStatus {
         this.leftAttempts = leftAttempts;
     }
 
+    @Override
     @JsonProperty("loginStatus")
-    public Status getStatus() {
+    public Status status() {
         return status;
     }
 
+    @Override
     @JsonProperty("user")
-    public User getUser() {
+    public User user() {
         return user;
     }
 
-    @JsonProperty("leftAttempts")
-    public int getLeftAttempts() {
+    @Override
+    @JsonProperty("leftLoginAttempts")
+    public int leftAttempts() {
         return leftAttempts;
     }
 }

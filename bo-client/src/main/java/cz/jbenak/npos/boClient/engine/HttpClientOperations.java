@@ -1,14 +1,119 @@
 package cz.jbenak.npos.boClient.engine;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import cz.jbenak.npos.boClient.exceptions.ClientException;
+import cz.jbenak.npos.boClient.exceptions.ServerException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.net.URI;
 import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 
 public class HttpClientOperations {
 
-    private final String authentication;
+    private final static Logger LOGGER = LogManager.getLogger(HttpClientOperations.class);
+    private final static Duration TIMEOUT = Duration.ofSeconds(5);
+    private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper().findAndRegisterModules();
+    private final String authorization;
     private final HttpClient client;
 
-    public HttpClientOperations(String authentication, HttpClient client) {
-        this.authentication = authentication;
+    public HttpClientOperations(String authorization, HttpClient client) {
+        this.authorization = authorization;
         this.client = client;
+    }
+
+    public <T> CompletableFuture<T> getData(URI uri, TypeReference<T> responseTypeReference) {
+        LOGGER.debug("Performing GET request to URI {}", uri);
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(uri)
+                .timeout(TIMEOUT)
+                .header("Content-Type", "application/json")
+                .header("Authorization", authorization)
+                .GET()
+                .build();
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> {
+                    if (response.statusCode() != 200) {
+                        throw parseRemoteException(response.statusCode(), response.body());
+                    }
+                    return response.body();
+                })
+                .thenApply(response -> deserialize(response, responseTypeReference));
+    }
+
+    public <T> CompletableFuture<T> postDataWithResponse(URI uri, Object data, TypeReference<T> responseTypeReference) {
+        LOGGER.debug("Performing POST request to URI {} awaiting another data in response.", uri);
+        String json;
+        try {
+            json = OBJECT_MAPPER.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+            LOGGER.error("Given data {} cannot be converted to JSON for POST: {}", data, e);
+            return CompletableFuture.failedFuture(e);
+        }
+        HttpRequest request = preparePOSTrequest(uri, json);
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> {
+                    if (response.statusCode() != 200) {
+                        throw parseRemoteException(response.statusCode(), response.body());
+                    }
+                    return response.body();
+                })
+                .thenApply(response -> deserialize(response, responseTypeReference));
+    }
+
+    public CompletableFuture<?> postData(URI uri, Object data) {
+        LOGGER.debug("Performing POST request to URI {} with standard HTTP response.", uri);
+        String json;
+        try {
+            json = OBJECT_MAPPER.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+            LOGGER.error("Given data {} cannot be converted to JSON for POST: {}", data, e);
+            return CompletableFuture.failedFuture(e);
+        }
+        HttpRequest request = preparePOSTrequest(uri, json);
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> {
+                    if (response.statusCode() != 200) {
+                        throw parseRemoteException(response.statusCode(), response.body());
+                    }
+                    return response.body();
+                });
+    }
+
+    private HttpRequest preparePOSTrequest(URI uri, String json) {
+        return HttpRequest.newBuilder()
+                .uri(uri)
+                .timeout(TIMEOUT)
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json")
+                .header("Authorization", authorization)
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
+    }
+
+    private <T> T deserialize(String json, TypeReference<T> typeReference) {
+        try {
+            return OBJECT_MAPPER.readValue(json, typeReference);
+        } catch (JsonProcessingException e) {
+            throw new ClientException("Cannot parse response", e);
+        }
+    }
+
+    private RuntimeException parseRemoteException(int statusCode, String body) {
+        if (body == null) {
+            return new ClientException(statusCode, "HTTP Error");
+        }
+        try {
+            return OBJECT_MAPPER.readValue(body, ServerException.class);
+        } catch (JsonProcessingException e) {
+            return new ClientException(statusCode, "HTTP Error");
+        }
     }
 }
