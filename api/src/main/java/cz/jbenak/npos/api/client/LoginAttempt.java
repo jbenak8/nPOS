@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @version 1.0.0.0
  * @since 2022-08-31
  */
-public record LoginAttempt(String userId, String password) {
+public record LoginAttempt(int userId, String password) {
 
     @JsonCreator
     public LoginAttempt {
@@ -20,7 +20,7 @@ public record LoginAttempt(String userId, String password) {
 
     @Override
     @JsonProperty
-    public String userId() {
+    public int userId() {
         return userId;
     }
 

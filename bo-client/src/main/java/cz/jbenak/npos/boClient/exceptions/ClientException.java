@@ -1,9 +1,18 @@
 package cz.jbenak.npos.boClient.exceptions;
 
-public class ClientException extends RuntimeException{
+import java.net.URI;
 
-    public ClientException(int status, String message) {
-        super("HTTP Status: " + status + ": " + message);
+public class ClientException extends RuntimeException {
+
+    private int status;
+
+    public ClientException(int status, URI uri, String message) {
+        super("HTTP Status: " + status + " on server URI " + uri + " error message: " + message);
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
     }
 
     public ClientException(String message, Throwable cause) {

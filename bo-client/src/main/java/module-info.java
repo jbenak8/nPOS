@@ -8,6 +8,7 @@ module cz.jbenak.npos.boClient {
     requires org.kordamp.ikonli.core;
     requires org.kordamp.ikonli.fontawesome5;
     requires org.kordamp.ikonli.feather;
+    requires org.kordamp.ikonli.fluentui;
     //requires eu.hansolo.tilesfx;
     requires org.apache.logging.log4j.core;
     requires org.apache.logging.log4j.iostreams;
@@ -27,6 +28,7 @@ module cz.jbenak.npos.boClient {
     exports cz.jbenak.npos.boClient.gui.main;
     exports cz.jbenak.npos.boClient.gui.dialogs.login;
     exports cz.jbenak.npos.boClient.engine;
+    exports cz.jbenak.npos.boClient.gui.dialogs.generic;
 
     opens cz.jbenak.npos.boClient to javafx.fxml;
     opens cz.jbenak.npos.boClient.api to javafx.fxml;
@@ -34,5 +36,6 @@ module cz.jbenak.npos.boClient {
     opens cz.jbenak.npos.boClient.engine to javafx.fxml;
     opens cz.jbenak.npos.boClient.gui.main to javafx.fxml;
     opens cz.jbenak.npos.boClient.gui.dialogs.login to javafx.fxml;
+    opens cz.jbenak.npos.boClient.gui.dialogs.generic to javafx.fxml;
 
 }

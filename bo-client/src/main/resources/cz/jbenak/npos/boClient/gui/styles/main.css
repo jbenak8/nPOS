@@ -1,4 +1,16 @@
-/* Background */
+@import "fonts.css";/* Background */
+
+.dialog-title {
+    font-family: "Comfortaa Bold";
+    -fx-font-size: 23px;
+}
+
+.dialog-footer-label {
+    -fx-font-family: "Comfortaa Medium";
+    -fx-font-size: 12px;
+    -fx-font-style: normal;
+    -fx-text-fill: #656565;
+}
 
 .dialog-main-background {
     -fx-background-color: white;
@@ -8,16 +20,35 @@
     -fx-border-color: #008a1a;
     -fx-border-radius: 5;
     /*-fx-border-insets: 2;*/
+    -fx-text-fill: #008a1a;
 }
 
 .dialog-button-cancel {
     -fx-border-color: #c30000;
     -fx-border-radius: 5;
+    -fx-text-fill: #c30000;
+}
+
+.dialog-button-generic {
+    -fx-border-color: #104c73;
+    -fx-border-radius: 5;
+    -fx-text-fill: #104c73;
+    -fx-min-width: 100;
+    -fx-min-height: 40;
 }
 
 .dialog-button-ok:focused, .dialog-button-cancel:focused {
     -fx-border-radius: 5;
     -fx-border-width: 3;
+}
+
+.mfx-button,
+.mfx-button:armed,
+.mfx-button:hover,
+.mfx-button:focused
+{
+    -fx-font-family: "Comfortaa Bold";
+    -fx-font-weight: bold;
 }
 
 .mfx-text-field {

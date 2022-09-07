@@ -1,6 +1,7 @@
 package cz.jbenak.npos.boClient;
 
 import cz.jbenak.npos.api.shared.Utils;
+import cz.jbenak.npos.boClient.gui.dialogs.login.LoginDialogController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -93,6 +94,8 @@ public class BoClient extends Application {
             LOGGER.info("Login dialog will be shown.");
             FXMLLoader loader = new FXMLLoader(BoClient.class.getResource("gui/dialogs/login/login-dialog.fxml"));
             stage.setScene(new Scene(loader.load()));
+            LoginDialogController controller = loader.getController();
+            controller.setDialogStage(stage);
             stage.setTitle("Přihlašte se do nBO klienta");
             stage.setResizable(false);
             stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("gui/img/BOikona.png"))));
@@ -105,6 +108,10 @@ public class BoClient extends Application {
             error.showAndWait();
             Platform.exit();
         }
+    }
+
+    protected void showError(Exception e) {
+
     }
 
     public static void main(String[] args) {

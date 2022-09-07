@@ -14,6 +14,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class HttpClientOperations {
@@ -41,7 +42,7 @@ public class HttpClientOperations {
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     if (response.statusCode() != 200) {
-                        throw parseRemoteException(response.statusCode(), response.body());
+                        throw parseRemoteException(uri, response.statusCode(), response.body());
                     }
                     return response.body();
                 })
@@ -61,7 +62,7 @@ public class HttpClientOperations {
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     if (response.statusCode() != 200) {
-                        throw parseRemoteException(response.statusCode(), response.body());
+                        throw parseRemoteException(uri, response.statusCode(), response.body());
                     }
                     return response.body();
                 })
@@ -81,7 +82,7 @@ public class HttpClientOperations {
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     if (response.statusCode() != 200) {
-                        throw parseRemoteException(response.statusCode(), response.body());
+                        throw parseRemoteException(uri, response.statusCode(), response.body());
                     }
                     return response.body();
                 });
@@ -106,14 +107,14 @@ public class HttpClientOperations {
         }
     }
 
-    private RuntimeException parseRemoteException(int statusCode, String body) {
+    private RuntimeException parseRemoteException(URI uri, int statusCode, String body) {
         if (body == null) {
-            return new ClientException(statusCode, "HTTP Error");
+            return new ClientException(statusCode, uri, "HTTP Error");
         }
         try {
             return OBJECT_MAPPER.readValue(body, ServerException.class);
         } catch (JsonProcessingException e) {
-            return new ClientException(statusCode, "HTTP Error");
+            return new ClientException(statusCode, uri,  "HTTP Error");
         }
     }
 }

@@ -1,9 +1,10 @@
 package cz.jbenak.npos.api.client;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeId;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,10 +15,9 @@ import java.util.Objects;
  * @version 1.0.0.0
  * @since 2022-08-06
  */
-
 public class User implements Comparable<User> {
 
-    private final String userId;
+    private int userId;
     private String userName;
     private String userSurname;
     private String phone;
@@ -26,46 +26,16 @@ public class User implements Comparable<User> {
     private List<String> accessRights;
     private List<String> userGroupIds;
     private int restLoginAttempts;
-    private String initPassword;
-    private boolean changePassword;
     private boolean userLocked;
     private LocalDateTime lastLoginTimestamp;
 
-    public User(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    @JsonCreator
-    public User(@JsonProperty(value = "userId", required = true) String userId,
-                @JsonProperty(value = "userName") String userName,
-                @JsonProperty(value = "userSurname") String userSurname,
-                @JsonProperty(value = "phone") String phone,
-                @JsonProperty(value = "mail") String mail,
-                @JsonProperty(value = "note") String note,
-                @JsonProperty(value = "accessRights") List<String> accessRights,
-                @JsonProperty(value = "userGroupIds") List<String> userGroupIds,
-                @JsonProperty(value = "restLoginAttempts") int restLoginAttempts,
-                @JsonProperty(value = "initPassword") String initPassword,
-                @JsonProperty(value = "passwordChangeRequired") boolean changePassword,
-                @JsonProperty(value = "userLocked") boolean userLocked,
-                @JsonProperty(value = "LastLoginTimestamp") LocalDateTime lastLoginTimestamp) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userSurname = userSurname;
-        this.phone = phone;
-        this.mail = mail;
-        this.note = note;
-        this.accessRights = accessRights;
-        this.userGroupIds = userGroupIds;
-        this.restLoginAttempts = restLoginAttempts;
-        this.initPassword = initPassword;
-        this.changePassword = changePassword;
-        this.userLocked = userLocked;
-        this.lastLoginTimestamp = lastLoginTimestamp;
-    }
-
-    @JsonProperty("userId")
-    public String getUserId() {
+    @JsonTypeId
+    @JsonProperty(value = "userId", required = true)
+    public int getUserId() {
         return userId;
     }
 
@@ -150,25 +120,8 @@ public class User implements Comparable<User> {
         this.userLocked = userLocked;
     }
 
-    @JsonProperty("initPassword")
-    public String getInitPassword() {
-        return initPassword;
-    }
 
-    public void setInitPassword(String initPassword) {
-        this.initPassword = initPassword;
-    }
-
-    @JsonProperty("passwordChangeRequired")
-    public boolean isChangePassword() {
-        return changePassword;
-    }
-
-    public void setChangePassword(boolean changePassword) {
-        this.changePassword = changePassword;
-    }
-
-    @JsonProperty("LastLoginTimestamp")
+    @JsonProperty("lastLoginTimestamp")
     public LocalDateTime getLastLoginTimestamp() {
         return lastLoginTimestamp;
     }
@@ -184,7 +137,7 @@ public class User implements Comparable<User> {
 
     @Override
     public int compareTo(User o) {
-        return userId.compareTo(o.userId);
+        return Integer.compare(userId, o.userId);
     }
 
     @Override
@@ -193,5 +146,23 @@ public class User implements Comparable<User> {
         if (obj == null || getClass() != obj.getClass()) return false;
         User user = (User) obj;
         return Objects.equals(user.userId, userId);
+    }
+
+    //TODO some helper for human-readable lists
+    @Override
+    public String toString() {
+        return "User = {" +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userSurname='" + userSurname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", mail='" + mail + '\'' +
+                ", note='" + note + '\'' +
+                ", accessRights=" + accessRights +
+                ", userGroupIds=" + userGroupIds +
+                ", restLoginAttempts=" + restLoginAttempts +
+                ", userLocked=" + userLocked +
+                ", lastLoginTimestamp=" + lastLoginTimestamp +
+                '}';
     }
 }

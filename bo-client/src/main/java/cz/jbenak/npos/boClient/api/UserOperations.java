@@ -32,7 +32,7 @@ public class UserOperations {
         this.baseURI = connection.getBaseURIBoServer() + "/user";
     }
 
-    public CompletableFuture<LoginStatus> loginUser(String user, String password) {
+    public CompletableFuture<LoginStatus> loginUser(int user, String password) {
         LOGGER.info("Performing login to BO server for user {}.", user);
         return httpClientOperations.postDataWithResponse(URI.create(baseURI + "/login"), new LoginAttempt(user, password), new TypeReference<>() {
         });
