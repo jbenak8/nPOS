@@ -1,6 +1,7 @@
 package cz.jbenak.npos.boClient.gui.dialogs.login;
 
 import cz.jbenak.npos.api.client.LoginStatus;
+import cz.jbenak.npos.api.shared.Utils;
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.api.UserOperations;
 import cz.jbenak.npos.boClient.exceptions.ClientException;
@@ -81,8 +82,10 @@ public class LoginDialogController implements Initializable {
             fieldPassword.setDisable(true);
             LOGGER.info("Login of user with user name {} will be performed.", fieldUserName.getText());
             try {
-                UserOperations operations = new UserOperations();
-                LoginStatus status = operations.loginUser(Integer.parseInt(fieldUserName.getText().trim()), fieldPassword.getText().trim()).join();
+                final UserOperations operations = new UserOperations();
+                final Utils apiUtils = new Utils();
+                LoginStatus status = operations.loginUser(Integer.parseInt(fieldUserName.getText().trim()),
+                        apiUtils.getStringEncryptor().encrypt(fieldPassword.getText().trim())).join();
                 System.out.println(status);
             } catch (Exception e) {
                 //TODO VYtvořit CommonDialogOperation - tohle aby šlo jednou metodou všude. I třeba i OK.

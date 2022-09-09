@@ -5,7 +5,7 @@ import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 
 /**
- * Utilities class for several usages accross the project.
+ * Utilities class for several usages across the project.
  *
  * @author Jan Benák
  * @version 1.0.0.0

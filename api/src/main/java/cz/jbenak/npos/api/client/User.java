@@ -1,12 +1,11 @@
 package cz.jbenak.npos.api.client;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class for user object. Can be used for creation and also change of the user.
@@ -23,8 +22,8 @@ public class User implements Comparable<User> {
     private String phone;
     private String mail;
     private String note;
-    private List<String> accessRights;
-    private List<String> userGroupIds;
+    private Set<String> accessRights;
+    private List<Integer> userGroupIds;
     private int restLoginAttempts;
     private boolean userLocked;
     private LocalDateTime lastLoginTimestamp;
@@ -33,7 +32,6 @@ public class User implements Comparable<User> {
         this.userId = userId;
     }
 
-    @JsonTypeId
     @JsonProperty(value = "userId", required = true)
     public int getUserId() {
         return userId;
@@ -85,20 +83,20 @@ public class User implements Comparable<User> {
     }
 
     @JsonProperty("accessRights")
-    public List<String> getAccessRights() {
+    public Set<String> getAccessRights() {
         return accessRights;
     }
 
-    public void setAccessRights(List<String> accessRights) {
+    public void setAccessRights(Set<String> accessRights) {
         this.accessRights = accessRights;
     }
 
     @JsonProperty("userGroupIds")
-    public List<String> getUserGroupIds() {
+    public List<Integer> getUserGroupIds() {
         return userGroupIds;
     }
 
-    public void setUserGroupIds(List<String> userGroupIds) {
+    public void setUserGroupIds(List<Integer> userGroupIds) {
         this.userGroupIds = userGroupIds;
     }
 
