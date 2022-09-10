@@ -64,6 +64,9 @@ public class UserService {
             return Mono.just(new LoginStatus(FAILED, mapBoUserToApiUser(user)));
         }
         user.setLast_login_timestamp(LocalDateTime.now());
+        if (user.getRest_login_attempts() < 3) {
+            user.setRest_login_attempts(3);
+        }
         user = userRepository.save(user).toFuture().join();
         User apiUser = mapBoUserToApiUser(user);
         apiUser.setUserGroupIds(groupRepository.getUserGroupsByUserId(id).map(UserGroup::id).collectList().toFuture().join());

@@ -1,7 +1,9 @@
 package cz.jbenak.npos.boClient;
 
+import cz.jbenak.npos.api.client.User;
 import cz.jbenak.npos.api.shared.Utils;
 import cz.jbenak.npos.boClient.gui.dialogs.login.LoginDialogController;
+import cz.jbenak.npos.boClient.gui.main.BoClientController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,6 +34,8 @@ public class BoClient extends Application {
     private static volatile BoClient instance;
     private Properties appProperties;
     private Utils apiUtils;
+    private Stage mainStage;
+    private User loggedUser;
 
     /**
      * Static instance initialization constructor.
@@ -62,6 +67,10 @@ public class BoClient extends Application {
         return apiUtils;
     }
 
+    public User getLoggedUser() {
+        return loggedUser;
+    }
+
     private boolean loadSettings() {
         boolean loaded = true;
         LOGGER.info("Application nBOS BO client is starting. Loading application settings.");
@@ -87,6 +96,7 @@ public class BoClient extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        mainStage = stage;
         if (loadSettings()) {
             LOGGER.info("Application settings has been loaded. Application version is {}. Additional logging and API utilities will be initialized.", appProperties.getProperty("app.version", "<N/A>"));
             initLogging();
@@ -110,8 +120,34 @@ public class BoClient extends Application {
         }
     }
 
-    protected void showError(Exception e) {
+    public void showMainWindow(User user) {
+        try {
+            LOGGER.info("Will be shown main application window.");
+            this.loggedUser = user;
+            FXMLLoader loader = new FXMLLoader(BoClient.class.getResource("gui/main/bo-client.fxml"));
+            mainStage.setScene(new Scene(loader.load()));
+            mainStage.setTitle("nPOS Backoffice klient " + appProperties.getProperty("app.version"));
+            mainStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("gui/img/BOikona.png"))));
+            mainStage.setResizable(true);
+            mainStage.setMaximized(Boolean.parseBoolean(appProperties.getProperty("app.showMaximized", "true")));
+            BoClientController controller = loader.getController();
+            controller.setUser();
+            mainStage.show();
+            mainStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onMainWindowClose);
+        } catch (Exception e) {
+            LOGGER.fatal("Cannot open main application window. Bo Client will terminate.", e);
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setTitle("BO klienta nelze spustit");
+            error.setHeaderText("Nepodařilo se zobrazit hlavní aplikační okno");
+            error.setContentText("Nemůžu spustit BO klienta, protože nastala závažná chyba zobrazení hlavního okna. Podívejte se prosím do protokolů aplikace.");
+            error.showAndWait();
+            Platform.exit();
+        }
+    }
 
+    private void onMainWindowClose(WindowEvent event) {
+        LOGGER.info("Close button pressed. Application will be closed");
+        // TODO event.consume();
     }
 
     public static void main(String[] args) {

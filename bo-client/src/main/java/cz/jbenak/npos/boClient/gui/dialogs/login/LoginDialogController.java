@@ -86,9 +86,8 @@ public class LoginDialogController implements Initializable {
                 final Utils apiUtils = new Utils();
                 LoginStatus status = operations.loginUser(Integer.parseInt(fieldUserName.getText().trim()),
                         apiUtils.getStringEncryptor().encrypt(fieldPassword.getText().trim())).join();
-                System.out.println(status);
+                handleLoginStatus(status);
             } catch (Exception e) {
-                //TODO VYtvořit CommonDialogOperation - tohle aby šlo jednou metodou všude. I třeba i OK.
                 LOGGER.error("Error during login operation occurred:", e);
                 InfoDialog errorDialog;
                 if (e.getCause() instanceof ConnectException) {
@@ -150,5 +149,53 @@ public class LoginDialogController implements Initializable {
             return false;
         }
         return true;
+    }
+
+    private void handleLoginStatus(LoginStatus status) {
+        switch (status.status()) {
+            case OK -> {
+                LOGGER.info("User with ID {} has been successfully logged in.", status.user().getUserId());
+                BoClient.getInstance().showMainWindow(status.user());
+            }
+            case FAILED -> {
+                LOGGER.warn("Login of user with ID {} has failed.", status.user().getUserId());
+                InfoDialog dialog = new InfoDialog(InfoDialogType.WARNING, dialogStage, false);
+                dialog.setDialogTitle("Přihlášení selhalo");
+                dialog.setDialogSubtitle("Bylo zadáno nesprávné heslo.");
+                String message = status.user().getRestLoginAttempts() > 0
+                        ?
+                        "Nebylo možné přihlásit uživatele " + status.user().getUserId()
+                                + " - " + status.user().getUserName() + " " + status.user().getUserSurname()
+                                + " jelikož bylo zadáno nesprávné heslo. \n\n Máte ještě " + status.user().getRestLoginAttempts()
+                                + (status.user().getRestLoginAttempts() > 1 ? " pokusy" : " pokus")
+                                + " než bude tento uživatel zablokován."
+                        :
+                        "Pro uživatele " + status.user().getUserId()
+                                + " byly vyčerpány všechny dostupné pokusy o přihlášení, takže uživatel byl zablokován.\n\n" +
+                                "Obraťte se prosím na svého systémového administrátora o odblokování.";
+                dialog.setDialogMessage(message);
+                dialog.showDialog();
+            }
+            case ID_UNKNOWN -> {
+                LOGGER.warn("Entered user with ID {} has not been found on the server.", fieldUserName.getText());
+                InfoDialog dialog = new InfoDialog(InfoDialogType.WARNING, dialogStage, false);
+                dialog.setDialogTitle("Přihlášení selhalo");
+                dialog.setDialogSubtitle("Uživatel neznámý.");
+                dialog.setDialogMessage("Zadaný uživatel nebyl na serveru nalezen. Prosím zkontrolujte jeho ID a zkuste se přihlásit znovu.");
+                dialog.showDialog();
+            }
+            case USER_LOCKED -> {
+                LOGGER.warn("User with ID {} has been locked.", status.user().getUserId());
+                InfoDialog dialog = new InfoDialog(InfoDialogType.ERROR, dialogStage, false);
+                dialog.setDialogTitle("Přihlášení selhalo");
+                dialog.setDialogSubtitle("Uživatel byl zablokován.");
+                dialog.setDialogMessage("Zadaný uživatel "
+                        + status.user().getUserId()
+                        + " - " + status.user().getUserName() + " " + status.user().getUserSurname()
+                        + " byl zablokován z důvodu vyčerpání možných pokusů o přihlášení.\n\n" +
+                        "Obraťte se prosím na svého systémového administrátora o odblokování.");
+                dialog.showDialog();
+            }
+        }
     }
 }

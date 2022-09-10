@@ -1,4 +1,4 @@
-@import "fonts.css";/* Background */
+@import "fonts.css"; /* Background */
 
 .dialog-title {
     font-family: "Comfortaa Bold";
@@ -45,8 +45,7 @@
 .mfx-button,
 .mfx-button:armed,
 .mfx-button:hover,
-.mfx-button:focused
-{
+.mfx-button:focused {
     -fx-font-family: "Comfortaa Bold";
     -fx-font-weight: bold;
 }
@@ -69,4 +68,39 @@
 
 .mfx-text-field:invalid .mfx-font-icon {
     -mfx-color: -mfx-red;
+}
+
+.main-window {
+    -fx-background-color: #ffffff;
+    -fx-background-image: url("../img/background.png");
+}
+
+.menu-panel {
+    -fx-font-family: "Comfortaa Bold";
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5;
+    /*-fx-border-color: #104c73;*/
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0.0, 0.0);
+}
+
+.menu-panel .button {
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.menu-panel .button:hover {
+    -fx-background-color: rgba(0, 66, 59, 0.1);
+}
+
+.menu-panel .button-toggled {
+    -fx-background-color: rgba(0, 66, 59, 0.1);
+    -fx-border-color: rgba(0, 66, 59, 0.5);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.taskbar {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.5, 0.0, 0.0);
+    -fx-font-family: Comfortaa;
 }
