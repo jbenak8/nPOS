@@ -14,7 +14,7 @@
    <bottom>
       <BorderPane prefHeight="30.0" prefWidth="200.0" styleClass="taskbar" BorderPane.alignment="CENTER">
          <left>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="354.0" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -33,7 +33,7 @@
             </HBox>
          </left>
          <right>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="283.0" BorderPane.alignment="CENTER">
                <children>
                   <Label fx:id="labelSystemStatus" text="Systém pracuje..." />
                   <MFXProgressSpinner fx:id="mainProgressIndicator" prefHeight="30.0" prefWidth="30.0">
@@ -45,7 +45,15 @@
             </HBox>
          </right>
          <center>
-            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="810.0" BorderPane.alignment="CENTER" />
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="810.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="16.0" prefWidth="480.0" text="Filiálka: ">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="16.0" prefWidth="138.0" text="Účetní období: 2022" />
+               </children></HBox>
          </center>
       </BorderPane>
    </bottom>
@@ -63,6 +71,18 @@
                   <Insets bottom="30.0" left="50.0" top="15.0" />
                </VBox.margin>
             </ImageView>
+            <Button alignment="BASELINE_LEFT" layoutX="25.0" layoutY="155.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" text="Domů">
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="15.0" />
+               </VBox.margin>
+            </Button>
             <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" text="Číselníky">
                <VBox.margin>
                   <Insets bottom="10.0" left="15.0" />
@@ -75,7 +95,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="35.0" layoutY="155.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" text="Sklad">
+            <Button alignment="BASELINE_LEFT" layoutX="35.0" layoutY="155.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" styleClass="button-toggled" text="Sklad a sortiment">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +107,7 @@
                   <Insets bottom="10.0" left="15.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="200.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" text="Peněžní denník">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="200.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" text="Pokladní deník">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -99,11 +119,23 @@
                   <Insets bottom="10.0" left="15.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="235.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" styleClass="button-toggled" text="Fakturace">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="235.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" text="Fakturace">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/icons/invoice.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="15.0" />
+               </VBox.margin>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="25.0" layoutY="335.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" text="Zákazníci">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons/customers.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -116,6 +148,18 @@
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/icons/sales.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="15.0" />
+               </VBox.margin>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="25.0" layoutY="380.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" text="Slevy a akce">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons/discount.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -171,7 +215,22 @@
                   <Insets bottom="10.0" left="15.0" />
                </VBox.margin>
             </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="25.0" layoutY="650.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="185.0" text="Nápověda">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons/help.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="15.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </left>
+   <center>
+      <fx:include source="../panels/warehouse/warehouse-panel.fxml" />
+   </center>
 </BorderPane>

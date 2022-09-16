@@ -46,7 +46,7 @@
 .mfx-button:armed,
 .mfx-button:hover,
 .mfx-button:focused {
-    -fx-font-family: "Comfortaa Bold";
+    -fx-font-family: Comfortaa;
     -fx-font-weight: bold;
 }
 

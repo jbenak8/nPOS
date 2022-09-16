@@ -1,14 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="cz.jbenak.npos.boClient.gui.panels.data.DataPanelController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<BorderPane fx:id="mainPane" prefHeight="768.0" prefWidth="1260.0" styleClass="panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.warehouse.WarehousePanelController">
+    <top>
+        <BorderPane fx:id="menuPane" prefHeight="100.0" prefWidth="1014.0" BorderPane.alignment="CENTER">
+            <top>
+                <HBox alignment="CENTER_LEFT" prefHeight="4.0" prefWidth="1014.0" styleClass="panel-main-menu" BorderPane.alignment="CENTER">
+                    <children>
+                  <Button fx:id="btnMenuItems2" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#setItemsPane" text="Účetní období" />
+                        <Button fx:id="btnMenuItems" mnemonicParsing="false" onAction="#setItemsPane" text="Pokladny">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                  <Button fx:id="btnMenuItems1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#setItemsPane" text="Předvolby na pokladně" />
+                        <Button fx:id="btnMenuItemGroups" mnemonicParsing="false" onAction="#setItemGroupsPane" text="Měrné jednotky">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnMenuStockReceipts" mnemonicParsing="false" onAction="#setStockReceiptsPane" text="Číselné řady">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnMenuStockDispenses" mnemonicParsing="false" onAction="#setStockDispensesPane" text="Platební prostředky">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnMenuStockTaking" mnemonicParsing="false" onAction="#setStockTakingPane" text="Pohyby">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnMenuViews" mnemonicParsing="false" onAction="#setViewPane" text="Měny">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Button>
+                  <Button fx:id="btnMenuViews1" layoutX="518.0" layoutY="10.0" mnemonicParsing="false" onAction="#setViewPane" text="Státy" />
+                  <Button fx:id="btnMenuViews11" layoutX="573.0" layoutY="10.0" mnemonicParsing="false" onAction="#setViewPane" text="Sazby DPH" />
+                  <Button fx:id="btnMenuViews111" layoutX="622.0" layoutY="10.0" mnemonicParsing="false" onAction="#setViewPane" text="Kurzy měn" />
+                  <Button fx:id="btnMenuViews1111" layoutX="973.0" layoutY="10.0" mnemonicParsing="false" onAction="#setViewPane" text="Reklamy" />
+                    </children>
+                    <BorderPane.margin>
+                        <Insets bottom="10.0" />
+                    </BorderPane.margin>
+                </HBox>
+            </top>
+            <center>
+                <fx:include source="items-menu.fxml" />
+            </center>
+        </BorderPane>
+    </top>
+    <padding>
+        <Insets bottom="10.0" right="10.0" top="10.0" />
+    </padding>
+    <center>
+        <MFXTableView prefHeight="99999.0" prefWidth="99999.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets top="10.0" />
+            </BorderPane.margin>
+        </MFXTableView>
+    </center>
 </BorderPane>

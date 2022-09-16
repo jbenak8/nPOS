@@ -36,6 +36,7 @@ public class BoClient extends Application {
     private Utils apiUtils;
     private Stage mainStage;
     private User loggedUser;
+    private boolean documentNotSaved;
 
     /**
      * Static instance initialization constructor.
@@ -69,6 +70,14 @@ public class BoClient extends Application {
 
     public User getLoggedUser() {
         return loggedUser;
+    }
+
+    public boolean isDocumentNotSaved() {
+        return documentNotSaved;
+    }
+
+    public void setDocumentNotSaved(boolean documentNotSaved) {
+        this.documentNotSaved = documentNotSaved;
     }
 
     private boolean loadSettings() {
@@ -147,6 +156,9 @@ public class BoClient extends Application {
 
     private void onMainWindowClose(WindowEvent event) {
         LOGGER.info("Close button pressed. Application will be closed");
+        if (documentNotSaved) {
+            LOGGER.info("There are unsaved documents in the background. Question dialog will be shown.");
+        }
         // TODO event.consume();
     }
 
