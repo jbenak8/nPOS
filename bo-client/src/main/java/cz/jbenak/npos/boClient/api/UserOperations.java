@@ -20,16 +20,12 @@ import java.util.concurrent.CompletableFuture;
  * @version 1.0.0.0
  * @since 2022-08-31
  */
-public class UserOperations {
+public class UserOperations extends AbstractClientOperations {
 
     private final static Logger LOGGER = LogManager.getLogger(UserOperations.class);
-    private final HttpClientOperations httpClientOperations;
-    private final String baseURI;
 
     public UserOperations() {
-        Connection connection = Connection.getInstance();
-        this.httpClientOperations = new HttpClientOperations(connection.getBasicAuthBoServer(), connection.getBoHttpClient());
-        this.baseURI = connection.getBaseURIBoServer() + "/user";
+        super("/user");
     }
 
     public CompletableFuture<LoginStatus> loginUser(int user, String password) {

@@ -72,6 +72,10 @@ public class BoClient extends Application {
         return loggedUser;
     }
 
+    public Stage getMainStage() {
+        return mainStage;
+    }
+
     public boolean isDocumentNotSaved() {
         return documentNotSaved;
     }

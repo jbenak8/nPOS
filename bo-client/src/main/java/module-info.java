@@ -29,7 +29,10 @@ module cz.jbenak.npos.boClient {
     exports cz.jbenak.npos.boClient.gui.dialogs.login;
     exports cz.jbenak.npos.boClient.engine;
     exports cz.jbenak.npos.boClient.gui.dialogs.generic;
+    exports cz.jbenak.npos.boClient.gui.panels;
     exports cz.jbenak.npos.boClient.gui.panels.data;
+    exports cz.jbenak.npos.boClient.gui.panels.finance;
+    exports cz.jbenak.npos.boClient.gui.panels.invoicing;
     exports cz.jbenak.npos.boClient.gui.panels.warehouse;
 
     opens cz.jbenak.npos.boClient to javafx.fxml;
@@ -39,6 +42,9 @@ module cz.jbenak.npos.boClient {
     opens cz.jbenak.npos.boClient.gui.main to javafx.fxml;
     opens cz.jbenak.npos.boClient.gui.dialogs.login to javafx.fxml;
     opens cz.jbenak.npos.boClient.gui.dialogs.generic to javafx.fxml;
+    opens cz.jbenak.npos.boClient.gui.panels to javafx.fxml;
     opens cz.jbenak.npos.boClient.gui.panels.data to javafx.fxml;
+    opens cz.jbenak.npos.boClient.gui.panels.finance to javafx.fxml;
+    opens cz.jbenak.npos.boClient.gui.panels.invoicing to javafx.fxml;
     opens cz.jbenak.npos.boClient.gui.panels.warehouse to javafx.fxml;
 }

@@ -7,7 +7,9 @@ module api {
 
     opens cz.jbenak.npos.api.client;
     opens cz.jbenak.npos.api.shared;
+    opens cz.jbenak.npos.api.data;
 
     exports cz.jbenak.npos.api.client;
     exports cz.jbenak.npos.api.shared;
+    exports cz.jbenak.npos.api.data;
 }
