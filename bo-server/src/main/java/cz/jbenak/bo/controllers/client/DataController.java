@@ -2,6 +2,7 @@ package cz.jbenak.bo.controllers.client;
 
 import cz.jbenak.bo.services.data.MeasureUnitService;
 import cz.jbenak.npos.api.data.MeasureUnit;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ public class DataController {
 
     private final MeasureUnitService measureUnitService;
 
+    @Autowired
     public DataController(MeasureUnitService measureUnitService) {
         this.measureUnitService = measureUnitService;
     }

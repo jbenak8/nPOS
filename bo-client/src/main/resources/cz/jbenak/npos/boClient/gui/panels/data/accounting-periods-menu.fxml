@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<FlowPane prefHeight="109.0" prefWidth="1088.0" styleClass="menu-panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.AccountingPeriodMenuController">
+<FlowPane prefHeight="109.0" prefWidth="1088.0" styleClass="menu-panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.AccountingPeriodController">
     <children>
         <VBox maxHeight="110.0" prefHeight="89.0" prefWidth="541.0">
             <children>

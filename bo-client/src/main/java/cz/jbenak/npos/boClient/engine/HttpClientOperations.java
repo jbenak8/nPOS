@@ -3,7 +3,7 @@ package cz.jbenak.npos.boClient.engine;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.boClient.exceptions.ClientException;
 import cz.jbenak.npos.boClient.exceptions.ServerException;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +14,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class HttpClientOperations {
@@ -58,7 +57,7 @@ public class HttpClientOperations {
             LOGGER.error("Given data {} cannot be converted to JSON for POST: {}", data, e);
             return CompletableFuture.failedFuture(e);
         }
-        HttpRequest request = preparePOSTrequest(uri, json);
+        HttpRequest request = preparePOSTRequest(uri, json);
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     if (response.statusCode() != 200) {
@@ -69,7 +68,7 @@ public class HttpClientOperations {
                 .thenApply(response -> deserialize(response, responseTypeReference));
     }
 
-    public CompletableFuture<?> postData(URI uri, Object data) {
+    public CompletableFuture<CRUDResult> postData(URI uri, Object data) {
         LOGGER.debug("Performing POST request to URI {} with standard HTTP response.", uri);
         String json;
         try {
@@ -78,17 +77,19 @@ public class HttpClientOperations {
             LOGGER.error("Given data {} cannot be converted to JSON for POST: {}", data, e);
             return CompletableFuture.failedFuture(e);
         }
-        HttpRequest request = preparePOSTrequest(uri, json);
+        HttpRequest request = preparePOSTRequest(uri, json);
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     if (response.statusCode() != 200) {
                         throw parseRemoteException(uri, response.statusCode(), response.body());
                     }
                     return response.body();
-                });
+                })
+                .thenApply(response -> deserialize(response, new TypeReference<>() {
+                }));
     }
 
-    private HttpRequest preparePOSTrequest(URI uri, String json) {
+    private HttpRequest preparePOSTRequest(URI uri, String json) {
         return HttpRequest.newBuilder()
                 .uri(uri)
                 .timeout(TIMEOUT)

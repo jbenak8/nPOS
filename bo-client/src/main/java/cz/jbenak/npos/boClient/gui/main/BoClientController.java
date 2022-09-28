@@ -73,6 +73,14 @@ public class BoClientController implements Initializable {
         labelStore.setText(storeData);
     }
 
+    public void setSystemStatus(String statusText) {
+        this.labelSystemStatus.setText(statusText);
+    }
+
+    public void showProgressIndicator(boolean show) {
+        this.mainProgressIndicator.setVisible(show);
+    }
+
     @FXML
     private void buttonHomePressed() {
         currentlySelectedButton = menuButtonHome;

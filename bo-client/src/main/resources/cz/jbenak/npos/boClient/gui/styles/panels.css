@@ -5,6 +5,11 @@
     -fx-background-color: transparent;
 }
 
+.panel-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 15pt;
+}
+
 .panel-main-menu .button {
     -fx-background-color: rgba(0, 0, 0, 0);
 }

@@ -37,6 +37,7 @@ public class BoClient extends Application {
     private Stage mainStage;
     private User loggedUser;
     private boolean documentNotSaved;
+    private BoClientController mainController;
 
     /**
      * Static instance initialization constructor.
@@ -74,6 +75,10 @@ public class BoClient extends Application {
 
     public Stage getMainStage() {
         return mainStage;
+    }
+
+    public BoClientController getMainController() {
+        return mainController;
     }
 
     public boolean isDocumentNotSaved() {
@@ -143,8 +148,8 @@ public class BoClient extends Application {
             mainStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("gui/img/BOikona.png"))));
             mainStage.setResizable(true);
             mainStage.setMaximized(Boolean.parseBoolean(appProperties.getProperty("app.showMaximized", "true")));
-            BoClientController controller = loader.getController();
-            controller.setUser();
+            mainController = loader.getController();
+            mainController.setUser();
             mainStage.show();
             mainStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onMainWindowClose);
         } catch (Exception e) {

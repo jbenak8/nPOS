@@ -1,6 +1,7 @@
 package cz.jbenak.npos.boClient.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +20,12 @@ public class DataOperations extends AbstractClientOperations {
 
     public CompletableFuture<List<MeasureUnit>> getAllMeasureUnits() {
         LOGGER.info("List of all measure units will be loaded from server.");
-        return httpClientOperations.getData(URI.create(baseURI + "/measure_units/getAll"), new TypeReference<List<MeasureUnit>>(){});
+        return httpClientOperations.getData(URI.create(baseURI + "/measure_units/getAll"), new TypeReference<>() {
+        });
+    }
+
+    public CompletableFuture<CRUDResult> storeMeasureUnit(MeasureUnit unit) {
+        LOGGER.info("Given measure unit with ID {} will be saved.", unit.getUnit());
+        return httpClientOperations.postData(URI.create(baseURI + "measure_units/save"), unit);
     }
 }

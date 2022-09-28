@@ -67,6 +67,9 @@
                </BorderPane.margin>
             </FlowPane>
          </top>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
         </BorderPane>
     </top>
     <padding>

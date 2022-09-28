@@ -4,6 +4,7 @@ import cz.jbenak.bo.repositories.data.MeasureUnitsRepository;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -13,6 +14,7 @@ public class MeasureUnitService {
     private static final Logger LOGGER = LogManager.getLogger(MeasureUnitService.class);
     private final MeasureUnitsRepository measureUnitsRepository;
 
+    @Autowired
     public MeasureUnitService(MeasureUnitsRepository measureUnitsRepository) {
         this.measureUnitsRepository = measureUnitsRepository;
     }

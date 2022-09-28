@@ -13,6 +13,7 @@ import cz.jbenak.npos.api.shared.Utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jasypt.encryption.StringEncryptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -30,6 +31,7 @@ public class UserService {
     private final GroupRepository groupRepository;
     private final FunctionsRepository functionsRepository;
 
+    @Autowired
     public UserService(UserRepository userRepository, GroupRepository groupRepository, FunctionsRepository functionsRepository) {
         this.userRepository = userRepository;
         this.groupRepository = groupRepository;

@@ -1,13 +1,12 @@
-package cz.jbenak.npos.boClient.gui.panels.warehouse;
+package cz.jbenak.npos.boClient.gui.panels.finance;
 
 import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
 import cz.jbenak.npos.boClient.gui.panels.PanelController;
-import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class StockTakingMenuController  extends AbstractPanelContentController {
+public class DisbursementsController extends AbstractPanelContentController {
 
     @Override
     public void loadData() {

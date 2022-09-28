@@ -1,11 +1,18 @@
 package cz.jbenak.npos.boClient.gui.panels.finance;
 
+import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
+import cz.jbenak.npos.boClient.gui.panels.PanelController;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DepositsController implements Initializable {
+public class DepositsController extends AbstractPanelContentController {
+    @Override
+    public void loadData() {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

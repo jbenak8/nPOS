@@ -17,12 +17,12 @@
          <children>
             <HBox alignment="CENTER" prefHeight="78.0" prefWidth="295.0">
                <children>
-                  <MFXButton prefHeight="32.0" prefWidth="100.0" text="Nová">
+                  <MFXButton onAction="#btnNewPressed" prefHeight="32.0" prefWidth="100.0" text="Nová">
                      <graphic>
                         <FontIcon iconColor="#008a1a" iconLiteral="fltral-document-add-24" iconSize="24" />
                      </graphic>
                   </MFXButton>
-                  <MFXButton prefWidth="100.0" text="Upravit">
+                  <MFXButton onAction="#bntEditPressed" prefWidth="100.0" text="Upravit">
                      <graphic>
                         <FontIcon iconColor="#104c73" iconLiteral="fltral-document-edit-24" iconSize="24" />
                      </graphic>
@@ -65,7 +65,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Label>
-                  <MFXButton prefHeight="32.0" prefWidth="140.0" text="Znovu načíst">
+                  <MFXButton onAction="#loadData" prefHeight="32.0" prefWidth="140.0" text="Znovu načíst">
                      <graphic>
                         <FontIcon iconColor="#2095dd" iconLiteral="fltral-arrow-sync-24" iconSize="24" />
                      </graphic>

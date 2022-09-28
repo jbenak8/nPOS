@@ -7,7 +7,11 @@ import javafx.beans.binding.Bindings;
 import javafx.css.PseudoClass;
 import javafx.scene.control.Label;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * General UI components helper class with static methods. It provides e.g. fields values validation methods.

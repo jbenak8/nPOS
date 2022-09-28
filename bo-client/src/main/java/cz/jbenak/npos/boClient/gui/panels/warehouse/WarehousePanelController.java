@@ -2,14 +2,14 @@ package cz.jbenak.npos.boClient.gui.panels.warehouse;
 
 import cz.jbenak.npos.boClient.gui.panels.PanelController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 
-import java.net.URL;;
+import java.net.URL;
 import java.util.ResourceBundle;
+
+;
 
 public class WarehousePanelController extends PanelController implements Initializable {
 

@@ -3,6 +3,7 @@ package cz.jbenak.bo.controllers.client;
 import cz.jbenak.bo.services.UserService;
 import cz.jbenak.npos.api.client.LoginAttempt;
 import cz.jbenak.npos.api.client.LoginStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ public class UserController {
 
     private final UserService service;
 
+    @Autowired
     public UserController(UserService service) {
         this.service = service;
     }
