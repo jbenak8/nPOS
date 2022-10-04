@@ -29,6 +29,7 @@ public class EditDialog<T, C extends EditDialogController<T>> extends Stage {
     private boolean cancelled;
     private boolean edited;
     private boolean saved;
+    private C controller = null;
 
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
@@ -55,51 +56,31 @@ public class EditDialog<T, C extends EditDialogController<T>> extends Stage {
         this.setTitle(title);
     }
 
-    /**
-     * Show a new entry dialog. It preloads a dialog.
-     *
-     * @return controller, which can be used to pass any additional data (i.e. combobox values, etc.)
-     */
-    public C preloadNewDialog() {
+    public boolean openNewDialog() {
         LOGGER.info("A dialog for enter a new value will be shown.");
         this.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/cz/jbenak/npos/boClient/gui/img/edit-dialog-new.png"))));
-        return preloadDialog(null);
+        return openDialog();
     }
-
-    /**
-     * Show an existing entry edition.
-     *
-     * @param data data, which have to be edited.
-     * @return controller, which can be used to pass any additional data (i.e. combobox values, etc.)
-     */
-    public C preloadEditDialog(T data) {
+    public boolean openEditDialog(T data) {
         LOGGER.info("A dialog for edit  a value of type {} will be shown.", data.getClass().getName());
         this.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/cz/jbenak/npos/boClient/gui/img/edit-dialog-edit.png"))));
-        return preloadDialog(data);
+        controller.setDataEdited(data);
+        return openDialog();
     }
 
-    /**
-     * Opens already preloaded dialog.
-     *
-     * @return if the data in source content have to be reloaded.
-     */
-    public boolean openDialog() {
+    private boolean openDialog() {
         this.centerOnScreen();
         this.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onEditDialogWindowClose);
         this.showAndWait();
         return cancelled;
     }
 
-    private C preloadDialog(T data) {
-        C controller = null;
+    public C preloadDialog() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             this.setScene(new Scene(loader.load()));
             controller = loader.getController();
             controller.setDialog(this);
-            if (data != null) {
-                controller.setDataEdited(data);
-            }
         } catch (Exception e) {
             LOGGER.error("During preloading of the edit dialog a serious error occurred:", e);
             InfoDialog dialog = new InfoDialog(InfoDialog.InfoDialogType.ERROR, BoClient.getInstance().getMainStage(), false);

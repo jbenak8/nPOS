@@ -54,9 +54,9 @@ public class MeasureUnitsController extends AbstractPanelContentController {
     @FXML
     private void btnNewPressed() {
         EditDialog<MeasureUnit, MeasureUnitEditingController> dialog = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/measure-unit-edit-dialog.fxml", "Nová měrná jednotka");
-        MeasureUnitEditingController controller = dialog.preloadNewDialog();
+        MeasureUnitEditingController controller = dialog.preloadDialog();
         controller.setBaseUnitsList(allMeasureUnits.stream().map(MeasureUnit::getUnit).collect(Collectors.toList()));
-        if (dialog.openDialog()) {
+        if (dialog.openNewDialog()) {
             loadData();
         }
     }
@@ -65,9 +65,9 @@ public class MeasureUnitsController extends AbstractPanelContentController {
     private void bntEditPressed() {
         if (table.getSelectionModel().getSelectedValues().size() == 1) {
             EditDialog<MeasureUnit, MeasureUnitEditingController> dialog = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/measure-unit-edit-dialog.fxml", "Úprava měrné jednotky");
-            MeasureUnitEditingController controller = dialog.preloadEditDialog(table.getSelectionModel().getSelectedValues().get(0));
+            MeasureUnitEditingController controller = dialog.preloadDialog();
             controller.setBaseUnitsList(allMeasureUnits.stream().map(MeasureUnit::getUnit).collect(Collectors.toList()));
-            if (dialog.openDialog()) {
+            if (dialog.openEditDialog(table.getSelectionModel().getSelectedValues().get(0))) {
                 loadData();
             }
         }
