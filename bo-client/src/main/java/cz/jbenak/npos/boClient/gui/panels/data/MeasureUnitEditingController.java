@@ -1,21 +1,19 @@
 package cz.jbenak.npos.boClient.gui.panels.data;
 
 import cz.jbenak.npos.api.data.MeasureUnit;
-import cz.jbenak.npos.boClient.gui.panels.ToMenuReturnable;
+import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialogController;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MeasureUnitEditingController implements Initializable, ToMenuReturnable {
+public class MeasureUnitEditingController extends EditDialogController<MeasureUnit> {
 
     @FXML
     private Label title;
@@ -29,15 +27,15 @@ public class MeasureUnitEditingController implements Initializable, ToMenuReturn
     private MFXTextField fieldRatio;
     private ObservableList<String> baseUnits = FXCollections.emptyObservableList();
     private MeasureUnit unit;
-    private Button buttonUpperMenu;
 
     public void setBaseUnitsList(List<String> baseUnitsList) {
         baseUnits = FXCollections.observableArrayList(baseUnitsList);
         selectorBaseUnit.setItems(baseUnits);
     }
 
-    public void editUnit(MeasureUnit unit) {
-        this.unit = unit;
+    @Override
+    public void setDataEdited(MeasureUnit dataEdited) {
+        this.unit = dataEdited;
         title.setText("Úprava měrné jednotky \"" + unit.getUnit() + "\"");
         fieldUnit.setText(unit.getUnit());
         fieldUnit.setDisable(true);
@@ -46,6 +44,11 @@ public class MeasureUnitEditingController implements Initializable, ToMenuReturn
         if (unit.getBaseUnit() != null) {
             selectorBaseUnit.selectItem(unit.getBaseUnit());
         }
+    }
+
+    @Override
+    public void save(MeasureUnit data) {
+
     }
 
     @FXML
@@ -64,10 +67,5 @@ System.out.println("cancel pressed");
     public void initialize(URL url, ResourceBundle resourceBundle) {
         title.setText("Nová měrná jednotka");
         selectorBaseUnit.setItems(baseUnits);
-    }
-
-    @Override
-    public void setUpperMenuBtn(Button upperMenuBtn) {
-        this.buttonUpperMenu = upperMenuBtn;
     }
 }

@@ -3,6 +3,7 @@ package cz.jbenak.npos.boClient.gui.panels.data;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.api.DataOperations;
+import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialog;
 import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
@@ -52,22 +53,24 @@ public class MeasureUnitsController extends AbstractPanelContentController {
 
     @FXML
     private void btnNewPressed() {
-        loadEditingPane();
+        EditDialog<MeasureUnit, MeasureUnitEditingController> dialog = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/measure-unit-edit-dialog.fxml", "Nová měrná jednotka");
+        MeasureUnitEditingController controller = dialog.preloadNewDialog();
+        controller.setBaseUnitsList(allMeasureUnits.stream().map(MeasureUnit::getUnit).collect(Collectors.toList()));
+        if (dialog.openDialog()) {
+            loadData();
+        }
     }
 
     @FXML
     private void bntEditPressed() {
-        loadEditingPane();
         if (table.getSelectionModel().getSelectedValues().size() == 1) {
-            editingController.editUnit(table.getSelectionModel().getSelectedValues().get(0));
+            EditDialog<MeasureUnit, MeasureUnitEditingController> dialog = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/measure-unit-edit-dialog.fxml", "Úprava měrné jednotky");
+            MeasureUnitEditingController controller = dialog.preloadEditDialog(table.getSelectionModel().getSelectedValues().get(0));
+            controller.setBaseUnitsList(allMeasureUnits.stream().map(MeasureUnit::getUnit).collect(Collectors.toList()));
+            if (dialog.openDialog()) {
+                loadData();
+            }
         }
-    }
-
-    private void loadEditingPane() {
-        MeasureUnitEditingMenuController controller = panelController.changeContentMenuPane("measure-unit-editation-menu.fxml");
-        editingController = panelController.changeContentPane("measure-unit-editation-pane.fxml");
-        controller.setEditingController(editingController);
-        editingController.setBaseUnitsList(allMeasureUnits.stream().map(MeasureUnit::getUnit).collect(Collectors.toList()));
     }
 
     private void prepareTable() {

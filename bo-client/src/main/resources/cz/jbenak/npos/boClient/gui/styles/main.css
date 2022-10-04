@@ -1,7 +1,7 @@
 @import "fonts.css"; /* Background */
 
 .dialog-title {
-    font-family: "Comfortaa Bold";
+    -fx-font-family: "Comfortaa Bold";
     -fx-font-size: 23px;
 }
 

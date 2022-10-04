@@ -36,7 +36,6 @@ public class BoClient extends Application {
     private Utils apiUtils;
     private Stage mainStage;
     private User loggedUser;
-    private boolean documentNotSaved;
     private BoClientController mainController;
 
     /**
@@ -81,13 +80,6 @@ public class BoClient extends Application {
         return mainController;
     }
 
-    public boolean isDocumentNotSaved() {
-        return documentNotSaved;
-    }
-
-    public void setDocumentNotSaved(boolean documentNotSaved) {
-        this.documentNotSaved = documentNotSaved;
-    }
 
     private boolean loadSettings() {
         boolean loaded = true;
@@ -151,7 +143,6 @@ public class BoClient extends Application {
             mainController = loader.getController();
             mainController.setUser();
             mainStage.show();
-            mainStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onMainWindowClose);
         } catch (Exception e) {
             LOGGER.fatal("Cannot open main application window. Bo Client will terminate.", e);
             Alert error = new Alert(Alert.AlertType.ERROR);
@@ -161,14 +152,6 @@ public class BoClient extends Application {
             error.showAndWait();
             Platform.exit();
         }
-    }
-
-    private void onMainWindowClose(WindowEvent event) {
-        LOGGER.info("Close button pressed. Application will be closed");
-        if (documentNotSaved) {
-            LOGGER.info("There are unsaved documents in the background. Question dialog will be shown.");
-        }
-        // TODO event.consume();
     }
 
     public static void main(String[] args) {

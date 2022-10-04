@@ -79,26 +79,4 @@ public class PanelController {
             dialog.showDialog();
         }
     }
-
-    /**
-     * Changes main content pane with one from loaded FXML definition.
-     *
-     * @param fxml GUI component (e.g. data item adding/edition) to load.
-     */
-    public <T extends ToMenuReturnable> T changeContentPane(String fxml) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-            Node panel = loader.load();
-            mainPane.setCenter(panel);
-            return loader.getController();
-        } catch (Exception e) {
-            LOGGER.error("During opening of main content items a serious error occurred:", e);
-            InfoDialog dialog = new InfoDialog(InfoDialog.InfoDialogType.ERROR, BoClient.getInstance().getMainStage(), false);
-            dialog.setDialogTitle("Nelze přepnout menu");
-            dialog.setDialogMessage("Nelze zobrazit požadovaný obsah z důvodu závažné chyby.\n" +
-                    "Následující text zašlete aministrátorovi: \n\n" + e);
-            dialog.showDialog();
-            return null;
-        }
-    }
 }
