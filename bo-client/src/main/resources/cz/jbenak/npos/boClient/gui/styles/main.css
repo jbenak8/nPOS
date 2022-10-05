@@ -1,4 +1,16 @@
-/* Background */
+@import "fonts.css"; /* Background */
+
+.dialog-title {
+    -fx-font-family: "Comfortaa Bold";
+    -fx-font-size: 23px;
+}
+
+.dialog-footer-label {
+    -fx-font-family: "Comfortaa Medium";
+    -fx-font-size: 12px;
+    -fx-font-style: normal;
+    -fx-text-fill: #656565;
+}
 
 .dialog-main-background {
     -fx-background-color: white;
@@ -8,14 +20,91 @@
     -fx-border-color: #008a1a;
     -fx-border-radius: 5;
     /*-fx-border-insets: 2;*/
+    -fx-text-fill: #008a1a;
 }
 
 .dialog-button-cancel {
     -fx-border-color: #c30000;
     -fx-border-radius: 5;
+    -fx-text-fill: #c30000;
+}
+
+.dialog-button-generic {
+    -fx-border-color: #104c73;
+    -fx-border-radius: 5;
+    -fx-text-fill: #104c73;
+    -fx-min-width: 100;
+    -fx-min-height: 40;
 }
 
 .dialog-button-ok:focused, .dialog-button-cancel:focused {
     -fx-border-radius: 5;
-    -fx-border-width:3;
+    -fx-border-width: 3;
+}
+
+.mfx-button,
+.mfx-button:armed,
+.mfx-button:hover,
+.mfx-button:focused {
+    -fx-font-family: Comfortaa;
+    -fx-font-weight: bold;
+}
+
+.mfx-text-field {
+    -mfx-main: #1d4694;
+}
+
+.mfx-text-field .text-field {
+    -fx-highlight-fill: #1d4694;
+}
+
+.mfx-text-field:invalid {
+    -fx-border-color: -mfx-red;
+}
+
+.mfx-text-field:invalid .floating-text {
+    -fx-text-fill: -mfx-red;
+}
+
+.mfx-text-field:invalid .mfx-font-icon {
+    -mfx-color: -mfx-red;
+}
+
+.main-window {
+    -fx-background-color: #ffffff;
+    -fx-background-image: url("../img/background.png");
+}
+
+.menu-panel {
+    -fx-font-family: "Comfortaa Bold";
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5;
+    /*-fx-border-color: #104c73;*/
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0.0, 0.0);
+}
+
+.menu-panel .button {
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.menu-panel .button:hover {
+    -fx-background-color: rgba(0, 66, 59, 0.1);
+}
+
+.menu-panel .button-toggled {
+    -fx-background-color: rgba(0, 66, 59, 0.1);
+    -fx-border-color: rgba(0, 66, 59, 0.5);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.content-panel {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0.0, 0.0);
+}
+
+.taskbar {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.5, 0.0, 0.0);
+    -fx-font-family: Comfortaa;
 }

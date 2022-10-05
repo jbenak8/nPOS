@@ -1,0 +1,21 @@
+.generic-dialog-info-text {
+    -fx-font-family: "Comfortaa Bold";
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-padding: 10 0 10 0;
+}
+
+.generic-dialog-message {
+    -fx-font-family: Roboto;
+    -fx-background-insets: 0;
+    -fx-background-color: transparent, white, transparent, white;
+    -fx-background-radius: 0, 0, 0, 0;
+    -fx-box-border: transparent;
+    -fx-text-box-border: -fx-control-inner-background;
+    -fx-faint-focus-color: -fx-control-inner-background;
+    -fx-border-width: -1;
+}
+
+.generic-dialog-message .content, .generic-dialog-message .content {
+    -fx-background-color: transparent, white, transparent, white;
+}

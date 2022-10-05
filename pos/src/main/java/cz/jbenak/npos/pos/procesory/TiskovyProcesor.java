@@ -107,14 +107,16 @@ public class TiskovyProcesor {
             parametry.put("UplatnenePoukazy", new JRBeanCollectionDataSource(poukazy));
             parametry.put("provozovna", "EET provozovna");
             parametry.put("rezim_trzby", "Běžný");
-            parametry.put("bkp", "BKP: " + doklad.getDataEET().getBkp());
-            parametry.put("pkp_fik", doklad.getDataEET().getFik() == null ? ("PKP: " + doklad.getDataEET().getPkp()) : ("FIK: " + doklad.getDataEET().getFik()));
+            parametry.put("bkp", "BKP: už nebude");
+            parametry.put("pkp_fik", "FIK: už nebude");
+            //parametry.put("bkp", "BKP: " + doklad.getDataEET().getBkp());
+            //parametry.put("pkp_fik", doklad.getDataEET().getFik() == null ? ("PKP: " + doklad.getDataEET().getPkp()) : ("FIK: " + doklad.getDataEET().getFik()));
             parametry.put("tisk_reklamy", true);
             parametry.put("tisk_eet", true);
             parametry.put("paticka_1radek", "Děkujeme Vám za návštěvu");
             parametry.put("paticka_2radek", "a přejeme Vám příjemný den.");
             parametry.put("carovy_kod", doklad.getCislo());
-            JasperPrint print = JasperFillManager.fillReport("sestavy/paragon.jasper", parametry, new JRBeanCollectionDataSource(polozky));
+            JasperPrint print = JasperFillManager.fillReport("c:/IDEA_PROJEKTY/nPOS/pos/src/main/zdroje/sestavy/paragon.jasper", parametry, new JRBeanCollectionDataSource(polozky));
             JasperPrintManager.printReport(print, true);
         } catch (Exception e) {
             e.printStackTrace();

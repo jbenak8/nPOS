@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="350.0" prefWidth="500.0" styleClass="dialog-main-background" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.dialogs.generic.InfoDialogController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="570.0" BorderPane.alignment="CENTER">
+         <children>
+            <FontIcon fx:id="titleIcon" iconColor="#c30000" iconLiteral="fth-check-circle" iconSize="64" styleClass="generic-dialog-info-icon">
+               <HBox.margin>
+                  <Insets right="25.0" />
+               </HBox.margin>
+            </FontIcon>
+            <Label fx:id="dialogTitle" styleClass="dialog-title" text="Label" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="570.0">
+               <children>
+                  <Label fx:id="dialogSubtitle" prefHeight="39.0" prefWidth="511.0" styleClass="generic-dialog-info-text" text="HTTP 400" />
+                  <MFXButton onAction="#btnCopyPressed" text=" ">
+                     <graphic>
+                        <FontIcon fill="#104c73" iconLiteral="far-copy" iconSize="24" tabSize="0" wrappingWidth="24.0" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Kopírovat zprávu." />
+                     </tooltip>
+                  </MFXButton>
+               </children>
+            </HBox>
+            <TextArea fx:id="dialogMessage" editable="false" prefHeight="200.0" prefWidth="200.0" styleClass="generic-dialog-message" wrapText="true" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="15.0" right="15.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <MFXButton fx:id="btnOK" buttonType="RAISED" onAction="#btnOkPressed" onKeyPressed="#keyPressed" rippleColor="#104d7381" styleClass="dialog-button-generic" text="OK">
+               <graphic>
+                  <FontIcon fill="#104c73" iconLiteral="fth-check-circle" iconSize="24" wrappingWidth="30.0" />
+               </graphic>
+            </MFXButton>
+         </children>
+      </HBox>
+   </bottom>
+   <stylesheets>
+      <URL value="@../../styles/main.css" />
+      <URL value="@../../styles/info-dialog.css" />
+   </stylesheets>
+</BorderPane>

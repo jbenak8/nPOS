@@ -1,0 +1,32 @@
+@import "main.css";
+
+.panel {
+    -fx-font-family: Comfortaa;
+    -fx-background-color: transparent;
+}
+
+.panel-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 15pt;
+}
+
+.panel-main-menu .button {
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.panel-main-menu .button:hover {
+    -fx-background-color: rgba(0, 66, 59, 0.1);
+}
+
+.panel-main-menu .button-toggled {
+    -fx-background-color: rgba(0, 66, 59, 0.1);
+    -fx-border-color: rgba(0, 66, 59, 0.5);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.group-label {
+    -fx-background-color: rgba(0, 66, 59, 0.1);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}

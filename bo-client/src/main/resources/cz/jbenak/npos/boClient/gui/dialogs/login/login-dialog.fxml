@@ -2,6 +2,7 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="400.0" prefWidth="400.0" styleClass="dialog-main-background" stylesheets="@../../styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.dialogs.login.LoginDialogController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="450.0" prefWidth="450.0" styleClass="dialog-main-background" stylesheets="@../../styles/main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.dialogs.login.LoginDialogController">
     <top>
         <ImageView fitHeight="113.0" fitWidth="273.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
             <image>
@@ -24,16 +25,6 @@
             </image>
         </ImageView>
     </top>
-    <bottom>
-        <Label fx:id="info" text="Klient nBO verze 1.0.0.0 © Jan Benák 2021" textFill="#656565" BorderPane.alignment="CENTER_LEFT">
-            <BorderPane.margin>
-                <Insets bottom="15.0" left="15.0" />
-            </BorderPane.margin>
-         <font>
-            <Font name="System Italic" size="12.0" />
-         </font>
-        </Label>
-    </bottom>
     <center>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
@@ -42,12 +33,13 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="60.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="60.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" valignment="CENTER" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label text="Přihlaste se prosím">
+                        <Label styleClass="dialog-title" text="Přihlaste se prosím">
                             <GridPane.margin>
                                 <Insets left="75.0" />
                             </GridPane.margin>
@@ -56,8 +48,9 @@
                             </font>
                         </Label>
                         <FontIcon iconLiteral="fth-user" iconSize="52" />
-                        <MFXTextField fx:id="fieldUserName" lineStrokeWidth="1.0" maxWidth="267.0" prefHeight="25.0" prefWidth="267.0" promptText="Vaše uživatelské jméno" validated="true" validatorTitle="Uživatelské jméno musí být vyplněno." viewOrder="1.0" GridPane.rowIndex="1" />
-                        <MFXPasswordField fx:id="fieldPassword" allowCopy="false" allowCut="false" lineStrokeWidth="1.0" maxWidth="267.0" onKeyTyped="#keyPressed" prefHeight="25.0" prefWidth="267.0" promptText="Vaše heslo" validated="true" validatorTitle="Heslo musí být vyplněno." GridPane.rowIndex="2" />
+                        <MFXTextField fx:id="fieldUserName" floatMode="BORDER" floatingText="Vaše uživatelské jméno:" maxWidth="350.0" prefHeight="24.0" prefWidth="350.0" viewOrder="1.0" GridPane.rowIndex="1" />
+                        <MFXPasswordField fx:id="fieldPassword" allowCopy="false" allowCut="false" floatMode="BORDER" floatingText="Vaše heslo:" graphicTextGap="5.0" maxWidth="350.0" onKeyTyped="#keyPressed" prefHeight="10.0" prefWidth="300.0" GridPane.rowIndex="2" />
+                  <Label fx:id="validationText" text="Label" textFill="#c30000" visible="false" GridPane.rowIndex="3" />
                     </children>
                 </GridPane>
                 <HBox alignment="CENTER" prefHeight="55.0" prefWidth="300.0">
@@ -67,7 +60,7 @@
                         <FontIcon fill="#008a1a" iconLiteral="fth-check-circle" iconSize="24" wrappingWidth="30.0" />
                      </graphic>
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="Comfortaa Bold" size="14.0" />
                      </font>
                   </MFXButton>
                   <MFXButton buttonType="RAISED" cancelButton="true" minHeight="40.0" minWidth="100.0" onAction="#btnCancelPressed" rippleAnimateShadow="true" rippleColor="#d37979" styleClass="dialog-button-cancel" text="Storno" textFill="#c30000" viewOrder="4.0">
@@ -92,4 +85,22 @@
             </BorderPane.margin>
         </VBox>
     </center>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="450.0" BorderPane.alignment="CENTER">
+         <children>
+              <Label fx:id="info" prefHeight="16.0" prefWidth="390.0" styleClass="dialog-footer-label" text="Klient nBO verze 1.0.0.0 © Jan Benák 2021" textFill="#656565">
+               <font>
+                  <Font name="Comfortaa Medium" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+              </Label>
+            <MFXProgressSpinner fx:id="progressSpinner" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
 </BorderPane>

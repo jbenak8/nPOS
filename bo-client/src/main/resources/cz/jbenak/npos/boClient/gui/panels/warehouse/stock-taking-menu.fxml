@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<FlowPane prefHeight="98.0" prefWidth="1279.0" styleClass="menu-panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.warehouse.StockRecepitMenuController">
+   <children>
+      <VBox maxHeight="105.0" prefHeight="105.0" prefWidth="397.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="73.0" prefWidth="291.0">
+               <children>
+                  <MFXButton prefHeight="32.0" prefWidth="134.0" text="Otevřít novou">
+                     <graphic>
+                        <FontIcon iconColor="#008a1a" iconLiteral="fltral-document-add-24" iconSize="24" />
+                     </graphic>
+                  </MFXButton>
+                  <MFXButton prefHeight="32.0" prefWidth="152.0" text="Upravit položky">
+                     <graphic>
+                        <FontIcon iconColor="#104c73" iconLiteral="fltral-document-edit-24" iconSize="24" />
+                     </graphic>
+                  </MFXButton>
+                  <MFXButton prefHeight="32.0" prefWidth="100.0" text="Storno">
+                     <graphic>
+                        <FontIcon iconColor="#c30000" iconLiteral="fltral-document-dismiss-24" iconSize="24" />
+                     </graphic></MFXButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <MFXButton prefHeight="32.0" prefWidth="192.0" text="Tisk inventurního listu">
+                     <graphic>
+                        <FontIcon iconColor="#0033ff" iconLiteral="fltrmz-print-24" iconSize="24" />
+                     </graphic>
+                  </MFXButton>
+                  <MFXButton layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="167.0" text="Dokončit inventuru">
+                     <graphic>
+                        <FontIcon iconColor="#6f9a37" iconLiteral="fltral-checkmark-square-24" iconSize="24" />
+                     </graphic>
+                  </MFXButton>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" prefWidth="389.0" styleClass="group-label" text="Inventura" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <FlowPane.margin>
+            <Insets top="4.0" />
+         </FlowPane.margin>
+      </VBox>
+      <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0">
+         <FlowPane.margin>
+            <Insets bottom="5.0" left="2.0" right="5.0" top="5.0" />
+         </FlowPane.margin></Separator>
+      <VBox prefHeight="105.0" prefWidth="643.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="307.0">
+               <children>
+                  <MFXTextField borderGap="0.0" floatingText="Rychlé hledání" floatingTextGap="0.0" graphicTextGap="0.0" measureUnitGap="0.0" prefHeight="44.0" prefWidth="350.0" />
+                  <MFXButton prefHeight="32.0" prefWidth="98.0" text="Smazat">
+                     <graphic>
+                        <FontIcon iconColor="#c30000" iconLiteral="fltral-backspace-24" iconSize="24" />
+                     </graphic>
+                  </MFXButton>
+                  <MFXButton text="Rozšířené hledání">
+                     <graphic>
+                        <FontIcon iconLiteral="fltrmz-search-24" iconSize="24" />
+                     </graphic>
+                  </MFXButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="511.0">
+               <children>
+                  <Label prefHeight="35.0" prefWidth="343.0" text="Sloupeček:">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <MFXButton prefHeight="32.0" prefWidth="140.0" text="Znovu načíst">
+                     <graphic>
+                        <FontIcon iconColor="#2095dd" iconLiteral="fltral-arrow-sync-24" iconSize="24" />
+                     </graphic>
+                  </MFXButton>
+                  <MFXButton layoutX="372.0" layoutY="12.0" prefHeight="32.0" prefWidth="159.0" text="Jen neuzavřené">
+                     <graphic>
+                        <FontIcon iconColor="#9621db" iconLiteral="fltral-folder-open-24" iconSize="24" />
+                     </graphic>
+                  </MFXButton>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="20.0" prefHeight="20.0" prefWidth="701.0" styleClass="group-label" text="Vyhledávání a zobrazení">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+         </children>
+         <FlowPane.margin>
+            <Insets right="2.0" top="4.0" />
+         </FlowPane.margin>
+      </VBox>
+      <Separator orientation="VERTICAL" prefHeight="60.0" prefWidth="0.0">
+         <FlowPane.margin>
+            <Insets bottom="5.0" left="5.0" top="5.0" />
+         </FlowPane.margin></Separator>
+      <VBox prefHeight="105.0" prefWidth="199.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="195.0">
+               <children>
+                  <MFXButton prefHeight="32.0" prefWidth="160.0" text="Přehled rozdílů">
+                     <graphic>
+                        <FontIcon iconColor="#d78110" iconLiteral="fltfal-eye-show-24" iconSize="24" />
+                     </graphic>
+                  </MFXButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="195.0">
+               <children>
+                  <MFXButton prefHeight="32.0" prefWidth="142.0" text="Tisk seznamu">
+                     <graphic>
+                        <FontIcon iconColor="#104c73" iconLiteral="fltrmz-print-24" iconSize="24" />
+                     </graphic>
+                  </MFXButton>
+               </children>
+            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="20.0" prefHeight="20.0" prefWidth="389.0" styleClass="group-label" text="Funkce" />
+         </children>
+         <FlowPane.margin>
+            <Insets left="5.0" top="4.0" />
+         </FlowPane.margin>
+      </VBox>
+   </children>
+</FlowPane>
