@@ -40,7 +40,7 @@ public class YesNoCancelDialog extends Stage {
     public Choice showDialog(String title, String question) {
         LOGGER.debug("Will be shown a YES/NO/CANCEL choice dialog.");
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("cz/jbenak/npos/boClient/gui/dialogs/generic/yes-no-cancel-dialog.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cz/jbenak/npos/boClient/gui/dialogs/generic/yes-no-cancel-dialog.fxml"));
             this.setScene(new Scene(loader.load()));
             YesNoCancelDialogController controller = loader.getController();
             controller.setDialog(this);

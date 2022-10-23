@@ -2,6 +2,7 @@ package cz.jbenak.npos.boClient.gui.panels.data;
 
 import cz.jbenak.npos.api.data.MeasureUnit;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialogController;
+import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
@@ -40,7 +41,7 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
         fieldUnit.setText(unit.getUnit());
         fieldUnit.setDisable(true);
         fieldName.setText(unit.getName());
-        fieldRatio.setText(unit.getRatio() == null ? "" : unit.getRatio().toString());
+        fieldRatio.setText(unit.getRatio() == null ? "" : Utils.formatDecimalCZPlain(unit.getRatio()));
         if (unit.getBaseUnit() != null) {
             selectorBaseUnit.selectItem(unit.getBaseUnit());
         }
@@ -60,7 +61,12 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
 
     @FXML
     void cancelPressed() {
-System.out.println("cancel pressed");
+        dialog.closeDialog();
+    }
+
+    @FXML
+    void contentChanged() {
+        dialog.setEdited(true);
     }
 
     @Override

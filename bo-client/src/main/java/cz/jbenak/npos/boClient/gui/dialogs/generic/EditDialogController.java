@@ -4,8 +4,8 @@ import javafx.fxml.Initializable;
 
 public abstract class EditDialogController<T> implements Initializable {
 
-    private EditDialog dialog;
-    private T dataEdited = null;
+    protected EditDialog dialog;
+    protected T dataEdited = null;
 
     public void setDialog(EditDialog dialog) {
         this.dialog = dialog;
