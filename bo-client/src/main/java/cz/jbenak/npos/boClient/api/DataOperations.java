@@ -24,8 +24,9 @@ public class DataOperations extends AbstractClientOperations {
         });
     }
 
-    public CompletableFuture<CRUDResult> storeMeasureUnit(MeasureUnit unit) {
+    public CompletableFuture<MeasureUnit> storeMeasureUnit(MeasureUnit unit) {
         LOGGER.info("Given measure unit with ID {} will be saved.", unit.getUnit());
-        return httpClientOperations.postData(URI.create(baseURI + "measure_units/save"), unit);
+        return httpClientOperations.postDataWithResponse(URI.create(baseURI + "/measure_units/store"), unit, new TypeReference<MeasureUnit>() {
+        });
     }
 }

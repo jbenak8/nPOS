@@ -5,10 +5,7 @@ import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -28,8 +25,18 @@ public class DataController {
         return measureUnitService.getMeasureUnits();
     }
 
+    @GetMapping("/measure_units/get/{id}")
+    public Mono<MeasureUnit> getMeasureUnit(@PathVariable String id) {
+        return measureUnitService.getMeasureUnit(id);
+    }
+
     @PostMapping(value = "/measure_units/store")
-    public Mono<CRUDResult> storeMeasureUnit(MeasureUnit unit) {
+    public Mono<MeasureUnit> storeMeasureUnit(@RequestBody MeasureUnit unit) {
         return measureUnitService.storeMeasureUnit(unit);
+    }
+
+    @DeleteMapping(value = "/measure_units/delete/{id}")
+    public Mono<Void> deleteMeasureUnit(@PathVariable String id) {
+        return measureUnitService.deleteMeasureUnit(id);
     }
 }

@@ -68,6 +68,8 @@ public class HttpClientOperations {
                 .thenApply(response -> deserialize(response, responseTypeReference));
     }
 
+    //Spíš parsovat HTTP response
+    @Deprecated
     public CompletableFuture<CRUDResult> postData(URI uri, Object data) {
         LOGGER.debug("Performing POST request to URI {} with standard HTTP response.", uri);
         String json;

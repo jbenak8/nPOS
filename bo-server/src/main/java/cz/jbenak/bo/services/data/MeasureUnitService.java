@@ -2,7 +2,6 @@ package cz.jbenak.bo.services.data;
 
 import cz.jbenak.bo.models.MeasureUnitModel;
 import cz.jbenak.bo.repositories.data.MeasureUnitsRepository;
-import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,22 +23,49 @@ public class MeasureUnitService {
 
     public Flux<MeasureUnit> getMeasureUnits() {
         LOGGER.info("All measure units will be loaded.");
-        return measureUnitsRepository.findAll().map(model -> {
-            MeasureUnit unit = new MeasureUnit();
-            unit.setUnit(model.unit());
-            unit.setName(model.name());
-            unit.setBaseUnit(model.base_unit());
-            unit.setRatio(model.ratio());
-            return unit;
-        });
+        return measureUnitsRepository.findAll().map(this::modelToUnit);
     }
 
-    public Mono<CRUDResult> storeMeasureUnit(MeasureUnit unit) {
-        CRUDResult result = new CRUDResult();
-        MeasureUnitModel model = new MeasureUnitModel(unit.getUnit(), unit.getName(), unit.getBaseUnit(), unit.getRatio());
-        if(measureUnitsRepository.save(model).toFuture().join() != null) {
-            result.setResultType(CRUDResult.ResultType.OK);
-        }
-        return Mono.just(result);
+    public Mono<MeasureUnit> getMeasureUnit(String id) {
+        LOGGER.info("Getting specific measure unit with ID {}.", id);
+        return measureUnitsRepository.findById(id).map(this::modelToUnit);
+    }
+
+    public Mono<MeasureUnit> storeMeasureUnit(MeasureUnit unit) {
+        LOGGER.info("Measure unit with following data will be saved: {}", unit);
+        return measureUnitsRepository.findById(unit.getUnit())
+                .flatMap(model -> {
+                    LOGGER.info("This measure unit was found, so there will be done update.");
+                    model.setName(unit.getName());
+                    model.setBase_unit(unit.getBaseUnit());
+                    model.setRatio(unit.getRatio());
+                    return measureUnitsRepository.save(model);
+                })
+                .switchIfEmpty(measureUnitsRepository.save(mapNewModel(unit)))
+                .map(this::modelToUnit);
+    }
+
+    //TODO: kontrola návaznosti záznamů
+    public Mono<Void> deleteMeasureUnit(String id) {
+        LOGGER.info("Measure unit with ID {} will be deleted.", id);
+        return measureUnitsRepository.deleteById(id);
+    }
+
+    private MeasureUnit modelToUnit(MeasureUnitModel model) {
+        MeasureUnit unit = new MeasureUnit();
+        unit.setUnit(model.getUnit());
+        unit.setName(model.getName());
+        unit.setBaseUnit(model.getBase_unit());
+        unit.setRatio(model.getRatio());
+        return unit;
+    }
+
+    private MeasureUnitModel mapNewModel(MeasureUnit unit) {
+        MeasureUnitModel model = new MeasureUnitModel();
+        model.setUnit(unit.getUnit());
+        model.setName(unit.getName());
+        model.setBase_unit(unit.getBaseUnit());
+        model.setRatio(unit.getRatio());
+        return model.asNew();
     }
 }
