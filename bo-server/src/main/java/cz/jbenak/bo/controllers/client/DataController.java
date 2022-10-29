@@ -1,7 +1,6 @@
 package cz.jbenak.bo.controllers.client;
 
 import cz.jbenak.bo.services.data.MeasureUnitService;
-import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
