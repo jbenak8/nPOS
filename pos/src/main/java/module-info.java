@@ -8,7 +8,6 @@ module cz.jbenak.npos.pos {
     requires org.postgresql.jdbc;
     requires jasperreports;
     requires org.apache.commons.lang3;
-    requires com.google.gson;
     requires api;
 
     exports cz.jbenak.npos.pos.system;

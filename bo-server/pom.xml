@@ -4,16 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>nPOS</artifactId>
-        <groupId>cz.jbenak</groupId>
+        <groupId>cz.jbenak.npos</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>bo-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>nPOS BO Server</name>
     <description>nPOS Back office server</description>
-    <properties>
-        <java.version>18</java.version>
-    </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
