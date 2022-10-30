@@ -186,9 +186,6 @@ public class Starter extends Task<Void> {
                         filialka.setAdresaSpolecnosti(rs.getString("adresa_spolecnosti"));
                         filialka.setZapisOr(rs.getString("zapis_or"));
                         filialka.setUrl(rs.getString("url"));
-                        filialka.setEetRezim(rs.getInt("eet_rezim"));
-                        filialka.setEetIdProvozovny(rs.getInt("eet_id_provozovny"));
-                        filialka.setEetPoverujiciDic(rs.getString("eet_poverujici_dic"));
                         Stat stat = new Stat();
                         stat.setIsoKod(rs.getString("iso_kod"));
                         stat.setBeznyNazev(rs.getString("bezny_nazev"));

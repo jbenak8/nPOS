@@ -9,7 +9,6 @@ module cz.jbenak.npos.pos {
     requires jasperreports;
     requires org.apache.commons.lang3;
     requires com.google.gson;
-    requires openeet.lite;
     requires api;
 
     exports cz.jbenak.npos.pos.system;

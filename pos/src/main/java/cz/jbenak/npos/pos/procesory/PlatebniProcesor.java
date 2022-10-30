@@ -436,34 +436,7 @@ public class PlatebniProcesor {
                 DokladProcesor.getInstance().getDoklad().setDatumVytvoreni(vytvoreni);
                 if (DokladProcesor.getInstance().getDoklad().getTyp() != TypDokladu.DODACI_LIST && Boolean.parseBoolean(Pos.getInstance().getNastaveni().getProperty("fiskalizace.eet.aktivni", "false"))) {
                     LOGER.info("Doklad interní ID {} bude odeslán do systému EET.", DokladProcesor.getInstance().getDoklad().getId());
-                    try {
-                        progres.setText("Odesílám data dokldadu do EET.");
-                        EvidenceEET eet = new EvidenceEET(true);
-                        eet.run();
-                        if (eet.get()) {
-                            LOGER.info("Evidence EET (prvotní) proběhla. Bude pokračovat uzavření dokladu.");
-                            try {
-                                progres.zobrazProgres("Uzavírám doklad a provádím ukládání do databáze.");
-                                DokladProcesor.getInstance().getDoklad().setCastkaKVraceni(getKVraceni());
-                                DokladProcesor.getInstance().uzavriDoklad();
-                            } catch (Exception e) {
-                                progres.zavriDialog();
-                                LOGER.error("Došlo k selhání při uzavírání a ukládání dokladu.", e);
-                                new DialogZpravy(DialogZpravy.TypZpravy.CHYBA, "Chyba systému", "Došlo k selhání při uzavírání a ukládání dokladu.\n\n" + e.getLocalizedMessage(), Pos.getInstance().getAplikacniOkno()).zobrazDialog(true);
-                            }
-                        } else {
-                            progres.zavriDialog();
-                            LOGER.error("Evidence EET neproběhla v pořádku.");
-                            new DialogZpravy(DialogZpravy.TypZpravy.CHYBA, "Chyba EET", "Nebylo možno evidovat EET. Nemohu pokračovat.\nZkontrolujte protokoly aplikace.", Pos.getInstance().getAplikacniOkno()).zobrazDialog(true);
-                            DokladProcesor.getInstance().getDoklad().getDataPlatbyKartou().clear();
-                            DokladProcesor.getInstance().getDoklad().getPlatby().clear();
-                            DokladProcesor.getInstance().aktualizujBinarniKopii();
-                        }
-                    } catch (Exception e) {
-                        progres.zavriDialog();
-                        LOGER.error("Došlo k selhání při odesílání dokladu do evidence tržeb.", e);
-                        new DialogZpravy(DialogZpravy.TypZpravy.CHYBA, "Chyba systému", "Došlo k selhání při odesílání EET \n\n" + e.getLocalizedMessage(), Pos.getInstance().getAplikacniOkno()).zobrazDialog(true);
-                    }
+                    new DialogZpravy(DialogZpravy.TypZpravy.VAROVANI, "EET zrušeno", "EET bylo rozhodnutím vlády zrušeno.", Pos.getInstance().getAplikacniOkno()).zobrazDialog(true);
                 } else {
                     try {
                         DokladProcesor.getInstance().getDoklad().setCastkaKVraceni(getKVraceni());

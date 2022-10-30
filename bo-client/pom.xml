@@ -22,6 +22,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>cz.jbenak.npos</groupId>
+            <artifactId>api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-javafx</artifactId>
             <version>${ikonli.verison}</version>
@@ -112,7 +118,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.7</version>
+                <version>0.0.8</version>
                 <executions>
                     <execution>
                         <!-- Default configuration for running with: mvn clean javafx:run -->
@@ -149,6 +155,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
+                            <!-- TODO exclude other OS version in base and graphics -->
                             <outputDirectory>${project.build.directory}/DIST/lib/fx</outputDirectory>
                             <includeGroupIds>org.openjfx</includeGroupIds>
                             <overWriteReleases>false</overWriteReleases>
@@ -173,8 +180,7 @@
                             <outputDirectory>${project.build.directory}/DIST/conf</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>conf</directory>
-                                    <filtering>true</filtering>
+                                    <directory>${project.basedir}/conf</directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -189,8 +195,7 @@
                             <outputDirectory>${project.build.directory}/DIST</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>scripts</directory>
-                                    <filtering>false</filtering>
+                                    <directory>${project.basedir}/scripts</directory>
                                 </resource>
                             </resources>
                         </configuration>

@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cz.jbenak</groupId>
+    <groupId>cz.jbenak.npos</groupId>
     <artifactId>nPOS</artifactId>
     <description>nPOS Point of Sale system</description>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>bo-server</module>
-        <module>bo-client</module>
-        <module>pos</module>
         <module>api</module>
+        <module>bo-client</module>
+        <module>bo-server</module>
+        <module>pos</module>
     </modules>
 
     <properties>
@@ -123,7 +123,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.19.1</version>
+            <version>6.20.0</version>
         </dependency>
         <dependency>
             <!-- barcodes -->
@@ -132,30 +132,24 @@
             <version>1.5-beta1</version>
         </dependency>
         <dependency>
-            <groupId>cz.jbenak</groupId>
-            <artifactId>api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-core</artifactId>
-            <version>3.4.22</version>
+            <version>3.4.24</version>
         </dependency>
         <dependency>
             <groupId>io.projectreactor.netty</groupId>
             <artifactId>reactor-netty</artifactId>
-            <version>1.0.22</version>
+            <version>1.0.24</version>
         </dependency>
         <dependency>
             <groupId>io.rsocket</groupId>
             <artifactId>rsocket-core</artifactId>
-            <version>1.1.2</version>
+            <version>1.1.3</version>
         </dependency>
         <dependency>
             <groupId>io.rsocket</groupId>
             <artifactId>rsocket-transport-netty</artifactId>
-            <version>1.1.2</version>
+            <version>1.1.3</version>
         </dependency>
         <dependency>
             <groupId>com.fazecast</groupId>

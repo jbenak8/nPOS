@@ -37,9 +37,6 @@ public class Filialka implements Serializable {
     private String adresaSpolecnosti;
     private String url;
     private String zapisOr;
-    private int eetRezim;
-    private int eetIdProvozovny;
-    private String eetPoverujiciDic;
 
     public String getOznaceni() {
         return oznaceni;
@@ -191,29 +188,5 @@ public class Filialka implements Serializable {
 
     public void setZapisOr(String zapisOr) {
         this.zapisOr = zapisOr;
-    }
-
-    public int getEetRezim() {
-        return eetRezim;
-    }
-
-    public void setEetRezim(int eetRezim) {
-        this.eetRezim = eetRezim;
-    }
-
-    public int getEetIdProvozovny() {
-        return eetIdProvozovny;
-    }
-
-    public void setEetIdProvozovny(int eetIdProvozovny) {
-        this.eetIdProvozovny = eetIdProvozovny;
-    }
-
-    public String getEetPoverujiciDic() {
-        return eetPoverujiciDic;
-    }
-
-    public void setEetPoverujiciDic(String eetPoverujiciDic) {
-        this.eetPoverujiciDic = eetPoverujiciDic;
     }
 }

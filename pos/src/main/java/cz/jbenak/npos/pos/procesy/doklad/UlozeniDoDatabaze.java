@@ -5,7 +5,6 @@
  */
 package cz.jbenak.npos.pos.procesy.doklad;
 
-import com.google.gson.Gson;
 import cz.jbenak.npos.pos.gui.registrace.hlavni.HlavniOkno;
 import cz.jbenak.npos.pos.gui.sdilene.dialogy.zprava.DialogZpravy;
 import cz.jbenak.npos.pos.objekty.adresy.Adresa;
@@ -79,11 +78,6 @@ public class UlozeniDoDatabaze extends Task<Boolean> {
             }
             if (!doklad.getUplatnenePoukazy().isEmpty() && !ulozUplatnenePoukazy()) {
                 LOGER.warn("Uložení uplatněných poukazů na dokladu s ID {} se nepovedlo. Akce bude vrácena zpět.", doklad.getId());
-                spojeni.rollback(spHlavicka);
-                procesOK = false;
-            }
-            if (doklad.getDataEET() != null && !ulozDataEET()) {
-                LOGER.warn("Uložení dat EET dokladu s ID {} se nepovedlo. Akce bude vrácena zpět.", doklad.getId());
                 spojeni.rollback(spHlavicka);
                 procesOK = false;
             }
@@ -488,48 +482,6 @@ public class UlozeniDoDatabaze extends Task<Boolean> {
                 LOGER.debug("Uložení slev na dokladu s ID {} provedeno. Bylo vloženo {} řádek.", doklad.getId(), radekUlozeno.length);
                 return radekUlozeno.length > 0;
             }
-        }
-    }
-
-    private boolean ulozDataEET() throws SQLException {
-        LOGER.info("Ukládám data EET (prvotní odeslání) dokaldu {} do databáze.", doklad.getId());
-        final String dotaz = "INSERT INTO " + spojeni.getCatalog() + ".eet (doklad, cislo_dokladu, prvni_odeslani, odeslani_ok, datum_odeslani, bkp, pkp, fik, " +
-                "celkova_trzba, cislo_pokladny, id_provozovny, dic, poverujici_dic, rezim, chyby) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-        try (PreparedStatement psmt = spojeni.prepareStatement(dotaz, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
-            psmt.setObject(1, doklad.getId());
-            psmt.setString(2, doklad.getCislo());
-            psmt.setBoolean(3, doklad.getDataEET().isPrvniOdeslani());
-            psmt.setBoolean(4, doklad.getDataEET().isOdeslaniOK());
-            psmt.setTimestamp(5, new Timestamp(doklad.getDataEET().getDatum().getTime()));
-            psmt.setString(6, doklad.getDataEET().getBkp());
-            if (doklad.getDataEET().getPkp() == null || doklad.getDataEET().getPkp().isEmpty()) {
-                psmt.setNull(7, Types.VARCHAR);
-            } else {
-                psmt.setString(7, doklad.getDataEET().getPkp());
-            }
-            if (doklad.getDataEET().getFik() == null || doklad.getDataEET().getFik().isEmpty()) {
-                psmt.setNull(8, Types.VARCHAR);
-            } else {
-                psmt.setString(8, doklad.getDataEET().getFik());
-            }
-            psmt.setBigDecimal(9, doklad.getDataEET().getCelkovaCastka());
-            psmt.setInt(10, Pos.getInstance().getCisloPokladny());
-            psmt.setInt(11, doklad.getDataEET().getIdProvozovny());
-            psmt.setString(12, doklad.getDataEET().getDic());
-            if (doklad.getDataEET().getPoverujiciDic() == null || doklad.getDataEET().getPoverujiciDic().isEmpty()) {
-                psmt.setNull(13, Types.VARCHAR);
-            } else {
-                psmt.setString(13, doklad.getDataEET().getPoverujiciDic());
-            }
-            psmt.setInt(14, doklad.getDataEET().getRezim());
-            if (doklad.getDataEET().getChybyEET().isEmpty()) {
-                psmt.setNull(15, Types.VARCHAR);
-            } else {
-                psmt.setString(15, (new Gson()).toJson(doklad.getDataEET().getChybyEET()));
-            }
-            int radekUlozeno = psmt.executeUpdate();
-            LOGER.debug("Uložení dat EET s ID {} provedeno. Bylo vloženo {} řádek.", doklad.getId(), radekUlozeno);
-            return radekUlozeno > 0;
         }
     }
 }

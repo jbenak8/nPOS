@@ -109,8 +109,6 @@ public class TiskovyProcesor {
             parametry.put("rezim_trzby", "Běžný");
             parametry.put("bkp", "BKP: už nebude");
             parametry.put("pkp_fik", "FIK: už nebude");
-            //parametry.put("bkp", "BKP: " + doklad.getDataEET().getBkp());
-            //parametry.put("pkp_fik", doklad.getDataEET().getFik() == null ? ("PKP: " + doklad.getDataEET().getPkp()) : ("FIK: " + doklad.getDataEET().getFik()));
             parametry.put("tisk_reklamy", true);
             parametry.put("tisk_eet", true);
             parametry.put("paticka_1radek", "Děkujeme Vám za návštěvu");

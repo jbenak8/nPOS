@@ -47,7 +47,6 @@ public class Doklad implements Serializable {
     private boolean storno;
     private Date datumVytvoreni;
     private Pokladni pokladni;
-    private DataEET dataEET;
     private Zakaznik zakaznik;
     private boolean polozkaOtevrena;
     private boolean maualniSlevyZakazany = false;
@@ -134,14 +133,6 @@ public class Doklad implements Serializable {
 
     public void setPokladni(Pokladni pokladni) {
         this.pokladni = pokladni;
-    }
-
-    public DataEET getDataEET() {
-        return dataEET;
-    }
-
-    public void setDataEET(DataEET dataEET) {
-        this.dataEET = dataEET;
     }
 
     public Zakaznik getZakaznik() {
