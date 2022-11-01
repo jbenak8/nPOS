@@ -83,6 +83,7 @@
                         <configuration>
                             <outputDirectory>${project.build.directory}/DIST/lib/fx</outputDirectory>
                             <includeGroupIds>org.openjfx</includeGroupIds>
+                            <excludeClassifiers>${javafx.excludeClassifier}</excludeClassifiers>
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
@@ -92,7 +93,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>copy-config</id>

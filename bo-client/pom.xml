@@ -153,8 +153,8 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <!-- TODO exclude other OS version in base and graphics -->
                             <outputDirectory>${project.build.directory}/DIST/lib/fx</outputDirectory>
+                            <excludeClassifiers>${javafx.excludeClassifier}</excludeClassifiers>
                             <includeGroupIds>org.openjfx</includeGroupIds>
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>true</overWriteSnapshots>
