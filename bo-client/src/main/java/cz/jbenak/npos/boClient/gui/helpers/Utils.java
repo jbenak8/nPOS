@@ -1,7 +1,12 @@
 package cz.jbenak.npos.boClient.gui.helpers;
 
+import cz.jbenak.npos.boClient.BoClient;
+import cz.jbenak.npos.boClient.exceptions.ClientException;
+import cz.jbenak.npos.boClient.gui.dialogs.generic.InfoDialog;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.ConnectException;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -39,5 +44,30 @@ public class Utils {
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("cs", "CZ"));
         format.setMinimumFractionDigits(toFormat.scale());
         return format.format(toFormat.doubleValue());
+    }
+
+    /**
+     * Show a dialog when some server operation foils.
+     *
+     * @param e                     an exception, which should be displayed.
+     * @param title                 title of the dialog.
+     * @param supplementarySubtitle a supplementary dialog to show with HTTP error.
+     * @param alternativeSubtitle   alternative subtitle, e.g. Caused by other error.
+     */
+    public static void showGenricErrorDialog(Throwable e, String title, String supplementarySubtitle, String alternativeSubtitle) {
+        InfoDialog errorDialog;
+        if (e.getCause() instanceof ConnectException) {
+            errorDialog = new InfoDialog(InfoDialog.InfoDialogType.OFFLINE, BoClient.getInstance().getMainStage(), false);
+        } else {
+            errorDialog = new InfoDialog(InfoDialog.InfoDialogType.ERROR, BoClient.getInstance().getMainStage(), false);
+            errorDialog.setDialogTitle(title);
+            errorDialog.setDialogMessage(e.getMessage());
+            if (e.getCause() instanceof ClientException) {
+                errorDialog.setDialogSubtitle(supplementarySubtitle + " HTTP status " + ((ClientException) e.getCause()).getStatus());
+            } else {
+                errorDialog.setDialogSubtitle(alternativeSubtitle);
+            }
+        }
+        errorDialog.showDialog();
     }
 }

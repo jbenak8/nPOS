@@ -12,6 +12,7 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -77,35 +78,7 @@ public class LoginDialogController implements Initializable {
     private void btnOkPressed() {
         //if (fieldUserName.getValidator().isValid() && fieldPassword.getValidator().isValid()) {
         if (areFieldsFilled()) {
-            progressSpinner.setVisible(true);
-            fieldUserName.setDisable(true);
-            fieldPassword.setDisable(true);
-            LOGGER.info("Login of user with user name {} will be performed.", fieldUserName.getText());
-            try {
-                final UserOperations operations = new UserOperations();
-                final Utils apiUtils = new Utils();
-                LoginStatus status = operations.loginUser(Integer.parseInt(fieldUserName.getText().trim()),
-                        apiUtils.getStringEncryptor().encrypt(fieldPassword.getText().trim())).join();
-                handleLoginStatus(status);
-            } catch (Exception e) {
-                LOGGER.error("Error during login operation occurred:", e);
-                InfoDialog errorDialog;
-                if (e.getCause() instanceof ConnectException) {
-                    errorDialog = new InfoDialog(InfoDialogType.OFFLINE, dialogStage, false);
-                } else {
-                    errorDialog = new InfoDialog(InfoDialogType.ERROR, dialogStage, false);
-                    errorDialog.setDialogTitle("Chyba při přihlašování");
-                    errorDialog.setDialogMessage(e.getMessage());
-                    if (e.getCause() instanceof ClientException) {
-                        errorDialog.setDialogSubtitle("HTTP status " + ((ClientException) e.getCause()).getStatus());
-                    }
-                }
-                errorDialog.showDialog();
-            } finally {
-                progressSpinner.setVisible(false);
-                fieldUserName.setDisable(false);
-                fieldPassword.setDisable(false);
-            }
+            performLogin();
         }
     }
 
@@ -149,6 +122,50 @@ public class LoginDialogController implements Initializable {
             return false;
         }
         return true;
+    }
+
+    private void performLogin() {
+        LOGGER.info("Login of user with user name {} will be performed.", fieldUserName.getText());
+        Task<LoginStatus> loginTask = new Task<>() {
+            @Override
+            protected LoginStatus call() {
+                final UserOperations operations = new UserOperations();
+                final Utils apiUtils = new Utils();
+                return operations.loginUser(Integer.parseInt(fieldUserName.getText().trim()),
+                        apiUtils.getStringEncryptor().encrypt(fieldPassword.getText().trim())).join();
+            }
+        };
+        loginTask.setOnRunning(evt -> {
+            progressSpinner.setVisible(true);
+            fieldUserName.setDisable(true);
+            fieldPassword.setDisable(true);
+        });
+        loginTask.setOnSucceeded(evt -> {
+            progressSpinner.setVisible(false);
+            fieldUserName.setDisable(false);
+            fieldPassword.setDisable(false);
+            handleLoginStatus((LoginStatus) evt.getSource().getValue());
+        });
+        loginTask.setOnFailed(evt -> {
+            Throwable e = evt.getSource().getException();
+            LOGGER.error("Error during login operation occurred:", e);
+            InfoDialog errorDialog;
+            if (e.getCause() instanceof ConnectException) {
+                errorDialog = new InfoDialog(InfoDialogType.OFFLINE, dialogStage, false);
+            } else {
+                errorDialog = new InfoDialog(InfoDialogType.ERROR, dialogStage, false);
+                errorDialog.setDialogTitle("Chyba při přihlašování");
+                errorDialog.setDialogMessage(e.getMessage());
+                if (e.getCause() instanceof ClientException) {
+                    errorDialog.setDialogSubtitle("HTTP status " + ((ClientException) e.getCause()).getStatus());
+                }
+            }
+            errorDialog.showDialog();
+            progressSpinner.setVisible(false);
+            fieldUserName.setDisable(false);
+            fieldPassword.setDisable(false);
+        });
+        BoClient.getInstance().getTaskExecutor().submit(loginTask);
     }
 
     private void handleLoginStatus(LoginStatus status) {

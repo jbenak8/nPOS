@@ -19,6 +19,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Primary class of an application Bo Client - it will initialize necessary settings and show login dialog.
@@ -37,6 +39,11 @@ public class BoClient extends Application {
     private Stage mainStage;
     private User loggedUser;
     private BoClientController mainController;
+    private final ExecutorService taskExecutor = Executors.newCachedThreadPool(runnable -> {
+        Thread daemon = Executors.defaultThreadFactory().newThread(runnable);
+        daemon.setDaemon(true);
+        return daemon;
+    });
 
     /**
      * Static instance initialization constructor.
@@ -80,6 +87,9 @@ public class BoClient extends Application {
         return mainController;
     }
 
+    public ExecutorService getTaskExecutor() {
+        return taskExecutor;
+    }
 
     private boolean loadSettings() {
         boolean loaded = true;

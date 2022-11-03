@@ -1,13 +1,18 @@
 package cz.jbenak.npos.boClient.gui.dialogs.generic;
 
+import cz.jbenak.npos.boClient.BoClient;
+import cz.jbenak.npos.boClient.exceptions.ClientException;
+import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import javafx.fxml.Initializable;
+
+import java.net.ConnectException;
 
 public abstract class EditDialogController<T> implements Initializable {
 
-    protected EditDialog dialog;
+    protected EditDialog<T, ? extends EditDialogController<T>> dialog;
     protected T dataEdited = null;
 
-    public void setDialog(EditDialog dialog) {
+    public void setDialog(EditDialog<T, ? extends EditDialogController<T>> dialog) {
         this.dialog = dialog;
     }
 
@@ -15,5 +20,17 @@ public abstract class EditDialogController<T> implements Initializable {
         this.dataEdited = dataEdited;
     }
 
-    public abstract void save(T data);
+    protected abstract void save();
+
+    protected void showDataNotSameDialog(Object saved, Object toSave) {
+        InfoDialog notSameInfoDialog = new InfoDialog(InfoDialog.InfoDialogType.WARNING, BoClient.getInstance().getMainStage(), false);
+        notSameInfoDialog.setDialogTitle("Chyba uložení");
+        notSameInfoDialog.setDialogSubtitle("Uložená a ukládaná data nejsou konzistentní!");
+        notSameInfoDialog.setDialogMessage("Uložená data (" + saved.toString() + ") se liší od dat k uložení (" + toSave.toString() + ").\n" +
+                "Prosím zkontrolujte protokoly klienta a serveru a ohlaste toto adaministrátorovi.");
+    }
+
+    protected void showSaveErrorDialog(Throwable e) {
+        Utils.showGenricErrorDialog(e, "Chyba uložení", "Data nebylo možné uložit.", "Data nebylo možné uložit z důvodu jiné chyby:");
+    }
 }

@@ -1,6 +1,7 @@
 package cz.jbenak.npos.boClient.gui.dialogs.generic;
 
 import cz.jbenak.npos.boClient.BoClient;
+import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -26,10 +27,12 @@ public class EditDialog<T, C extends EditDialogController<T>> extends Stage {
 
     private final static Logger LOGGER = LogManager.getLogger(EditDialog.class);
     private final String fxml;
+    private final AbstractPanelContentController parentDataController;
     private boolean cancelled;
     private boolean edited;
     private boolean saved;
     private C controller = null;
+
 
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
@@ -48,8 +51,9 @@ public class EditDialog<T, C extends EditDialogController<T>> extends Stage {
      *
      * @param title title to be shown in the header
      */
-    public EditDialog(String fxml, String title) {
+    public EditDialog(String fxml, String title, AbstractPanelContentController parentDataController) {
         this.fxml = fxml;
+        this.parentDataController = parentDataController;
         this.initModality(Modality.APPLICATION_MODAL);
         this.initStyle(StageStyle.DECORATED);
         this.initOwner(BoClient.getInstance().getMainStage());
@@ -106,6 +110,7 @@ public class EditDialog<T, C extends EditDialogController<T>> extends Stage {
         } else {
             LOGGER.info("Edit/new dialog will be closed.");
             this.close();
+            parentDataController.loadData();
         }
     }
 }
