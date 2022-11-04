@@ -4,7 +4,6 @@ import cz.jbenak.npos.api.data.MeasureUnit;
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.api.DataOperations;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialogController;
-import cz.jbenak.npos.boClient.gui.dialogs.generic.InfoDialog;
 import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;

@@ -8,6 +8,7 @@ import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,10 +32,32 @@ public class MeasureUnitsController extends AbstractPanelContentController {
     private List<MeasureUnit> allMeasureUnits;
     private MeasureUnitEditingController editingController;
     private final MFXTableView<MeasureUnit> table = new MFXTableView<>();
+    @FXML
+    MFXTextField quickSearchField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        quickSearchField.textProperty().addListener((observable, oldVal, newVal) -> {
+            if (newVal != null && !newVal.isBlank()) {
+                List<MeasureUnit> filtered = allMeasureUnits.stream().filter(itm -> {
+                    final String value = newVal.trim().toLowerCase();
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(itm.getUnit()).append(";");
+                    sb.append(itm.getName().trim()).append(";");
+                    if (itm.getBaseUnit() != null) {
+                        sb.append(itm.getUnit()).append(";");
+                    }
+                    if (itm.getRatio() != null) {
+                        sb.append(Utils.formatDecimalCZPlain(itm.getRatio()));
+                    }
+                    return sb.toString().toLowerCase().contains(value);
+                }).toList();
+                measureUnitsList = FXCollections.observableArrayList(filtered);
+            } else {
+                measureUnitsList = FXCollections.observableArrayList(allMeasureUnits);
+            }
+            table.setItems(measureUnitsList);
+        });
     }
 
     @Override
@@ -86,7 +109,7 @@ public class MeasureUnitsController extends AbstractPanelContentController {
     }
 
     @FXML
-    private void bntEditPressed() {
+    private void btnEditPressed() {
         if (table.getSelectionModel().getSelectedValues().size() == 1) {
             EditDialog<MeasureUnit, MeasureUnitEditingController> dialog = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/measure-unit-edit-dialog.fxml", "Úprava měrné jednotky", this);
             MeasureUnitEditingController controller = dialog.preloadDialog();
@@ -98,7 +121,18 @@ public class MeasureUnitsController extends AbstractPanelContentController {
     }
 
     @FXML
-    private void btnReloadPressed() {
+    private void btnDeletePressed() {
+
+    }
+
+    @FXML
+    void btnClearFilterFieldPressed() {
+        quickSearchField.clear();
+    }
+
+    @FXML
+    void btnReloadPressed() {
+        quickSearchField.clear();
         loadData();
     }
 

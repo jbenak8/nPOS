@@ -1,11 +1,8 @@
 package cz.jbenak.npos.boClient.gui.dialogs.generic;
 
 import cz.jbenak.npos.boClient.BoClient;
-import cz.jbenak.npos.boClient.exceptions.ClientException;
 import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import javafx.fxml.Initializable;
-
-import java.net.ConnectException;
 
 public abstract class EditDialogController<T> implements Initializable {
 

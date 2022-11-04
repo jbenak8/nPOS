@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<FlowPane prefHeight="105.0" prefWidth="1050.0" styleClass="menu-panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.warehouse.StockDispensesMEnuController">
+<FlowPane prefHeight="109.0" prefWidth="977.0" styleClass="menu-panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.warehouse.StockDispensesMEnuController">
    <children>
-      <VBox maxHeight="105.0" prefHeight="105.0" prefWidth="305.0">
+      <VBox alignment="CENTER" maxHeight="105.0" prefHeight="105.0" prefWidth="305.0">
          <children>
             <HBox alignment="CENTER" prefHeight="73.0" prefWidth="291.0">
                <children>
@@ -33,7 +33,7 @@
                      </graphic></MFXButton>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="73.0" prefWidth="295.0">
                <children>
                   <MFXButton prefHeight="32.0" prefWidth="129.0" text="Tisk výdejky">
                      <graphic>
@@ -55,25 +55,20 @@
          <FlowPane.margin>
             <Insets bottom="5.0" top="5.0" />
          </FlowPane.margin></Separator>
-      <VBox prefHeight="105.0" prefWidth="515.0">
+      <VBox alignment="CENTER" prefHeight="105.0" prefWidth="442.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="307.0">
+            <HBox alignment="CENTER" prefHeight="35.0" prefWidth="307.0">
                <children>
-                  <MFXTextField borderGap="0.0" floatingText="Rychlé hledání" floatingTextGap="0.0" graphicTextGap="0.0" measureUnitGap="0.0" prefHeight="44.0" prefWidth="350.0" />
+                  <MFXTextField borderGap="0.0" floatingText="Rychlé hledání" floatingTextGap="0.0" graphicTextGap="0.0" measureUnitGap="0.0" prefHeight="44.0" prefWidth="434.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="36.0" prefWidth="511.0">
+               <children>
                   <MFXButton text="Rozšířené hledání">
                      <graphic>
                         <FontIcon iconLiteral="fltrmz-search-24" iconSize="24" />
                      </graphic>
                   </MFXButton>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="511.0">
-               <children>
-                  <Label prefHeight="35.0" prefWidth="259.0" text="Sloupeček:">
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </Label>
                   <MFXButton prefHeight="32.0" prefWidth="98.0" text="Smazat">
                      <graphic>
                         <FontIcon iconColor="#c30000" iconLiteral="fltral-backspace-24" iconSize="24" />
@@ -100,7 +95,7 @@
          <FlowPane.margin>
             <Insets bottom="5.0" left="5.0" top="5.0" />
          </FlowPane.margin></Separator>
-      <VBox prefHeight="105.0" prefWidth="199.0">
+      <VBox alignment="CENTER" prefHeight="105.0" prefWidth="199.0">
          <children>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="195.0">
                <children>
