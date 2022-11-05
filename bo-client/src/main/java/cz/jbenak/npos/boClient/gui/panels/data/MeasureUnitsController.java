@@ -30,7 +30,6 @@ public class MeasureUnitsController extends AbstractPanelContentController {
     private static final Logger LOGGER = LogManager.getLogger(MeasureUnitEditingController.class);
     private ObservableList<MeasureUnit> measureUnitsList;
     private List<MeasureUnit> allMeasureUnits;
-    private MeasureUnitEditingController editingController;
     private final MFXTableView<MeasureUnit> table = new MFXTableView<>();
     @FXML
     MFXTextField quickSearchField;
@@ -79,6 +78,7 @@ public class MeasureUnitsController extends AbstractPanelContentController {
             LOGGER.info("Measure units list has been successfully loaded.");
             if (allMeasureUnits != null && !allMeasureUnits.isEmpty()) {
                 allMeasureUnits.clear();
+                measureUnitsList.clear();
             }
             allMeasureUnits = (List<MeasureUnit>) evt.getSource().getValue();
             measureUnitsList = FXCollections.observableArrayList(allMeasureUnits);

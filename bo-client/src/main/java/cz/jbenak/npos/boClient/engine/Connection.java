@@ -93,15 +93,16 @@ public class Connection {
     }
 
     private void createBoHttpClient() {
+        final int timeout = Integer.parseInt(appProps.getProperty("connection.timeoutSec", "5"));
         if (Boolean.parseBoolean(appProps.getProperty("connection.ssl.enabled"))) {
             try {
-                boHttpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).followRedirects(HttpClient.Redirect.NEVER).connectTimeout(Duration.ofSeconds(5)).sslContext(createSSLContext()).build();
+                boHttpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).followRedirects(HttpClient.Redirect.NEVER).connectTimeout(Duration.ofSeconds(timeout)).sslContext(createSSLContext()).build();
             } catch (Exception e) {
                 LOGGER.error("There was an error during creation of SSL Context.", e);
                 boHttpClient = null;
             }
         } else {
-            boHttpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).followRedirects(HttpClient.Redirect.NEVER).connectTimeout(Duration.ofSeconds(5)).build();
+            boHttpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).followRedirects(HttpClient.Redirect.NEVER).connectTimeout(Duration.ofSeconds(timeout)).build();
         }
     }
 }

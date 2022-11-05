@@ -4,6 +4,7 @@ import cz.jbenak.npos.api.data.MeasureUnit;
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.api.DataOperations;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialogController;
+import cz.jbenak.npos.boClient.gui.helpers.Helpers;
 import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -12,6 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +29,8 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
     private static final Logger LOGGER = LogManager.getLogger(MeasureUnitEditingController.class);
     @FXML
     private Label title;
+    @FXML
+    private Label validationLabel;
     @FXML
     private MFXTextField fieldUnit;
     @FXML
@@ -74,9 +80,11 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
             MeasureUnit savedUnit = (MeasureUnit) evt.getSource().getValue();
             if (savedUnit.equals(dataEdited)) {
                 dialog.setSaved(true);
+                dialog.setEdited(false);
+                dialog.setCancelled(false);
                 dialog.closeDialog();
             } else {
-                LOGGER.warn("Saved measure unit {} and present measure unit {} are not the same! Please check procedure.",savedUnit, dataEdited);
+                LOGGER.warn("Saved measure unit {} and present measure unit {} are not the same! Please check procedure.", savedUnit, dataEdited);
                 showDataNotSameDialog(savedUnit, dataEdited);
             }
         });
@@ -89,33 +97,105 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
         BoClient.getInstance().getTaskExecutor().submit(saveUnitTask);
     }
 
+    @Override
+    @FXML
+    protected void keyPressed(KeyEvent evt) {
+        if (evt.isControlDown() && evt.getCode() == KeyCode.ENTER) {
+            savePressed();
+        }
+        if (evt.getCode() == KeyCode.ESCAPE) {
+            dialog.closeDialog();
+        }
+    }
+
     @FXML
     void savePressed() {
-        dataEdited = new MeasureUnit();
-        dataEdited.setName(fieldName.getText().trim());
-        dataEdited.setUnit(fieldUnit.getText().trim());
-        if (!fieldRatio.getText().trim().isEmpty()) {
-            dataEdited.setRatio(new BigDecimal(fieldRatio.getText().trim().replace(',', '.')));
+        if (validateFields()) {
+            dataEdited = new MeasureUnit();
+            dataEdited.setName(fieldName.getText().trim());
+            dataEdited.setUnit(fieldUnit.getText().trim());
+            if (!fieldRatio.getText().trim().isEmpty()) {
+                dataEdited.setRatio(new BigDecimal(fieldRatio.getText().trim().replace(',', '.')));
+            }
+            if (selectorBaseUnit.getSelectedIndex() >= 0) {
+                dataEdited.setBaseUnit(selectorBaseUnit.getSelectedItem());
+            }
+            save();
         }
-        if (selectorBaseUnit.getSelectedIndex() > 0) {
-            dataEdited.setBaseUnit(selectorBaseUnit.getSelectedItem());
+    }
+
+    private boolean validateFields() {
+        if (!fieldRatio.getText().isBlank() && !fieldRatio.getValidator().isValid()) {
+            return false;
         }
-        save();
+        if (!fieldRatio.getText().isBlank() && !selectorBaseUnit.isValid()) {
+            validationLabel.setText("Není vybrána hlavní měrná jednotka.");
+            validationLabel.setVisible(true);
+            return false;
+        }
+        if (fieldRatio.getText().isBlank() && selectorBaseUnit.getSelectedIndex() >= 0) {
+            validationLabel.setText("Není zadán poměr vůči vybrané hlavní MJ.");
+            validationLabel.setVisible(true);
+            return false;
+        }
+        if (!fieldName.getValidator().isValid()) {
+            return false;
+        }
+        if (!fieldUnit.getValidator().isValid()) {
+            return false;
+        }
+        return true;
     }
 
     @FXML
     void cancelPressed() {
+        dialog.setCancelled(true);
         dialog.closeDialog();
-    }
-
-    @FXML
-    void contentChanged() {
-        dialog.setEdited(true);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         title.setText("Nová měrná jednotka");
         selectorBaseUnit.setItems(baseUnits);
+        fieldUnit.textProperty().addListener((observable, oldVal, newVal) -> {
+            if (dataEdited == null || (dataEdited.getUnit().compareTo(newVal) != 0)) {
+                dialog.setEdited(true);
+            }
+        });
+        fieldUnit.setTextLimit(5);
+        fieldName.textProperty().addListener((observable, oldVal, newVal) -> {
+            if (dataEdited == null || (dataEdited.getName().compareTo(newVal) != 0)) {
+                dialog.setEdited(true);
+            }
+        });
+        fieldName.setTextLimit(45);
+        fieldRatio.textProperty().addListener((observable, oldVal, newVal) -> {
+            if(validationLabel.isVisible()) {
+                validationLabel.setVisible(false);
+            }
+            String ratio = "";
+            if (dataEdited != null) {
+                ratio = dataEdited.getRatio() == null ? "" : Utils.formatDecimalCZPlain(dataEdited.getRatio());
+            }
+            if (dataEdited == null || (ratio.compareTo(newVal) != 0)) {
+                dialog.setEdited(true);
+            }
+        });
+        fieldRatio.setTextLimit(9);
+        selectorBaseUnit.selectedItemProperty().addListener((observable, oldVal, newVal) -> {
+            String baseUnit = "";
+            if (dataEdited != null) {
+                baseUnit = dataEdited.getBaseUnit() == null ? "" : dataEdited.getBaseUnit();
+            }
+            if (dataEdited == null || (baseUnit.compareTo(newVal) != 0)) {
+                dialog.setEdited(true);
+            }
+        });
+        //TODO: přepsat až bude vyřešeno https://github.com/palexdev/MaterialFX/issues/252
+        Helpers.getDecimalLengthConstraint(fieldRatio, true, 5,3,
+                "Lze napsat pouze číslo s max. 5 celými a max. 3 desetinnými místy", validationLabel);
+        Helpers.getEmptyTextConstraint(fieldUnit, false, "Je nutno vyplnit jednotku", validationLabel);
+        Helpers.getEmptyTextConstraint(fieldName, false, "Je nutno vyplnit název jednotky", validationLabel);
+        Helpers.getNoItemSelectedConstraint(selectorBaseUnit, "Je třeba vybrat hlavní MJ.", validationLabel);
     }
 }

@@ -2,7 +2,9 @@ package cz.jbenak.npos.boClient.gui.dialogs.generic;
 
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.gui.helpers.Utils;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyEvent;
 
 public abstract class EditDialogController<T> implements Initializable {
 
@@ -18,6 +20,9 @@ public abstract class EditDialogController<T> implements Initializable {
     }
 
     protected abstract void save();
+
+    @FXML
+    protected abstract void keyPressed(KeyEvent evt);
 
     protected void showDataNotSameDialog(Object saved, Object toSave) {
         InfoDialog notSameInfoDialog = new InfoDialog(InfoDialog.InfoDialogType.WARNING, BoClient.getInstance().getMainStage(), false);

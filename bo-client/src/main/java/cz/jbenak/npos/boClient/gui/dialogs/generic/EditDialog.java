@@ -28,9 +28,9 @@ public class EditDialog<T, C extends EditDialogController<T>> extends Stage {
     private final static Logger LOGGER = LogManager.getLogger(EditDialog.class);
     private final String fxml;
     private final AbstractPanelContentController parentDataController;
-    private boolean cancelled;
-    private boolean edited;
-    private boolean saved;
+    private boolean cancelled = false;
+    private boolean edited = false;
+    private boolean saved = false;
     private C controller = null;
 
 
@@ -65,6 +65,7 @@ public class EditDialog<T, C extends EditDialogController<T>> extends Stage {
         this.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/cz/jbenak/npos/boClient/gui/img/edit-dialog-new.png"))));
         return openDialog();
     }
+
     public boolean openEditDialog(T data) {
         LOGGER.info("A dialog for edit  a value of type {} will be shown.", data.getClass().getName());
         this.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/cz/jbenak/npos/boClient/gui/img/edit-dialog-edit.png"))));
@@ -105,8 +106,20 @@ public class EditDialog<T, C extends EditDialogController<T>> extends Stage {
      * Used for closing of the dialog. When edited and non-saved data occurs during closing, question dialog will be shown
      */
     public void closeDialog() {
-        if (edited && (cancelled || !saved)) {
+        //TODO create GUI settings for ask for saving?
+        if (edited && (!saved && !cancelled)) {
             LOGGER.info("Close of edit/new dialog requested. Data has been edited but not saved. A question dialog to really close will be shown.");
+            YesNoCancelDialog question = new YesNoCancelDialog(this.getOwner());
+            YesNoCancelDialog.Choice answer = question.showDialog("Uložit?", "Úpravy v daných datech nebyly uloženy. Přejete si změny uložit?");
+            if (answer == YesNoCancelDialog.Choice.NO) {
+                LOGGER.info("No was pressed. Data will not be saved and dialog will be closed.");
+                this.close();
+            }
+            if (answer == YesNoCancelDialog.Choice.YES) {
+                LOGGER.info("Yes was pressed. Data will be saved.");
+                controller.save();
+                parentDataController.loadData();
+            }
         } else {
             LOGGER.info("Edit/new dialog will be closed.");
             this.close();

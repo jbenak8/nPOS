@@ -91,8 +91,8 @@ public class LoginDialogController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         info.setText("nBO Backoffice klient verze " + BoClient.getInstance().getAppProperties().getProperty("app.version", "<N/A>") + " \u00a9 Jan Benák " + Year.now());
-        Helpers.getEmptyTextConstraint(fieldUserName, "Uživatelské jméno nemůže být prázdné.", validationText);
-        Helpers.getEmptyTextConstraint(fieldPassword, "Heslo nemůže být prázdné", validationText);
+        Helpers.getEmptyTextConstraint(fieldUserName, false, "Uživatelské jméno nemůže být prázdné.", validationText);
+        Helpers.getEmptyTextConstraint(fieldPassword, false, "Heslo nemůže být prázdné", validationText);
         progressSpinner.setVisible(false);
     }
 
