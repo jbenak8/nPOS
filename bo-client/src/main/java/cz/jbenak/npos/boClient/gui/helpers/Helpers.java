@@ -77,7 +77,6 @@ public class Helpers {
                     } else {
                         final String regex = "(\\d{1," + maxIntegerLength + "})|(\\d{1," + maxIntegerLength
                                 + "}([.|,])?)|(\\d{1," + maxIntegerLength + "}([.|,]\\d{1," + maxDecimalLength + "})?)";
-                        System.out.println(field.getText() + " -> " + field.getText().matches(regex));
                         return field.getText().matches(regex);
                     }
                 }, field.textProperty()))

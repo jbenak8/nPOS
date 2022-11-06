@@ -68,8 +68,7 @@ public class HttpClientOperations {
                 .thenApply(response -> deserialize(response, responseTypeReference));
     }
 
-    //Spíš parsovat HTTP response
-    @Deprecated
+
     public CompletableFuture<CRUDResult> postData(URI uri, Object data) {
         LOGGER.debug("Performing POST request to URI {} with standard HTTP response.", uri);
         String json;
@@ -80,6 +79,10 @@ public class HttpClientOperations {
             return CompletableFuture.failedFuture(e);
         }
         HttpRequest request = preparePOSTRequest(uri, json);
+        return getCrudResultCompletableFuture(uri, request);
+    }
+
+    private CompletableFuture<CRUDResult> getCrudResultCompletableFuture(URI uri, HttpRequest request) {
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     if (response.statusCode() != 200) {
@@ -89,6 +92,19 @@ public class HttpClientOperations {
                 })
                 .thenApply(response -> deserialize(response, new TypeReference<>() {
                 }));
+    }
+
+    public CompletableFuture<CRUDResult> deleteData(URI uri) {
+        LOGGER.debug("Performing DELETE request to URI {} with standard HTTP response.", uri);
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(uri)
+                .timeout(TIMEOUT)
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json")
+                .header("Authorization", authorization)
+                .DELETE()
+                .build();
+        return getCrudResultCompletableFuture(uri, request);
     }
 
     private HttpRequest preparePOSTRequest(URI uri, String json) {

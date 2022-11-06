@@ -1,5 +1,6 @@
 package cz.jbenak.npos.boClient.gui.panels.data;
 
+import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.api.DataOperations;
@@ -13,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.apache.logging.log4j.LogManager;
@@ -62,9 +62,9 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
     @Override
     protected void save() {
         LOGGER.info("Measure unit {} will be saved.", dataEdited);
-        Task<MeasureUnit> saveUnitTask = new Task<>() {
+        Task<CRUDResult> saveUnitTask = new Task<>() {
             @Override
-            protected MeasureUnit call() {
+            protected CRUDResult call() {
                 DataOperations operations = new DataOperations();
                 return operations.storeMeasureUnit(dataEdited).join();
             }
@@ -74,18 +74,19 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
             BoClient.getInstance().getMainController().setSystemStatus("Ukládám měrnou jednotku...");
         });
         saveUnitTask.setOnSucceeded(evt -> {
-            LOGGER.info("Measure unit data has been saved.");
+            CRUDResult result = (CRUDResult) evt.getSource().getValue();
             BoClient.getInstance().getMainController().showProgressIndicator(false);
-            BoClient.getInstance().getMainController().setSystemStatus("MJ uložena");
-            MeasureUnit savedUnit = (MeasureUnit) evt.getSource().getValue();
-            if (savedUnit.equals(dataEdited)) {
+            if (result.getResultType() == CRUDResult.ResultType.OK) {
+                LOGGER.info("Measure unit data has been saved.");
+                BoClient.getInstance().getMainController().setSystemStatus("MJ uložena");
                 dialog.setSaved(true);
                 dialog.setEdited(false);
                 dialog.setCancelled(false);
                 dialog.closeDialog();
-            } else {
-                LOGGER.warn("Saved measure unit {} and present measure unit {} are not the same! Please check procedure.", savedUnit, dataEdited);
-                showDataNotSameDialog(savedUnit, dataEdited);
+            }
+            if (result.getResultType() == CRUDResult.ResultType.GENERAL_ERROR) {
+                BoClient.getInstance().getMainController().setSystemStatus("Chyba při ukládání měrné jednotky.");
+                showCRUDresultErrorDialog(result.getMessage());
             }
         });
         saveUnitTask.setOnFailed(evt -> {
@@ -141,10 +142,7 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
         if (!fieldName.getValidator().isValid()) {
             return false;
         }
-        if (!fieldUnit.getValidator().isValid()) {
-            return false;
-        }
-        return true;
+        return fieldUnit.getValidator().isValid();
     }
 
     @FXML
@@ -170,7 +168,7 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
         });
         fieldName.setTextLimit(45);
         fieldRatio.textProperty().addListener((observable, oldVal, newVal) -> {
-            if(validationLabel.isVisible()) {
+            if (validationLabel.isVisible()) {
                 validationLabel.setVisible(false);
             }
             String ratio = "";
@@ -191,8 +189,7 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
                 dialog.setEdited(true);
             }
         });
-        //TODO: přepsat až bude vyřešeno https://github.com/palexdev/MaterialFX/issues/252
-        Helpers.getDecimalLengthConstraint(fieldRatio, true, 5,3,
+        Helpers.getDecimalLengthConstraint(fieldRatio, true, 5, 3,
                 "Lze napsat pouze číslo s max. 5 celými a max. 3 desetinnými místy", validationLabel);
         Helpers.getEmptyTextConstraint(fieldUnit, false, "Je nutno vyplnit jednotku", validationLabel);
         Helpers.getEmptyTextConstraint(fieldName, false, "Je nutno vyplnit název jednotky", validationLabel);

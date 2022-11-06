@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="260.0" prefWidth="550.0" styleClass="dialog-main-background" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.dialogs.generic.YesNoDialogController">
+   <center>
+      <Label fx:id="question" styleClass="generic-dialog-message" text="Label" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="80.0" prefWidth="550.0" BorderPane.alignment="CENTER">
+         <children>
+            <MFXButton buttonType="RAISED" minHeight="40.0" minWidth="100.0" onAction="#btnOkPressed" rippleColor="#84d391" styleClass="dialog-button-ok" text="Ano">
+               <graphic>
+                  <FontIcon iconColor="#008a1a" iconLiteral="fth-check-circle" iconSize="24" wrappingWidth="30.0" />
+               </graphic>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </MFXButton>
+            <MFXButton buttonType="RAISED" minHeight="40.0" minWidth="100.0" onAction="#btnNoPressed" rippleColor="#d37979" styleClass="dialog-button-cancel" text="Ne">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <graphic>
+                  <FontIcon iconColor="#c30000" iconLiteral="fth-x-circle" iconSize="24" wrappingWidth="30.0" />
+               </graphic>
+            </MFXButton>
+         </children>
+      </HBox>
+   </bottom>
+   <stylesheets>
+      <URL value="@../../styles/main.css" />
+      <URL value="@../../styles/info-dialog.css" />
+   </stylesheets>
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="550.0" BorderPane.alignment="CENTER">
+         <children>
+            <FontIcon iconColor="#2497da" iconLiteral="fltrmz-question-circle-24" iconSize="64">
+               <HBox.margin>
+                  <Insets right="25.0" />
+               </HBox.margin>
+            </FontIcon>
+            <Label fx:id="title" styleClass="dialog-title" text="Label" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="15.0" right="15.0" top="15.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+</BorderPane>

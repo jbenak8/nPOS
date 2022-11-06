@@ -1,9 +1,12 @@
 package cz.jbenak.npos.boClient.gui.panels.data;
 
+import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.api.DataOperations;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialog;
+import cz.jbenak.npos.boClient.gui.dialogs.generic.InfoDialog;
+import cz.jbenak.npos.boClient.gui.dialogs.generic.YesNoDialog;
 import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
@@ -44,7 +47,7 @@ public class MeasureUnitsController extends AbstractPanelContentController {
                     sb.append(itm.getUnit()).append(";");
                     sb.append(itm.getName().trim()).append(";");
                     if (itm.getBaseUnit() != null) {
-                        sb.append(itm.getUnit()).append(";");
+                        sb.append(itm.getBaseUnit()).append(";");
                     }
                     if (itm.getRatio() != null) {
                         sb.append(Utils.formatDecimalCZPlain(itm.getRatio()));
@@ -122,7 +125,14 @@ public class MeasureUnitsController extends AbstractPanelContentController {
 
     @FXML
     private void btnDeletePressed() {
-
+        if (table.getSelectionModel().getSelectedValues().size() == 1) {
+            MeasureUnit selected = table.getSelectionModel().getSelectedValues().get(0);
+            YesNoDialog question = new YesNoDialog(BoClient.getInstance().getMainStage());
+            YesNoDialog.Choice answer = question.showDialog("Smazat měrnou jednotku?", "Přejete si opravdu smazat vybranou jednotku \"" + selected.getUnit() + "\"?");
+            if (answer == YesNoDialog.Choice.YES) {
+                deleteUnit(selected.getUnit());
+            }
+        }
     }
 
     @FXML
@@ -134,6 +144,53 @@ public class MeasureUnitsController extends AbstractPanelContentController {
     void btnReloadPressed() {
         quickSearchField.clear();
         loadData();
+    }
+
+    private void deleteUnit(String unitId) {
+        LOGGER.info("Selected measure unit '{}' will be deleted.", unitId);
+        Task<CRUDResult> deleteTask = new Task<>() {
+            @Override
+            protected CRUDResult call() {
+                DataOperations operations = new DataOperations();
+                return operations.deleteMeasureUnit(unitId).join();
+            }
+        };
+        deleteTask.setOnRunning(evt -> {
+            BoClient.getInstance().getMainController().showProgressIndicator(true);
+            BoClient.getInstance().getMainController().setSystemStatus("Mažu vybranou měrnou jednotku...");
+        });
+        deleteTask.setOnSucceeded(evt -> {
+            BoClient.getInstance().getMainController().showProgressIndicator(false);
+            CRUDResult result = (CRUDResult) evt.getSource().getValue();
+            if (result.getResultType() == CRUDResult.ResultType.OK) {
+                LOGGER.info("Measure unit '{}' has been deleted successfully.", unitId);
+                BoClient.getInstance().getMainController().setSystemStatus("Měrná jednotka smazána");
+            }
+            if (result.getResultType() == CRUDResult.ResultType.HAS_BOUND_RECORDS) {
+                BoClient.getInstance().getMainController().setSystemStatus("Měrná jednotka nebyla smazána");
+                InfoDialog warnDialog = new InfoDialog(InfoDialog.InfoDialogType.WARNING, BoClient.getInstance().getMainStage(), false);
+                warnDialog.setDialogTitle("Měrnou jednotku nelze smazat");
+                warnDialog.setDialogMessage("Na vybranou měrnou jednotku \"" + unitId + "\" odkazují jiné záznamy v databázi, tedy měrná jednotka je používána.");
+                warnDialog.showDialog();
+            }
+            if (result.getResultType() == CRUDResult.ResultType.GENERAL_ERROR) {
+                BoClient.getInstance().getMainController().setSystemStatus("Měrná jednotka nebyla smazána");
+                InfoDialog errorDialog = new InfoDialog(InfoDialog.InfoDialogType.ERROR, BoClient.getInstance().getMainStage(), false);
+                errorDialog.setDialogTitle("Chyba při mazání MJ " + unitId);
+                errorDialog.setDialogMessage(result.getMessage());
+                errorDialog.showDialog();
+            }
+            loadData();
+        });
+        deleteTask.setOnFailed(evt -> {
+            LOGGER.error("There was an error during deletion of measure unit data.", evt.getSource().getException());
+            BoClient.getInstance().getMainController().showProgressIndicator(false);
+            BoClient.getInstance().getMainController().setSystemStatus("Chyba při mazání měrné jednotky.");
+            Utils.showGenricErrorDialog(evt.getSource().getException(),
+                    "Chyba mazání", "Vybranou měrnou jednotku nebylo možno smazat.",
+                    "Vybranou měrnou jednotku nebylo možné smazat z důvodu jiné chyby:");
+        });
+        BoClient.getInstance().getTaskExecutor().submit(deleteTask);
     }
 
     private void prepareTable() {
@@ -166,6 +223,7 @@ public class MeasureUnitsController extends AbstractPanelContentController {
             table.setFooterVisible(false);
             table.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             table.getStyleClass().add("content-panel");
+            table.getSelectionModel().setAllowsMultipleSelection(false);
             mainPane.setCenter(table);
         }
         table.setItems(measureUnitsList);

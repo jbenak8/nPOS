@@ -1,6 +1,7 @@
 package cz.jbenak.bo.controllers.client;
 
 import cz.jbenak.bo.services.data.MeasureUnitService;
+import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -30,12 +31,12 @@ public class DataController {
     }
 
     @PostMapping(value = "/measure_units/store")
-    public Mono<MeasureUnit> storeMeasureUnit(@RequestBody MeasureUnit unit) {
+    public Mono<CRUDResult> storeMeasureUnit(@RequestBody MeasureUnit unit) {
         return measureUnitService.storeMeasureUnit(unit);
     }
 
     @DeleteMapping(value = "/measure_units/delete/{id}")
-    public Mono<Void> deleteMeasureUnit(@PathVariable String id) {
+    public Mono<CRUDResult> deleteMeasureUnit(@PathVariable String id) {
         return measureUnitService.deleteMeasureUnit(id);
     }
 }

@@ -24,12 +24,11 @@ public abstract class EditDialogController<T> implements Initializable {
     @FXML
     protected abstract void keyPressed(KeyEvent evt);
 
-    protected void showDataNotSameDialog(Object saved, Object toSave) {
-        InfoDialog notSameInfoDialog = new InfoDialog(InfoDialog.InfoDialogType.WARNING, BoClient.getInstance().getMainStage(), false);
-        notSameInfoDialog.setDialogTitle("Chyba uložení");
-        notSameInfoDialog.setDialogSubtitle("Uložená a ukládaná data nejsou konzistentní!");
-        notSameInfoDialog.setDialogMessage("Uložená data (" + saved.toString() + ") se liší od dat k uložení (" + toSave.toString() + ").\n" +
-                "Prosím zkontrolujte protokoly klienta a serveru a ohlaste toto adaministrátorovi.");
+    protected void showCRUDresultErrorDialog(String message) {
+        InfoDialog CRUDErrorDialog = new InfoDialog(InfoDialog.InfoDialogType.ERROR, BoClient.getInstance().getMainStage(), false);
+        CRUDErrorDialog.setDialogTitle("Chyba uložení");
+        CRUDErrorDialog.setDialogSubtitle("Nastala chyba při ukládání dat.");
+        CRUDErrorDialog.setDialogMessage(message);
     }
 
     protected void showSaveErrorDialog(Throwable e) {

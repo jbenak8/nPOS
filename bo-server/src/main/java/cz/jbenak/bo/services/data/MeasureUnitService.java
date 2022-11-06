@@ -2,6 +2,7 @@ package cz.jbenak.bo.services.data;
 
 import cz.jbenak.bo.models.MeasureUnitModel;
 import cz.jbenak.bo.repositories.data.MeasureUnitsRepository;
+import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,8 +32,10 @@ public class MeasureUnitService {
         return measureUnitsRepository.findById(id).map(this::modelToUnit);
     }
 
-    public Mono<MeasureUnit> storeMeasureUnit(MeasureUnit unit) {
+    public Mono<CRUDResult> storeMeasureUnit(MeasureUnit unit) {
         LOGGER.info("Measure unit with following data will be saved: {}", unit);
+        CRUDResult resultOK = new CRUDResult();
+        CRUDResult resultError = new CRUDResult();
         return measureUnitsRepository.findById(unit.getUnit())
                 .flatMap(model -> {
                     LOGGER.info("This measure unit was found, so there will be done update.");
@@ -42,13 +45,42 @@ public class MeasureUnitService {
                     return measureUnitsRepository.save(model);
                 })
                 .switchIfEmpty(measureUnitsRepository.save(mapNewModel(unit)))
-                .map(this::modelToUnit);
+                .doOnSuccess(saved -> {
+                    LOGGER.info("Measure unit with id '{}' has been deleted.", saved.getUnit());
+                    resultOK.setResultType(CRUDResult.ResultType.OK);
+                })
+                .thenReturn(resultOK)
+                .doOnError(err -> {
+                    LOGGER.error("Measure unit with ID '{}' has not been deleted because of an error.", unit.getUnit(), err);
+                    resultError.setResultType(CRUDResult.ResultType.GENERAL_ERROR);
+                    resultError.setMessage(err.getLocalizedMessage());
+                })
+                .onErrorReturn(resultError);
     }
 
     //TODO: kontrola návaznosti záznamů
-    public Mono<Void> deleteMeasureUnit(String id) {
+    public Mono<CRUDResult> deleteMeasureUnit(String id) {
         LOGGER.info("Measure unit with ID {} will be deleted.", id);
-        return measureUnitsRepository.deleteById(id);
+        if(measureUnitsRepository.getUnitsByBaseUnit(id).collectList().toFuture().join().isEmpty()) {
+            CRUDResult resultOK = new CRUDResult();
+            CRUDResult resultError = new CRUDResult();
+            return measureUnitsRepository.deleteById(id)
+                    .doOnSuccess(result -> {
+                        LOGGER.info("Measure unit with id '{}' has been deleted.", id);
+                        resultOK.setResultType(CRUDResult.ResultType.OK);
+                    })
+                    .thenReturn(resultOK)
+                    .doOnError(err -> {
+                        LOGGER.error("Measure unit with ID '{}' has not been deleted because of an error.", id, err);
+                        resultError.setResultType(CRUDResult.ResultType.GENERAL_ERROR);
+                        resultError.setMessage(err.getLocalizedMessage());
+                    })
+                    .onErrorReturn(resultError);
+        } else {
+            CRUDResult itemsExists = new CRUDResult();
+            itemsExists.setResultType(CRUDResult.ResultType.HAS_BOUND_RECORDS);
+            return Mono.just(itemsExists);
+        }
     }
 
     private MeasureUnit modelToUnit(MeasureUnitModel model) {
