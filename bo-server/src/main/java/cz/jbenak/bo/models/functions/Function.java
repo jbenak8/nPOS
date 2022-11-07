@@ -1,4 +1,4 @@
-package cz.jbenak.bo.models;
+package cz.jbenak.bo.models.functions;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;

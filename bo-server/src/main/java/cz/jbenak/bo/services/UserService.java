@@ -1,8 +1,8 @@
 package cz.jbenak.bo.services;
 
-import cz.jbenak.bo.models.BoUser;
-import cz.jbenak.bo.models.Function;
-import cz.jbenak.bo.models.UserGroup;
+import cz.jbenak.bo.models.user.BoUser;
+import cz.jbenak.bo.models.functions.Function;
+import cz.jbenak.bo.models.user.UserGroup;
 import cz.jbenak.bo.repositories.functions.FunctionsRepository;
 import cz.jbenak.bo.repositories.user.GroupRepository;
 import cz.jbenak.bo.repositories.user.UserRepository;

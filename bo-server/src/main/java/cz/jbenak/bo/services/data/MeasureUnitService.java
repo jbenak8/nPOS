@@ -1,6 +1,6 @@
 package cz.jbenak.bo.services.data;
 
-import cz.jbenak.bo.models.MeasureUnitModel;
+import cz.jbenak.bo.models.data.MeasureUnitModel;
 import cz.jbenak.bo.repositories.data.MeasureUnitsRepository;
 import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.MeasureUnit;

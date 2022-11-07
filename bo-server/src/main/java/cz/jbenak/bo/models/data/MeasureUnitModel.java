@@ -1,4 +1,4 @@
-package cz.jbenak.bo.models;
+package cz.jbenak.bo.models.data;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;

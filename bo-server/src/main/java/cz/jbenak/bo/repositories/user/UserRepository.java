@@ -1,6 +1,6 @@
 package cz.jbenak.bo.repositories.user;
 
-import cz.jbenak.bo.models.BoUser;
+import cz.jbenak.bo.models.user.BoUser;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;

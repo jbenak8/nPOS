@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CRUDResult {
 
     public enum ResultType {
-        OK, ALREADY_EXISTS, HAS_BOUND_RECORDS, GENERAL_ERROR
+        OK, ALREADY_EXISTS, HAS_BOUND_RECORDS, GENERAL_ERROR, DATA_CONSTRAINT_VIOLATION
     }
 
     private ResultType resultType;
