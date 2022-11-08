@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<BorderPane fx:id="mainPane" prefHeight="768.0" prefWidth="1260.0" styleClass="panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.DataPanelController">
+<BorderPane fx:id="mainPane" prefHeight="768.0" prefWidth="1260.0" styleClass="panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.DataPanelController">
     <top>
         <BorderPane fx:id="menuPane" prefHeight="9.0" prefWidth="1250.0" BorderPane.alignment="CENTER">
             <center>
@@ -41,7 +41,7 @@
                      <FlowPane.margin>
                         <Insets left="5.0" />
                      </FlowPane.margin></Button>
-                        <Button fx:id="btnMenuCurrencies" mnemonicParsing="false" text="Měny">
+                        <Button fx:id="btnMenuCurrencies" mnemonicParsing="false" onAction="#btnMenuCurrenciesPressed" text="Měny">
                      <FlowPane.margin>
                         <Insets left="5.0" />
                      </FlowPane.margin></Button>

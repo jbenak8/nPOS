@@ -11,7 +11,6 @@ import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,8 +33,6 @@ public class MeasureUnitsController extends AbstractPanelContentController {
     private ObservableList<MeasureUnit> measureUnitsList;
     private List<MeasureUnit> allMeasureUnits;
     private final MFXTableView<MeasureUnit> table = new MFXTableView<>();
-    @FXML
-    MFXTextField quickSearchField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,6 +62,7 @@ public class MeasureUnitsController extends AbstractPanelContentController {
     @Override
     @SuppressWarnings("unchecked")
     public void loadData() {
+        prepareTable();
         LOGGER.debug("Process of loading measure units from server will be prepared.");
         Task<List<MeasureUnit>> loadTask = new Task<>() {
             @Override
@@ -133,17 +131,6 @@ public class MeasureUnitsController extends AbstractPanelContentController {
                 deleteUnit(selected.getUnit());
             }
         }
-    }
-
-    @FXML
-    void btnClearFilterFieldPressed() {
-        quickSearchField.clear();
-    }
-
-    @FXML
-    void btnReloadPressed() {
-        quickSearchField.clear();
-        loadData();
     }
 
     private void deleteUnit(String unitId) {

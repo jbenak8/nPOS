@@ -1,5 +1,7 @@
 package cz.jbenak.npos.boClient.gui.panels;
 
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 
@@ -10,6 +12,8 @@ public abstract class AbstractPanelContentController implements Initializable, P
 
     public BorderPane mainPane;
     public PanelController panelController;
+    @FXML
+    protected MFXTextField quickSearchField;
     @Override
     public void setMainContentPane(BorderPane mainContentPane) {
         this.mainPane = mainContentPane;
@@ -25,4 +29,15 @@ public abstract class AbstractPanelContentController implements Initializable, P
 
     @Override
     public abstract void initialize(URL url, ResourceBundle resourceBundle);
+
+    @FXML
+    void btnClearFilterFieldPressed() {
+        quickSearchField.clear();
+    }
+
+    @FXML
+    void btnReloadPressed() {
+        quickSearchField.clear();
+        loadData();
+    }
 }

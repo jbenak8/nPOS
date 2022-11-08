@@ -50,6 +50,11 @@ public class DataPanelController extends PanelController implements Initializabl
         changeContentMenuPane("measure-units-menu.fxml", btnMenuMeasureUnits);
     }
 
+    @FXML
+    private void btnMenuCurrenciesPressed() {
+        changeContentMenuPane("currency-menu.fxml", btnMenuCurrencies);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnPreviouslySelected = btnMenuAccountingPeriods;

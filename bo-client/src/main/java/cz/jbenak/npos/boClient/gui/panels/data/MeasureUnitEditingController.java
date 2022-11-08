@@ -14,8 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,8 +25,6 @@ import java.util.ResourceBundle;
 public class MeasureUnitEditingController extends EditDialogController<MeasureUnit> {
 
     private static final Logger LOGGER = LogManager.getLogger(MeasureUnitEditingController.class);
-    @FXML
-    private Label title;
     @FXML
     private Label validationLabel;
     @FXML
@@ -98,19 +94,9 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
         BoClient.getInstance().getTaskExecutor().submit(saveUnitTask);
     }
 
+    @FXML
     @Override
-    @FXML
-    protected void keyPressed(KeyEvent evt) {
-        if (evt.isControlDown() && evt.getCode() == KeyCode.ENTER) {
-            savePressed();
-        }
-        if (evt.getCode() == KeyCode.ESCAPE) {
-            dialog.closeDialog();
-        }
-    }
-
-    @FXML
-    void savePressed() {
+    protected void savePressed() {
         if (validateFields()) {
             dataEdited = new MeasureUnit();
             dataEdited.setName(fieldName.getText().trim());
@@ -145,11 +131,6 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
         return fieldUnit.getValidator().isValid();
     }
 
-    @FXML
-    void cancelPressed() {
-        dialog.setCancelled(true);
-        dialog.closeDialog();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -88,6 +88,9 @@ public class HttpClientOperations {
                     if (response.statusCode() != 200) {
                         throw parseRemoteException(uri, response.statusCode(), response.body());
                     }
+                    if (response.statusCode() == 404) {
+                        throw parseRemoteException(uri, response.statusCode(), "Požadovaná data nebyla na serveru nalezena.");
+                    }
                     return response.body();
                 })
                 .thenApply(response -> deserialize(response, new TypeReference<>() {
