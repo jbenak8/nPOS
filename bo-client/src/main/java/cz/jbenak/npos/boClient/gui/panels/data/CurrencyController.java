@@ -50,7 +50,7 @@ public class CurrencyController extends AbstractPanelContentController {
             BoClient.getInstance().getMainController().setSystemStatus("Načítám seznam měn...");
         });
         loadTask.setOnSucceeded(evt -> {
-            LOGGER.info("Measure currencies has been successfully loaded.");
+            LOGGER.info("Currencies has been successfully loaded.");
             if (allCurrencies != null && !allCurrencies.isEmpty()) {
                 allCurrencies.clear();
                 currencyList.clear();
@@ -149,7 +149,7 @@ public class CurrencyController extends AbstractPanelContentController {
                 BoClient.getInstance().getMainController().setSystemStatus("Vybraná měna nebyla smazána");
                 InfoDialog warnDialog = new InfoDialog(InfoDialog.InfoDialogType.WARNING, BoClient.getInstance().getMainStage(), false);
                 warnDialog.setDialogTitle("Měnu nelze smazat");
-                warnDialog.setDialogMessage("Na vybranou měrnou měnu \"" + isoCode + "\" odkazují jiné záznamy v databázi, tedy tato měna je používána.");
+                warnDialog.setDialogMessage("Na vybranou měnu \"" + isoCode + "\" odkazují jiné záznamy v databázi, tedy tato měna je používána.");
                 warnDialog.showDialog();
             }
             if (result.getResultType() == CRUDResult.ResultType.GENERAL_ERROR) {
@@ -164,7 +164,7 @@ public class CurrencyController extends AbstractPanelContentController {
         deleteTask.setOnFailed(evt -> {
             LOGGER.error("There was an error during deletion of selected currency data.", evt.getSource().getException());
             BoClient.getInstance().getMainController().showProgressIndicator(false);
-            BoClient.getInstance().getMainController().setSystemStatus("Chyba při mazání měnyy.");
+            BoClient.getInstance().getMainController().setSystemStatus("Chyba při mazání měny.");
             Utils.showGenricErrorDialog(evt.getSource().getException(),
                     "Chyba mazání", "Vybranou měnu nebylo možno smazat.",
                     "Vybranou měnu nebylo možné smazat z důvodu jiné chyby:");

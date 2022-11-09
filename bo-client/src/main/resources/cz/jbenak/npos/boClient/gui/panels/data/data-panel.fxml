@@ -45,7 +45,7 @@
                      <FlowPane.margin>
                         <Insets left="5.0" />
                      </FlowPane.margin></Button>
-                        <Button fx:id="btnMenuCountries" mnemonicParsing="false" text="Státy">
+                        <Button fx:id="btnMenuCountries" mnemonicParsing="false" onAction="#btnMenuCountriesPressed" text="Státy">
                      <FlowPane.margin>
                         <Insets left="5.0" />
                      </FlowPane.margin></Button>

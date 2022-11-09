@@ -2,6 +2,7 @@ package cz.jbenak.npos.boClient.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import cz.jbenak.npos.api.client.CRUDResult;
+import cz.jbenak.npos.api.data.Country;
 import cz.jbenak.npos.api.data.Currency;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import org.apache.logging.log4j.LogManager;
@@ -49,5 +50,21 @@ public class DataOperations extends AbstractClientOperations {
     public CompletableFuture<CRUDResult> deleteCurrency(String isoCode) {
         LOGGER.info("Given currency with ISO code {} will be deleted.", isoCode);
         return httpClientOperations.deleteData(URI.create(baseURI + "/currencies/delete/" + isoCode));
+    }
+
+    public CompletableFuture<List<Country>> getAllCountries() {
+        LOGGER.info("List of all countries will be loaded from server.");
+        return httpClientOperations.getData(URI.create(baseURI + "/countries/getAll"), new TypeReference<>() {
+        });
+    }
+
+    public CompletableFuture<CRUDResult> storeCountry(Country country) {
+        LOGGER.info("Given country with ISO code {} will be saved.", country.getIsoCode());
+        return httpClientOperations.postData(URI.create(baseURI + "/countries/store"), country);
+    }
+
+    public CompletableFuture<CRUDResult> deleteCountry(String isoCode) {
+        LOGGER.info("Given country with ISO code {} will be deleted.", isoCode);
+        return httpClientOperations.deleteData(URI.create(baseURI + "/countries/delete/" + isoCode));
     }
 }

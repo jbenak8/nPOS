@@ -1,8 +1,10 @@
 package cz.jbenak.bo.controllers.client;
 
+import cz.jbenak.bo.services.data.CountryService;
 import cz.jbenak.bo.services.data.CurrencyService;
 import cz.jbenak.bo.services.data.MeasureUnitService;
 import cz.jbenak.npos.api.client.CRUDResult;
+import cz.jbenak.npos.api.data.Country;
 import cz.jbenak.npos.api.data.Currency;
 import cz.jbenak.npos.api.data.MeasureUnit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ public class DataController {
 
     private MeasureUnitService measureUnitService;
     private CurrencyService currencyService;
+    private CountryService countryService;
 
     @Autowired
     public void setMeasureUnitService(MeasureUnitService measureUnitService) {
@@ -26,6 +29,11 @@ public class DataController {
     @Autowired
     public void setCurrencyService(CurrencyService currencyService) {
         this.currencyService = currencyService;
+    }
+
+    @Autowired
+    public void setCountryService(CountryService countryService) {
+        this.countryService = countryService;
     }
 
     @GetMapping("/measure_units/getAll")
@@ -66,6 +74,26 @@ public class DataController {
     @DeleteMapping("/currencies/delete/{isoCode}")
     public Mono<CRUDResult> deleteCurrency(@PathVariable String isoCode) {
         return currencyService.deleteCurrency(isoCode);
+    }
+
+    @GetMapping("/countries/getAll")
+    public Flux<Country> getAllCountries() {
+        return countryService.getAllCountries();
+    }
+
+    @GetMapping("/countries/get/{isoCode}")
+    public Mono<Country> getCountry(@PathVariable String isoCode) {
+        return countryService.getCountry(isoCode);
+    }
+
+    @PostMapping("/countries/store")
+    public Mono<CRUDResult> storeCountry(@RequestBody Country country) {
+        return countryService.storeCountry(country);
+    }
+
+    @DeleteMapping("/countries/delete/{isoCode}")
+    public Mono<CRUDResult> deleteCountry(@PathVariable String isoCode) {
+        return countryService.deleteCountry(isoCode);
     }
 
 }

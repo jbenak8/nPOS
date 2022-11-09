@@ -25,6 +25,7 @@ public abstract class AbstractPanelContentController implements Initializable, P
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public abstract void loadData();
 
     @Override

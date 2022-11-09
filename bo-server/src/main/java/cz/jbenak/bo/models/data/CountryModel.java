@@ -5,14 +5,14 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("currencies")
-public class CurrencyModel implements Persistable<String> {
+@Table("countries")
+public class CountryModel implements Persistable<String> {
 
     @Id
     private String iso_code;
-    private String name;
-    private String symbol;
-    private boolean acceptable;
+    private String common_name;
+    private String full_name;
+    private String currency_code;
     private boolean main;
     @Transient
     private transient boolean saveNew;
@@ -25,28 +25,28 @@ public class CurrencyModel implements Persistable<String> {
         this.iso_code = iso_code;
     }
 
-    public String getName() {
-        return name;
+    public String getCommon_name() {
+        return common_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCommon_name(String common_name) {
+        this.common_name = common_name;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public String getFull_name() {
+        return full_name;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
     }
 
-    public boolean isAcceptable() {
-        return acceptable;
+    public String getCurrency_code() {
+        return currency_code;
     }
 
-    public void setAcceptable(boolean acceptable) {
-        this.acceptable = acceptable;
+    public void setCurrency_code(String currency_code) {
+        this.currency_code = currency_code;
     }
 
     public boolean isMain() {
@@ -68,7 +68,7 @@ public class CurrencyModel implements Persistable<String> {
         return saveNew;
     }
 
-    public CurrencyModel saveAsNew() {
+    public CountryModel saveAsNew() {
         this.saveNew = true;
         return this;
     }
