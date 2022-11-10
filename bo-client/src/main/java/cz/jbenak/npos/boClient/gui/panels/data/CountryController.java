@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 public class CountryController extends AbstractPanelContentController {
 
     private static final Logger LOGGER = LogManager.getLogger(CountryController.class);
-    private final ObservableList<Country> countryList = FXCollections.emptyObservableList();
+    private ObservableList<Country> countryList = FXCollections.emptyObservableList();
     private List<Country> allCountries = new ArrayList<>();
     private List<Currency> allCurrencies = new ArrayList<>();
     private final MFXTableView<Country> table = new MFXTableView<>();
@@ -58,13 +58,19 @@ public class CountryController extends AbstractPanelContentController {
                 countryList.clear();
             }
             allCountries = (List<Country>) evt.getSource().getValue();
-            allCountries = FXCollections.observableArrayList(allCountries);
+            countryList = FXCollections.observableArrayList(allCountries);
             prepareTable();
             BoClient.getInstance().getMainController().showProgressIndicator(false);
             BoClient.getInstance().getMainController().setSystemStatus("Načteno " + countryList.size() + " záznamů.");
         });
         loadTask.setOnFailed(evt -> {
-
+            Throwable e = evt.getSource().getException();
+            LOGGER.error("Countries list loading failed.", e);
+            BoClient.getInstance().getMainController().setSystemStatus("Chyba při načítání seznamu států");
+            Utils.showGenricErrorDialog(e, "Státy nelze načíst",
+                    "Nastala chyba při načítání seznamu států.",
+                    "Státy nebyly načteny z důvodu jiné chyby.");
+            BoClient.getInstance().getMainController().showProgressIndicator(false);
         });
         BoClient.getInstance().getTaskExecutor().submit(loadTask);
     }
@@ -109,15 +115,18 @@ public class CountryController extends AbstractPanelContentController {
                 warnDialog.setDialogMessage("Pro uložení státu prosím nejprve vytvořte měnu.");
                 warnDialog.showDialog();
             } else {
-                EditDialog<Country, CountryEditingController> dialog = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/countries-edit-dialog.fxml", "Úprava státu", this);
-                CountryEditingController controller = dialog.preloadDialog();
-                controller.setCurrencies(allCurrencies);
                 if (edit) {
-                    if (dialog.openEditDialog(table.getSelectionModel().getSelectedValues().get(0))) {
+                    EditDialog<Country, CountryEditingController> dialogNew = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/countries-edit-dialog.fxml", "Nový stát", this);
+                    CountryEditingController controller = dialogNew.preloadDialog();
+                    controller.setCurrencies(allCurrencies);
+                    if (dialogNew.openEditDialog(table.getSelectionModel().getSelectedValues().get(0))) {
                         loadData();
                     }
                 } else {
-                    if (dialog.openNewDialog()) {
+                    EditDialog<Country, CountryEditingController> dialogEdit = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/countries-edit-dialog.fxml", "Úprava státu", this);
+                    CountryEditingController controller = dialogEdit.preloadDialog();
+                    controller.setCurrencies(allCurrencies);
+                    if (dialogEdit.openNewDialog()) {
                         loadData();
                     }
                 }
@@ -171,6 +180,7 @@ public class CountryController extends AbstractPanelContentController {
                 BoClient.getInstance().getMainController().setSystemStatus("Měna smazána");
             }
             if (result.getResultType() == CRUDResult.ResultType.HAS_BOUND_RECORDS) {
+                LOGGER.error("Country {} could not be deleted because it has bound records.", isoCode);
                 BoClient.getInstance().getMainController().setSystemStatus("Vybraný stát nebyl smazán");
                 InfoDialog warnDialog = new InfoDialog(InfoDialog.InfoDialogType.WARNING, BoClient.getInstance().getMainStage(), false);
                 warnDialog.setDialogTitle("Stát nelze smazat");
@@ -178,6 +188,7 @@ public class CountryController extends AbstractPanelContentController {
                 warnDialog.showDialog();
             }
             if (result.getResultType() == CRUDResult.ResultType.GENERAL_ERROR) {
+                LOGGER.error("There was a general error during deletion of selected country data: {}", evt.getSource().getMessage());
                 BoClient.getInstance().getMainController().setSystemStatus("Stát nebyl smazán");
                 InfoDialog errorDialog = new InfoDialog(InfoDialog.InfoDialogType.ERROR, BoClient.getInstance().getMainStage(), false);
                 errorDialog.setDialogTitle("Chyba při mazání státu " + isoCode);
@@ -208,9 +219,6 @@ public class CountryController extends AbstractPanelContentController {
             MFXTableColumn<Country> isMainColumn = new MFXTableColumn<>("Je hlavní", true, Comparator.comparing(Country::isMain));
 
             isoCodeColumn.setRowCellFactory(country -> new MFXTableRowCell<>(Country::getIsoCode));
-            fullNameColumn.setRowCellFactory(country -> new MFXTableRowCell<>(Country::getFullName) {{
-                setAlignment(Pos.CENTER);
-            }});
             currencyColumn.setRowCellFactory(row -> new MFXTableRowCell<>(Country::getCurrencyIsoCode) {{
                 setAlignment(Pos.CENTER);
             }});
@@ -218,12 +226,13 @@ public class CountryController extends AbstractPanelContentController {
                 setAlignment(Pos.CENTER);
             }});
             commonNameColumn.setRowCellFactory(country -> new MFXTableRowCell<>(Country::getCommonName));
+            fullNameColumn.setRowCellFactory(country -> new MFXTableRowCell<>(Country::getFullName));
 
             isoCodeColumn.setMinWidth(160);
-            fullNameColumn.setMinWidth(50);
+            fullNameColumn.setMinWidth(300);
             commonNameColumn.setMinWidth(200);
-            isMainColumn.setMinWidth(30);
-            currencyColumn.setMinWidth(30);
+            isMainColumn.setMinWidth(70);
+            currencyColumn.setMinWidth(70);
 
             table.autosizeColumnsOnInitialization();
             columns.add(isoCodeColumn);
@@ -232,7 +241,7 @@ public class CountryController extends AbstractPanelContentController {
             columns.add(currencyColumn);
             columns.add(isMainColumn);
 
-            table.setFooterVisible(true);
+            table.setFooterVisible(false);
             table.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             table.getStyleClass().add("content-panel");
             table.getSelectionModel().setAllowsMultipleSelection(false);

@@ -62,7 +62,13 @@ public class CurrencyController extends AbstractPanelContentController {
             BoClient.getInstance().getMainController().setSystemStatus("Načteno " + currencyList.size() + " záznamů.");
         });
         loadTask.setOnFailed(evt -> {
-
+            Throwable e = evt.getSource().getException();
+            LOGGER.error("Currencies list loading failed.", e);
+            BoClient.getInstance().getMainController().setSystemStatus("Chyba při načítání seznamu měn");
+            Utils.showGenricErrorDialog(e, "Měny nelze načíst",
+                    "Nastala chyba při načítání seznamu měn.",
+                    "Měny načteny z důvodu jiné chyby.");
+            BoClient.getInstance().getMainController().showProgressIndicator(false);
         });
         BoClient.getInstance().getTaskExecutor().submit(loadTask);
     }
@@ -146,6 +152,7 @@ public class CurrencyController extends AbstractPanelContentController {
                 BoClient.getInstance().getMainController().setSystemStatus("Měna smazána");
             }
             if (result.getResultType() == CRUDResult.ResultType.HAS_BOUND_RECORDS) {
+                LOGGER.error("Currency {} could not be deleted because it has bound records.", isoCode);
                 BoClient.getInstance().getMainController().setSystemStatus("Vybraná měna nebyla smazána");
                 InfoDialog warnDialog = new InfoDialog(InfoDialog.InfoDialogType.WARNING, BoClient.getInstance().getMainStage(), false);
                 warnDialog.setDialogTitle("Měnu nelze smazat");
@@ -153,6 +160,7 @@ public class CurrencyController extends AbstractPanelContentController {
                 warnDialog.showDialog();
             }
             if (result.getResultType() == CRUDResult.ResultType.GENERAL_ERROR) {
+                LOGGER.error("There was a general error during deletion of selected currency data: {}", evt.getSource().getMessage());
                 BoClient.getInstance().getMainController().setSystemStatus("Měna nebyla smazána");
                 InfoDialog errorDialog = new InfoDialog(InfoDialog.InfoDialogType.ERROR, BoClient.getInstance().getMainStage(), false);
                 errorDialog.setDialogTitle("Chyba při mazání měny " + isoCode);

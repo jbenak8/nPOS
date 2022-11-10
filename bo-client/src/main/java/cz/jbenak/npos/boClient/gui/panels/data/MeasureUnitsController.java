@@ -154,6 +154,7 @@ public class MeasureUnitsController extends AbstractPanelContentController {
                 BoClient.getInstance().getMainController().setSystemStatus("Měrná jednotka smazána");
             }
             if (result.getResultType() == CRUDResult.ResultType.HAS_BOUND_RECORDS) {
+                LOGGER.error("Measure unit {} could not be deleted because it has bound records.", unitId);
                 BoClient.getInstance().getMainController().setSystemStatus("Měrná jednotka nebyla smazána");
                 InfoDialog warnDialog = new InfoDialog(InfoDialog.InfoDialogType.WARNING, BoClient.getInstance().getMainStage(), false);
                 warnDialog.setDialogTitle("Měrnou jednotku nelze smazat");
@@ -161,6 +162,7 @@ public class MeasureUnitsController extends AbstractPanelContentController {
                 warnDialog.showDialog();
             }
             if (result.getResultType() == CRUDResult.ResultType.GENERAL_ERROR) {
+                LOGGER.error("There was a general error during deletion of selected measure unit data: {}", evt.getSource().getMessage());
                 BoClient.getInstance().getMainController().setSystemStatus("Měrná jednotka nebyla smazána");
                 InfoDialog errorDialog = new InfoDialog(InfoDialog.InfoDialogType.ERROR, BoClient.getInstance().getMainStage(), false);
                 errorDialog.setDialogTitle("Chyba při mazání MJ " + unitId);
