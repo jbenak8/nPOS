@@ -3,10 +3,12 @@ package cz.jbenak.bo.controllers.client;
 import cz.jbenak.bo.services.data.CountryService;
 import cz.jbenak.bo.services.data.CurrencyService;
 import cz.jbenak.bo.services.data.MeasureUnitService;
+import cz.jbenak.bo.services.data.VATService;
 import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.Country;
 import cz.jbenak.npos.api.data.Currency;
 import cz.jbenak.npos.api.data.MeasureUnit;
+import cz.jbenak.npos.api.data.VAT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,7 @@ public class DataController {
     private MeasureUnitService measureUnitService;
     private CurrencyService currencyService;
     private CountryService countryService;
+    private VATService vatService;
 
     @Autowired
     public void setMeasureUnitService(MeasureUnitService measureUnitService) {
@@ -34,6 +37,11 @@ public class DataController {
     @Autowired
     public void setCountryService(CountryService countryService) {
         this.countryService = countryService;
+    }
+
+    @Autowired
+    public void setVatService(VATService vatService) {
+        this.vatService = vatService;
     }
 
     @GetMapping("/measure_units/getAll")
@@ -94,6 +102,21 @@ public class DataController {
     @DeleteMapping("/countries/delete/{isoCode}")
     public Mono<CRUDResult> deleteCountry(@PathVariable String isoCode) {
         return countryService.deleteCountry(isoCode);
+    }
+
+    @GetMapping("/vat/getAll")
+    public Flux<VAT> getAllVAT() {
+        return vatService.getAllVAT();
+    }
+
+    @GetMapping("/vat/getAllValid")
+    public Flux<VAT> getAllValidVAT() {
+        return vatService.getAllValidVAT();
+    }
+
+    @GetMapping("/vat/get/{id}")
+    public Mono<VAT> getVATbyID(@PathVariable int id) {
+        return vatService.getVATbyId(id);
     }
 
 }
