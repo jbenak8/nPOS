@@ -2,6 +2,7 @@ package cz.jbenak.npos.api.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class VAT {
@@ -12,8 +13,8 @@ public class VAT {
 
     private int id;
     private Type type;
-    private double percentage;
-    private String name;
+    private BigDecimal percentage;
+    private String label;
     private LocalDate validFrom;
     private LocalDate validTo;
 
@@ -36,21 +37,21 @@ public class VAT {
     }
 
     @JsonProperty("percentage")
-    public double getPercentage() {
+    public BigDecimal getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(double percentage) {
+    public void setPercentage(BigDecimal percentage) {
         this.percentage = percentage;
     }
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("label")
+    public String getLabel() {
+        return label;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     @JsonProperty("validFrom")
@@ -69,5 +70,17 @@ public class VAT {
 
     public void setValidTo(LocalDate validTo) {
         this.validTo = validTo;
+    }
+
+    @Override
+    public String toString() {
+        return "VAT {" +
+                "id=" + id +
+                ", type=" + type +
+                ", percentage=" + percentage +
+                ", label='" + label + '\'' +
+                ", validFrom=" + validFrom +
+                ", validTo=" + validTo +
+                '}';
     }
 }

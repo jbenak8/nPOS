@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="348.0" prefWidth="482.0" styleClass="panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.VATEditingController">
+    <top>
+        <FlowPane prefHeight="55.0" prefWidth="590.0" styleClass="menu-panel">
+            <children>
+                <VBox maxHeight="105.0" prefHeight="44.0" prefWidth="247.0">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="33.0" prefWidth="237.0">
+                            <children>
+                                <MFXButton onAction="#savePressed" prefHeight="32.0" prefWidth="100.0" text="Uložit">
+                                    <graphic>
+                                        <FontIcon iconColor="#008a1a" iconLiteral="fltrmz-save-24" iconSize="24" />
+                                    </graphic>
+                                </MFXButton>
+                                <MFXButton onAction="#cancelPressed" prefHeight="32.0" prefWidth="100.0" text="Storno">
+                                    <graphic>
+                                        <FontIcon iconColor="#c30000" iconLiteral="fltral-document-dismiss-24" iconSize="24" />
+                                    </graphic>
+                                </MFXButton>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                    <FlowPane.margin>
+                        <Insets top="4.0" />
+                    </FlowPane.margin>
+                </VBox>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </BorderPane.margin>
+        </FlowPane>
+    </top>
+    <center>
+        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="498.0">
+            <top>
+                <Label fx:id="title" styleClass="panel-title" text="Label" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                    </BorderPane.margin>
+                </Label>
+            </top>
+            <center>
+                <GridPane prefHeight="157.0" prefWidth="448.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="165.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="423.0" minWidth="10.0" prefWidth="283.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="91.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="210.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Typ sazby daně:">
+                            <GridPane.margin>
+                                <Insets left="10.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <Label text="Sazba v procentech:" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets left="10.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <Label text="Platnost od:" GridPane.rowIndex="2">
+                            <GridPane.margin>
+                                <Insets left="10.0" />
+                            </GridPane.margin>
+                        </Label>
+                        <Label text="Platnost do:" GridPane.rowIndex="3">
+                            <padding>
+                                <Insets left="10.0" />
+                            </padding>
+                        </Label>
+                        <MFXTextField fx:id="fieldVATPercentage" floatMode="DISABLED" measureUnit="\%" prefHeight="29.0" prefWidth="151.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <MFXComboBox fx:id="selectorVATType" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <MFXDatePicker fx:id="datePickerValidFrom" maxHeight="38.0" minWidth="30.0" prefHeight="38.0" prefWidth="151.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <MFXDatePicker fx:id="datePickerValidTo" prefHeight="38.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    </children>
+                    <BorderPane.margin>
+                        <Insets bottom="25.0" left="25.0" right="25.0" />
+                    </BorderPane.margin>
+                </GridPane>
+            </center>
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </BorderPane.margin>
+         <bottom>
+            <Label fx:id="validationLabel" prefHeight="25.0" prefWidth="434.0" textFill="#c60000" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="5.0" />
+               </BorderPane.margin>
+            </Label>
+         </bottom>
+        </BorderPane>
+    </center>
+</BorderPane>

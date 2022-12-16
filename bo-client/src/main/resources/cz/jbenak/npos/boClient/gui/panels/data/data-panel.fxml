@@ -49,7 +49,7 @@
                      <FlowPane.margin>
                         <Insets left="5.0" />
                      </FlowPane.margin></Button>
-                        <Button fx:id="btnMenuVAT" mnemonicParsing="false" text="Sazby DPH">
+                        <Button fx:id="btnMenuVAT" mnemonicParsing="false" onAction="#btnMenuVATPressed" text="Sazby DPH">
                      <FlowPane.margin>
                         <Insets left="5.0" />
                      </FlowPane.margin></Button>

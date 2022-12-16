@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.ConnectException;
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Locale;
 
 /**
@@ -44,6 +47,16 @@ public class Utils {
         NumberFormat format = NumberFormat.getNumberInstance(new Locale("cs", "CZ"));
         format.setMinimumFractionDigits(toFormat.scale());
         return format.format(toFormat.doubleValue());
+    }
+
+    /**
+     * Format a date to a localized string.
+     * @param date date to format.
+     * @return Regular date string.
+     */
+    public static String formatDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+        return formatter.format(date);
     }
 
     /**

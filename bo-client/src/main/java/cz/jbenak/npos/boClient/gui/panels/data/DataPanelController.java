@@ -60,6 +60,11 @@ public class DataPanelController extends PanelController implements Initializabl
         changeContentMenuPane("countries-menu.fxml", btnMenuCountries);
     }
 
+    @FXML
+    private void btnMenuVATPressed() {
+        changeContentMenuPane("vat-menu.fxml", btnMenuVAT);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnPreviouslySelected = btnMenuAccountingPeriods;

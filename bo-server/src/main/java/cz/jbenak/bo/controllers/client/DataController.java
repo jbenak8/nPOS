@@ -119,4 +119,14 @@ public class DataController {
         return vatService.getVATbyId(id);
     }
 
+    @PostMapping("/vat/store")
+    public Mono<CRUDResult> storeVAT(@RequestBody VAT vat) {
+        return vatService.saveVAT(vat);
+    }
+
+    @DeleteMapping("/vat/delete/{id}")
+    public Mono<CRUDResult> deleteVAT(@PathVariable int id) {
+        return vatService.deleteVAT(id);
+    }
+
 }

@@ -1,0 +1,21 @@
+### getAllVATs
+GET https://localhost:7422/client/data/vat/getAll
+Authorization: Basic Qm9DbGllbnQ6Q2xpZW50MTIz
+
+### postBaseVAT
+POST https://localhost:7422/client/data/vat/store
+Authorization: Basic Qm9DbGllbnQ6Q2xpZW50MTIz
+Content-Type: application/json
+
+{
+  "id": 0,
+  "type": "BASE",
+  "percentage": 21,
+  "label": "Základní",
+  "validFrom": "2022-12-15",
+  "validTo": null
+}
+
+### deleteVAT
+DELETE https://localhost:7422/client/data/vat/delete/1
+Authorization: Basic Qm9DbGllbnQ6Q2xpZW50MTIz

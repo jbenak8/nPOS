@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<FlowPane prefHeight="115.0" prefWidth="759.0" styleClass="menu-panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.VATController">
+    <VBox alignment="CENTER" maxHeight="111.0" prefHeight="111.0" prefWidth="305.0">
+        <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </padding>
+        <FlowPane.margin>
+            <Insets top="4.0" />
+        </FlowPane.margin>
+        <HBox alignment="CENTER" prefHeight="95.0" prefWidth="295.0">
+            <MFXButton onAction="#btnNewPressed" prefHeight="32.0" prefWidth="100.0" text="Nová">
+                <graphic>
+                    <FontIcon iconColor="#008a1a" iconLiteral="fltral-document-add-24" iconSize="24" />
+                </graphic>
+            </MFXButton>
+            <MFXButton onAction="#btnEditPressed" prefWidth="100.0" text="Upravit">
+                <graphic>
+                    <FontIcon iconColor="#104c73" iconLiteral="fltral-document-edit-24" iconSize="24" />
+                </graphic>
+            </MFXButton>
+            <MFXButton onAction="#btnDeletePressed" prefHeight="32.0" prefWidth="100.0" text="Smazat">
+                <graphic>
+                    <FontIcon iconColor="#c30000" iconLiteral="fltral-document-dismiss-24" iconSize="24" />
+                </graphic>
+            </MFXButton>
+        </HBox>
+        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="20.0" minHeight="20.0" prefHeight="30.0" prefWidth="291.0" styleClass="group-label" text="DPH" />
+    </VBox>
+    <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0">
+        <FlowPane.margin>
+            <Insets bottom="5.0" top="5.0" />
+        </FlowPane.margin>
+    </Separator>
+    <VBox alignment="CENTER" prefHeight="105.0" prefWidth="434.0">
+        <FlowPane.margin>
+            <Insets left="5.0" top="4.0" />
+        </FlowPane.margin>
+        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="307.0">
+            <MFXTextField fx:id="quickSearchField" borderGap="0.0" floatingText="Rychlé hledání" floatingTextGap="0.0" graphicTextGap="0.0" measureUnitGap="0.0" prefHeight="44.0" prefWidth="434.0" />
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="511.0">
+            <MFXButton onAction="#btnClearFilterFieldPressed" prefHeight="32.0" prefWidth="126.0" text="Smazat pole">
+                <graphic>
+                    <FontIcon iconColor="#c30000" iconLiteral="fltral-backspace-24" iconSize="24" />
+                </graphic>
+            </MFXButton>
+            <MFXButton onAction="#btnReloadPressed" prefHeight="32.0" prefWidth="140.0" text="Znovu načíst">
+                <graphic>
+                    <FontIcon iconColor="#2095dd" iconLiteral="fltral-arrow-sync-24" iconSize="24" />
+                </graphic>
+            </MFXButton>
+         <MFXToggleButton fx:id="switchValidOnly" onMouseClicked="#switchValidOnlyChanged" text="Jen platné" />
+        </HBox>
+        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="20.0" prefHeight="20.0" prefWidth="701.0" styleClass="group-label" text="Vyhledávání a zobrazení">
+            <font>
+                <Font name="System Italic" size="12.0" />
+            </font>
+        </Label>
+    </VBox>
+</FlowPane>
