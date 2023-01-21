@@ -42,23 +42,36 @@ public class VATService {
         CRUDResult result = new CRUDResult();
         VATModel model = VATtoModel(vat);
         //TODO: kontrola platnosti poslední DPH ve skupině a kontrola data platnosti od.
-        VATModel savedVAT = repository.save(model).doOnSuccess(saved -> {
-                    LOGGER.info("VAT {} was successfully stored under ID {}", vat, saved.id());
-                    result.setResultType(CRUDResult.ResultType.OK);
-                })
-                .doOnError(err -> {
-                    LOGGER.error("VAT {} could not be stored because of error: ", vat, err);
-                    result.setResultType(CRUDResult.ResultType.GENERAL_ERROR);
-                    result.setMessage(err.getLocalizedMessage());
-                })
-                .toFuture().join();
-        if (result.getResultType() == CRUDResult.ResultType.OK && savedVAT.id() != vat.getId()) {
-            checkAndInvalidateVAT(savedVAT, result);
+        if (checkValidFrom(model, result)) {
+            VATModel savedVAT = repository.save(model).doOnSuccess(saved -> {
+                        LOGGER.info("VAT {} was successfully stored under ID {}", vat, saved.id());
+                        result.setResultType(CRUDResult.ResultType.OK);
+                    })
+                    .doOnError(err -> {
+                        LOGGER.error("VAT {} could not be stored because of error: ", vat, err);
+                        result.setResultType(CRUDResult.ResultType.GENERAL_ERROR);
+                        result.setMessage(err.getLocalizedMessage());
+                    })
+                    .toFuture().join();
+            if (result.getResultType() == CRUDResult.ResultType.OK && savedVAT.id() != vat.getId()) {
+                checkAndInvalidateVAT(savedVAT, result);
+            }
         }
         return Mono.just(result);
     }
 
+    private boolean checkValidFrom(VATModel toSave, CRUDResult result) {
+        VATModel lastSavedVAT = repository.getPreviousValidVATbyType(toSave.vat_type(), toSave.id()).toFuture().join();
+        if (lastSavedVAT != null) {
+
+        } else {
+            return true;
+        }
+        return false;
+    }
+
     private void checkAndInvalidateVAT(VATModel newVAT, CRUDResult result) {
+        //TODO: kontrola a zneplatnění i v případě, že datum do je nastaveno.
         VATModel VATtoInvalidate = repository.getPreviousValidVATbyType(newVAT.vat_type(), newVAT.id()).toFuture().join();
         if (VATtoInvalidate != null) {
             LOGGER.info("VAT with id {} will be invalidated.", VATtoInvalidate.id());

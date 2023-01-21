@@ -1,9 +1,12 @@
 package cz.jbenak.npos.boClient.gui.panels.data;
 
+import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.VAT;
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.api.DataOperations;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialog;
+import cz.jbenak.npos.boClient.gui.dialogs.generic.InfoDialog;
+import cz.jbenak.npos.boClient.gui.dialogs.generic.YesNoDialog;
 import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
@@ -104,14 +107,64 @@ public class VATController extends AbstractPanelContentController {
 
     @FXML
     private void btnDeletePressed() {
-        /*if (table.getSelectionModel().getSelectedValues().size() == 1) {
-            Country selected = table.getSelectionModel().getSelectedValues().get(0);
+        if (table.getSelectionModel().getSelectedValues().size() == 1) {
+            VAT selected = table.getSelectionModel().getSelectedValues().get(0);
             YesNoDialog question = new YesNoDialog(BoClient.getInstance().getMainStage());
-            YesNoDialog.Choice answer = question.showDialog("Smazat stát?", "Přejete si opravdu smazat vybraný stát \"" + selected.getCommonName() + "\"?");
+            YesNoDialog.Choice answer = question.showDialog("Smazat DPH?", "Přejete si opravdu smazat vybranou DPH " + selected.getId()+ "" +
+                    " - " + selected.getLabel() + " " + selected.getPercentage() + "% ?");
             if (answer == YesNoDialog.Choice.YES) {
-                deleteCountry(selected.getIsoCode());
+                deleteVAT(selected.getId());
             }
-        }*/
+        }
+    }
+
+    private void deleteVAT(int VATid) {
+        LOGGER.info("Selected VAT with ID '{}' will be deleted.", VATid);
+        Task<CRUDResult> deleteTask = new Task<>() {
+            @Override
+            protected CRUDResult call() {
+                DataOperations operations = new DataOperations();
+                return operations.deleteVAT(VATid).join();
+            }
+        };
+        deleteTask.setOnRunning(evt -> {
+            BoClient.getInstance().getMainController().showProgressIndicator(true);
+            BoClient.getInstance().getMainController().setSystemStatus("Mažu vybranou DPH...");
+        });
+        deleteTask.setOnSucceeded(evt -> {
+            BoClient.getInstance().getMainController().showProgressIndicator(false);
+            CRUDResult result = (CRUDResult) evt.getSource().getValue();
+            if (result.getResultType() == CRUDResult.ResultType.OK) {
+                LOGGER.info("VAT with ID '{}' has been deleted successfully.", VATid);
+                BoClient.getInstance().getMainController().setSystemStatus("Měrná jednotka smazána");
+            }
+            if (result.getResultType() == CRUDResult.ResultType.HAS_BOUND_RECORDS) {
+                LOGGER.error("VAT with ID {} could not be deleted because it has bound records.", VATid);
+                BoClient.getInstance().getMainController().setSystemStatus("DPH nebyla smazána");
+                InfoDialog warnDialog = new InfoDialog(InfoDialog.InfoDialogType.WARNING, BoClient.getInstance().getMainStage(), false);
+                warnDialog.setDialogTitle("Nemůžu smazat vybranou DPH");
+                warnDialog.setDialogMessage("Na vybranou DPH s interním číslem \"" + VATid + "\" odkazují jiné záznamy v databázi, tedy DPH je používána.");
+                warnDialog.showDialog();
+            }
+            if (result.getResultType() == CRUDResult.ResultType.GENERAL_ERROR) {
+                LOGGER.error("There was a general error during deletion of selected VAT with ID {} : {}", VATid, evt.getSource().getMessage());
+                BoClient.getInstance().getMainController().setSystemStatus("DPH nebyla smazána");
+                InfoDialog errorDialog = new InfoDialog(InfoDialog.InfoDialogType.ERROR, BoClient.getInstance().getMainStage(), false);
+                errorDialog.setDialogTitle("Chyba při mazání DPH " + VATid);
+                errorDialog.setDialogMessage(result.getMessage());
+                errorDialog.showDialog();
+            }
+            loadData();
+        });
+        deleteTask.setOnFailed(evt -> {
+            LOGGER.error("There was an error during deletion of selected VAT with ID {} : {}", VATid, evt.getSource().getException());
+            BoClient.getInstance().getMainController().showProgressIndicator(false);
+            BoClient.getInstance().getMainController().setSystemStatus("Chyba při mazání DPH.");
+            Utils.showGenricErrorDialog(evt.getSource().getException(),
+                    "Chyba při mazání", "Vybranou DPH jsem nemohl smazat.",
+                    "Vybranou DPH nebylo možné smazat z důvodu jiné chyby:");
+        });
+        BoClient.getInstance().getTaskExecutor().submit(deleteTask);
     }
 
     @Override
@@ -123,11 +176,13 @@ public class VATController extends AbstractPanelContentController {
         ObservableList<MFXTableColumn<VAT>> columns = table.getTableColumns();
 
         if (columns.isEmpty()) {
+            MFXTableColumn<VAT> idColumn = new MFXTableColumn<>("Číslo položky", true, Comparator.comparing(VAT::getId));
             MFXTableColumn<VAT> labelColumn = new MFXTableColumn<>("Typ daně", true, Comparator.comparing(VAT::getLabel));
             MFXTableColumn<VAT> percentageColumn = new MFXTableColumn<>("Sazba v procentech", true, Comparator.comparing(VAT::getPercentage));
             MFXTableColumn<VAT> validFromColumn = new MFXTableColumn<>("Platost od", true, Comparator.comparing(VAT::getValidFrom));
             MFXTableColumn<VAT> validToColumn = new MFXTableColumn<>("Platnostd do", true, Comparator.comparing(VAT::getValidTo));
 
+            idColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(VAT::getId));
             labelColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(VAT::getLabel));
             percentageColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(val -> Utils.formatDecimalCZPlain(val.getPercentage())) {{
                 setAlignment(Pos.CENTER_RIGHT);
@@ -139,12 +194,14 @@ public class VATController extends AbstractPanelContentController {
                 setAlignment(Pos.CENTER);
             }});
 
+            idColumn.setMinWidth(100);
             labelColumn.setMinWidth(250);
             percentageColumn.setMinWidth(150);
             validFromColumn.setMinWidth(150);
             validToColumn.setMinWidth(150);
 
             table.autosizeColumnsOnInitialization();
+            columns.add(idColumn);
             columns.add(labelColumn);
             columns.add(percentageColumn);
             columns.add(validFromColumn);

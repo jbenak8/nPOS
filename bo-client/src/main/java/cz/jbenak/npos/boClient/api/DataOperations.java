@@ -79,4 +79,9 @@ public class DataOperations extends AbstractClientOperations {
         LOGGER.info("Given VAT {} will be saved.", vat);
         return httpClientOperations.postData(URI.create(baseURI + "/vat/store"), vat);
     }
+
+    public CompletableFuture<CRUDResult> deleteVAT(int VATid) {
+        LOGGER.info("Given VAT with VAT ID {} will be deleted.", VATid);
+        return httpClientOperations.deleteData(URI.create(baseURI + "/vat/delete/" + VATid));
+    }
 }
