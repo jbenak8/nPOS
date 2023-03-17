@@ -5,6 +5,7 @@ import cz.jbenak.npos.api.data.VAT;
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.api.DataOperations;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialogController;
+import cz.jbenak.npos.boClient.gui.dialogs.generic.InfoDialog;
 import cz.jbenak.npos.boClient.gui.helpers.Helpers;
 import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -35,8 +36,6 @@ public class VATEditingController extends EditDialogController<VAT> {
     private MFXComboBox<VATTypeSelectionItem> selectorVATType;
     @FXML
     private MFXDatePicker datePickerValidFrom;
-    @FXML
-    private MFXDatePicker datePickerValidTo;
 
     private final ObservableList<VATTypeSelectionItem> vatTypeObservableList = FXCollections.observableArrayList();
     private final static Logger LOGGER = LogManager.getLogger(VATEditingController.class);
@@ -49,9 +48,6 @@ public class VATEditingController extends EditDialogController<VAT> {
         setValue.ifPresent(itm -> selectorVATType.selectItem(itm));
         fieldVATPercentage.setText(Utils.formatDecimalCZPlain(dataEdited.getPercentage()));
         datePickerValidFrom.setValue(dataEdited.getValidFrom());
-        if (dataEdited.getValidTo() != null) {
-            datePickerValidTo.setValue(dataEdited.getValidTo());
-        }
     }
 
     @Override
@@ -95,15 +91,28 @@ public class VATEditingController extends EditDialogController<VAT> {
     @Override
     protected void savePressed() {
         if (validateFields()) {
-            int vatId = dataEdited == null ? 0: dataEdited.getId();
+            int vatId = dataEdited == null ? 0 : dataEdited.getId();
             dataEdited = new VAT();
             dataEdited.setId(vatId);
             dataEdited.setPercentage(new BigDecimal(fieldVATPercentage.getText().trim().replace(',', '.')));
             dataEdited.setType(selectorVATType.getValue().getType());
             dataEdited.setLabel(selectorVATType.getValue().toString());
             dataEdited.setValidFrom(datePickerValidFrom.getValue());
-            dataEdited.setValidTo(datePickerValidTo.getValue());
-            save();
+            if (datePickerValidFrom.getValue().isBefore(LocalDate.now())) {
+                InfoDialog validityInPastInfo = new InfoDialog(InfoDialog.InfoDialogType.WARNING, dialog, true);
+                validityInPastInfo.setDialogTitle("Nesprávné datum");
+                validityInPastInfo.setDialogSubtitle("Datum platnosti od DPH je v minulosti.");
+                validityInPastInfo.setDialogMessage("""
+                        Datum platnosti OD ukládané DPH nemůže být v minulosti.
+                        
+                        Zadejte prosím dnešní datum nebo nějaké budoucí.
+                        """);
+                validityInPastInfo.showDialog();
+                datePickerValidFrom.requestFocus();
+                datePickerValidFrom.show();
+            } else {
+                save();
+            }
         }
     }
 
@@ -133,11 +142,6 @@ public class VATEditingController extends EditDialogController<VAT> {
             }
         });
         datePickerValidFrom.valueProperty().addListener((observable, oldVal, newVal) -> {
-            if (dataEdited == null || (!dataEdited.getValidFrom().isEqual(newVal))) {
-                dialog.setEdited(true);
-            }
-        });
-        datePickerValidTo.valueProperty().addListener((observable, oldVal, newVal) -> {
             if (dataEdited == null || (!dataEdited.getValidFrom().isEqual(newVal))) {
                 dialog.setEdited(true);
             }

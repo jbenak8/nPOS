@@ -12,6 +12,8 @@ import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.github.palexdev.materialfx.filter.BooleanFilter;
+import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -180,6 +182,7 @@ public class CurrencyController extends AbstractPanelContentController {
         BoClient.getInstance().getTaskExecutor().submit(deleteTask);
     }
 
+    @SuppressWarnings("unchecked")
     private void prepareTable() {
         ObservableList<MFXTableColumn<Currency>> columns = table.getTableColumns();
 
@@ -215,7 +218,15 @@ public class CurrencyController extends AbstractPanelContentController {
             columns.add(isAcceptableColumn);
             columns.add(isMainColumn);
 
-            table.setFooterVisible(false);
+            table.getFilters().addAll(
+                    new StringFilter<>("ISO kód", Currency::getIsoCode),
+                    new StringFilter<>("Název", Currency::getName),
+                    new StringFilter<>("Národní symbol", Currency::getSymbol),
+                    new BooleanFilter<>("Je akceptovaná", Currency::isAcceptable),
+                    new BooleanFilter<>("Je hlavní", Currency::isMain)
+            );
+
+            table.setFooterVisible(true);
             table.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             table.getStyleClass().add("content-panel");
             table.getSelectionModel().setAllowsMultipleSelection(false);

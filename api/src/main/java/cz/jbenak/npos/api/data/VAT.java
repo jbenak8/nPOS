@@ -16,7 +16,6 @@ public class VAT {
     private BigDecimal percentage;
     private String label;
     private LocalDate validFrom;
-    private LocalDate validTo;
 
     @JsonProperty("id")
     public int getId() {
@@ -63,15 +62,6 @@ public class VAT {
         this.validFrom = validFrom;
     }
 
-    @JsonProperty("validTo")
-    public LocalDate getValidTo() {
-        return validTo;
-    }
-
-    public void setValidTo(LocalDate validTo) {
-        this.validTo = validTo;
-    }
-
     @Override
     public String toString() {
         return "VAT {" +
@@ -80,7 +70,6 @@ public class VAT {
                 ", percentage=" + percentage +
                 ", label='" + label + '\'' +
                 ", validFrom=" + validFrom +
-                ", validTo=" + validTo +
                 '}';
     }
 }

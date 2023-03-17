@@ -58,7 +58,7 @@
         <dependency>
             <groupId>io.github.palexdev</groupId>
             <artifactId>materialfx</artifactId>
-            <version>11.13.8</version>
+            <version>11.13.10</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>
@@ -67,14 +67,9 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>io.github.palexdev</groupId>
-            <artifactId>mfxlocalization</artifactId>
-            <version>11.0.1</version>
-        </dependency>
-        <dependency>
             <groupId>eu.hansolo</groupId>
             <artifactId>tilesfx</artifactId>
-            <version>17.1.15</version>
+            <version>17.1.17</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>

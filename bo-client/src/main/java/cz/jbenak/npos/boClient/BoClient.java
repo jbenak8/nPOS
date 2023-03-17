@@ -4,6 +4,8 @@ import cz.jbenak.npos.api.client.User;
 import cz.jbenak.npos.api.shared.Utils;
 import cz.jbenak.npos.boClient.gui.dialogs.login.LoginDialogController;
 import cz.jbenak.npos.boClient.gui.main.BoClientController;
+import io.github.palexdev.materialfx.i18n.I18N;
+import io.github.palexdev.materialfx.i18n.Language;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -116,6 +117,7 @@ public class BoClient extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        I18N.setLanguage(Language.CZECH);
         mainStage = stage;
         if (loadSettings()) {
             LOGGER.info("Application settings has been loaded. Application version is {}. Additional logging and API utilities will be initialized.", appProperties.getProperty("app.version", "<N/A>"));

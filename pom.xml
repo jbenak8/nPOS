@@ -14,6 +14,9 @@
         <module>bo-client</module>
         <module>bo-server</module>
         <module>pos</module>
+        <module>communicator</module>
+        <module>comm-tester</module>
+        <module>config-manager</module>
     </modules>
 
     <properties>
@@ -24,7 +27,7 @@
         <!-- JavaFX classifiers: win, linux, mac -->
         <javafx.classifier>win</javafx.classifier>
         <javafx.excludeClassifier>linux</javafx.excludeClassifier>
-        <jackson.version>2.14.1</jackson.version>
+        <jackson.version>2.14.2</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencyManagement>
@@ -32,7 +35,7 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-bom</artifactId>
-                <version>2.17.2</version>
+                <version>2.19.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -135,7 +138,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.20.0</version>
+            <version>6.20.1</version>
         </dependency>
         <dependency>
             <!-- barcodes -->
@@ -146,12 +149,12 @@
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-core</artifactId>
-            <version>3.4.24</version>
+            <version>3.5.3</version>
         </dependency>
         <dependency>
             <groupId>io.projectreactor.netty</groupId>
             <artifactId>reactor-netty</artifactId>
-            <version>1.0.24</version>
+            <version>1.1.4</version>
         </dependency>
         <dependency>
             <groupId>io.rsocket</groupId>
@@ -166,7 +169,7 @@
         <dependency>
             <groupId>com.fazecast</groupId>
             <artifactId>jSerialComm</artifactId>
-            <version>2.9.2</version>
+            <version>2.9.3</version>
         </dependency>
     </dependencies>
 

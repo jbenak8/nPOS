@@ -12,6 +12,8 @@ import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.github.palexdev.materialfx.filter.BigDecimalFilter;
+import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -182,6 +184,7 @@ public class MeasureUnitsController extends AbstractPanelContentController {
         BoClient.getInstance().getTaskExecutor().submit(deleteTask);
     }
 
+    @SuppressWarnings("unchecked")
     private void prepareTable() {
         ObservableList<MFXTableColumn<MeasureUnit>> columns = table.getTableColumns();
 
@@ -209,7 +212,14 @@ public class MeasureUnitsController extends AbstractPanelContentController {
             columns.add(baseUnitColumn);
             columns.add(ratioColumn);
 
-            table.setFooterVisible(false);
+            table.getFilters().addAll(
+                    new StringFilter<>("Měrná jednotka", MeasureUnit::getUnit),
+                    new StringFilter<>("Název", MeasureUnit::getName),
+                    new StringFilter<>("Základní MJ", (measureUnit -> measureUnit.getBaseUnit() == null ? "" : measureUnit.getBaseUnit())),
+                    new BigDecimalFilter<>("Poměr", (measureUnit -> measureUnit.getRatio() == null ? BigDecimal.ZERO : measureUnit.getRatio()))
+            );
+
+            table.setFooterVisible(true);
             table.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             table.getStyleClass().add("content-panel");
             table.getSelectionModel().setAllowsMultipleSelection(false);

@@ -13,6 +13,8 @@ import cz.jbenak.npos.boClient.gui.panels.AbstractPanelContentController;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.github.palexdev.materialfx.filter.BooleanFilter;
+import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -156,7 +158,23 @@ public class CountryController extends AbstractPanelContentController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        quickSearchField.textProperty().addListener((observable, oldVal, newVal) -> {
+            if (newVal != null && !newVal.isBlank()) {
+                List<Country> filtered = allCountries.stream().filter(itm -> {
+                    final String value = newVal.trim().toLowerCase();
+                    String sb = itm.getIsoCode() + ";"
+                            + itm.getCommonName() + ";"
+                            + itm.getFullName() + ";"
+                            + itm.getCurrencyIsoCode() + ";"
+                            + (itm.isMain() ? "ano" : "ne") + ";";
+                    return sb.toLowerCase().contains(value);
+                }).toList();
+                countryList = FXCollections.observableArrayList(filtered);
+            } else {
+                countryList = FXCollections.observableArrayList(allCountries);
+            }
+            table.setItems(countryList);
+        });
     }
 
     private void deleteCountry(String isoCode) {
@@ -208,6 +226,7 @@ public class CountryController extends AbstractPanelContentController {
         BoClient.getInstance().getTaskExecutor().submit(deleteTask);
     }
 
+    @SuppressWarnings("unchecked")
     private void prepareTable() {
         ObservableList<MFXTableColumn<Country>> columns = table.getTableColumns();
 
@@ -215,7 +234,7 @@ public class CountryController extends AbstractPanelContentController {
             MFXTableColumn<Country> isoCodeColumn = new MFXTableColumn<>("ISO kód", true, Comparator.comparing(Country::getIsoCode));
             MFXTableColumn<Country> commonNameColumn = new MFXTableColumn<>("Běžný název", true, Comparator.comparing(Country::getCommonName));
             MFXTableColumn<Country> fullNameColumn = new MFXTableColumn<>("Úplný název", true, Comparator.comparing(Country::getFullName));
-            MFXTableColumn<Country> currencyColumn = new MFXTableColumn<>("Měna", true, Comparator.comparing(Country::getIsoCode));
+            MFXTableColumn<Country> currencyColumn = new MFXTableColumn<>("Měna", true, Comparator.comparing(Country::getCurrencyIsoCode));
             MFXTableColumn<Country> isMainColumn = new MFXTableColumn<>("Je hlavní", true, Comparator.comparing(Country::isMain));
 
             isoCodeColumn.setRowCellFactory(country -> new MFXTableRowCell<>(Country::getIsoCode));
@@ -241,7 +260,15 @@ public class CountryController extends AbstractPanelContentController {
             columns.add(currencyColumn);
             columns.add(isMainColumn);
 
-            table.setFooterVisible(false);
+            table.getFilters().addAll(
+                    new StringFilter<>("ISO kód", Country::getIsoCode),
+                    new StringFilter<>("Běžný název", Country::getCommonName),
+                    new StringFilter<>("Úplný název", Country::getFullName),
+                    new StringFilter<>("Kód měny", Country::getCurrencyIsoCode),
+                    new BooleanFilter<>("Je hlavní", Country::isMain)
+            );
+
+            table.setFooterVisible(true);
             table.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             table.getStyleClass().add("content-panel");
             table.getSelectionModel().setAllowsMultipleSelection(false);

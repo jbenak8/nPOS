@@ -1,19 +1,16 @@
 package cz.jbenak.npos.boClient.gui.helpers;
 
 import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import io.github.palexdev.materialfx.controls.base.MFXCombo;
 import io.github.palexdev.materialfx.validation.Constraint;
 import io.github.palexdev.materialfx.validation.Severity;
 import javafx.beans.binding.Bindings;
 import javafx.css.PseudoClass;
 import javafx.scene.control.Label;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * General UI components helper class with static methods. It provides e.g. fields values validation methods.
@@ -65,6 +62,26 @@ public class Helpers {
         field.getValidator().constraint(emptyTextConstraint);
         setShowErrorListener(field, errorTextInfoLabels);
         setHideErrorListener(field, errorTextInfoLabels);
+    }
+
+    //TODO kontrola funkce
+    public static void getActualDateConstraint(MFXDatePicker picker, boolean allowEmpty, String errorText, Label... errorTextInfoLabels) {
+        Constraint actuaDateConstraint = Constraint.Builder.build()
+                .setSeverity(Severity.ERROR)
+                .setMessage(errorText)
+                .setCondition(Bindings.createBooleanBinding(() -> {
+                            if (picker.valueProperty().getValue() == null && allowEmpty) {
+                                return true;
+                            }
+                            if (picker.valueProperty().getValue() == null && !allowEmpty) {
+                                return false;
+                            }
+                            return picker.valueProperty().getValue().isEqual(LocalDate.now()) || picker.valueProperty().getValue().isAfter(LocalDate.now());
+                        }
+                )).get();
+        picker.getValidator().constraint(actuaDateConstraint);
+        setShowErrorListener(picker, errorTextInfoLabels);
+        setHideErrorListener(picker, errorTextInfoLabels);
     }
 
     public static void getDecimalLengthConstraint(MFXTextField field, boolean allowEmpty, int maxIntegerLength, int maxDecimalLength, String errorText, Label... errorTextInfoLabels) {

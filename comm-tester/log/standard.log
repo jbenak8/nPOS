@@ -1,0 +1,40 @@
+11.02.2023 20:54:49.485 INFO  CommTester: Application nBOS BO client is starting. Loading application settings.
+11.02.2023 20:54:49.487 ERROR CommTester: Application properties are empty!
+11.02.2023 20:57:51.078 INFO  CommTester: Application nBOS BO client is starting. Loading application settings.
+11.02.2023 20:57:51.080 FATAL CommTester: Application cannot start
+java.lang.Exception: Application properties are empty!
+	at cz.jbenak.npos.commTester.CommTester.loadSettings(CommTester.java:75) ~[classes/:?]
+	at cz.jbenak.npos.commTester.CommTester.start(CommTester.java:48) ~[classes/:?]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:847) ~[javafx-graphics-19-win.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:484) ~[javafx-graphics-19-win.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:457) ~[javafx-graphics-19-win.jar:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:399) ~[?:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:456) ~[javafx-graphics-19-win.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96) ~[javafx-graphics-19-win.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[javafx-graphics-19-win.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184) ~[javafx-graphics-19-win.jar:?]
+	at java.lang.Thread.run(Thread.java:1589) ~[?:?]
+11.02.2023 21:00:34.776 INFO  CommTester: Application nBOS BO client is starting. Loading application settings.
+11.02.2023 21:00:34.778 INFO  CommTester: Application is starting
+11.02.2023 21:00:34.794 FATAL CommTester: Application cannot start
+java.lang.IllegalStateException: Location is not set.
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2541) ~[javafx-fxml-19-win.jar:?]
+	at javafx.fxml.FXMLLoader.load(FXMLLoader.java:2516) ~[javafx-fxml-19-win.jar:?]
+	at cz.jbenak.npos.commTester.CommTester.start(CommTester.java:52) ~[classes/:?]
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:847) ~[javafx-graphics-19-win.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:484) ~[javafx-graphics-19-win.jar:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:457) ~[javafx-graphics-19-win.jar:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:399) ~[?:?]
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:456) ~[javafx-graphics-19-win.jar:?]
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96) ~[javafx-graphics-19-win.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[javafx-graphics-19-win.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184) ~[javafx-graphics-19-win.jar:?]
+	at java.lang.Thread.run(Thread.java:1589) ~[?:?]
+11.02.2023 21:01:53.196 INFO  CommTester: Application nBOS BO client is starting. Loading application settings.
+11.02.2023 21:01:53.198 INFO  CommTester: Application is starting
+11.02.2023 21:03:26.662 INFO  CommTester: Application nBOS BO client is starting. Loading application settings.
+11.02.2023 21:03:26.666 INFO  CommTester: Application version ${project.version} is starting
+11.02.2023 21:05:55.884 INFO  CommTester: Application nBOS BO client is starting. Loading application settings.
+11.02.2023 21:05:55.887 INFO  CommTester: Application version ${project.version} is starting
+11.02.2023 21:08:03.603 INFO  CommTester: Application nBOS BO client is starting. Loading application settings.
+11.02.2023 21:08:03.607 INFO  CommTester: Application version ${project.version} is starting

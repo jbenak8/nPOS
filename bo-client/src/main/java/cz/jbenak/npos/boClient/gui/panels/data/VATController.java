@@ -13,6 +13,9 @@ import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.github.palexdev.materialfx.filter.BigDecimalFilter;
+import io.github.palexdev.materialfx.filter.IntegerFilter;
+import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -97,12 +100,26 @@ public class VATController extends AbstractPanelContentController {
     @FXML
     private void btnEditPressed() {
         if (table.getSelectionModel().getSelectedValues().size() == 1) {
-            EditDialog<VAT, VATEditingController> dialog = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/vat-edit-dialog.fxml", "Nová DPH", this);
-            dialog.preloadDialog();
-            if (dialog.openEditDialog(table.getSelectionModel().getSelectedValues().get(0))) {
-                loadData();
+            VAT selectedVAT = table.getSelectionModel().getSelectedValues().get(0);
+            if (isVatValid(selectedVAT)) {
+                EditDialog<VAT, VATEditingController> dialog = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/vat-edit-dialog.fxml", "Nová DPH", this);
+                dialog.preloadDialog();
+                if (dialog.openEditDialog(table.getSelectionModel().getSelectedValues().get(0))) {
+                    loadData();
+                }
+            } else {
+                InfoDialog inf = new InfoDialog(InfoDialog.InfoDialogType.INFO, BoClient.getInstance().getMainStage(), true);
+                inf.setDialogMessage("Zadaná DPH je již neplatná a není možné ji upravovat.");
+                inf.setDialogTitle("Nelze upravit");
+                inf.setDialogSubtitle("Zadanou DPH nelze upravit");
+                inf.showDialog();
             }
         }
+    }
+
+    private boolean isVatValid(VAT selectedVAT) {
+        loadedVATs.sort(Comparator.comparing(VAT::getValidFrom));
+        return loadedVATs.indexOf(selectedVAT) == loadedVATs.size() - 1;
     }
 
     @FXML
@@ -110,7 +127,7 @@ public class VATController extends AbstractPanelContentController {
         if (table.getSelectionModel().getSelectedValues().size() == 1) {
             VAT selected = table.getSelectionModel().getSelectedValues().get(0);
             YesNoDialog question = new YesNoDialog(BoClient.getInstance().getMainStage());
-            YesNoDialog.Choice answer = question.showDialog("Smazat DPH?", "Přejete si opravdu smazat vybranou DPH " + selected.getId()+ "" +
+            YesNoDialog.Choice answer = question.showDialog("Smazat DPH?", "Přejete si opravdu smazat vybranou DPH " + selected.getId() + "" +
                     " - " + selected.getLabel() + " " + selected.getPercentage() + "% ?");
             if (answer == YesNoDialog.Choice.YES) {
                 deleteVAT(selected.getId());
@@ -170,8 +187,25 @@ public class VATController extends AbstractPanelContentController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         switchValidOnly.setSelected(selectionStatusValidOnlyVATs);
+        quickSearchField.textProperty().addListener((observable, oldVal, newVal) -> {
+            if (newVal != null && !newVal.isBlank()) {
+                List<VAT> filtered = loadedVATs.stream().filter(itm -> {
+                    final String value = newVal.trim().toLowerCase();
+                    String sb = itm.getId() + ";"
+                            + itm.getLabel() + ";"
+                            + Utils.formatDecimalCZPlain(itm.getPercentage()) + ";"
+                            + Utils.formatDate(itm.getValidFrom()) + ";";
+                    return sb.toLowerCase().contains(value);
+                }).toList();
+                VATList = FXCollections.observableArrayList(filtered);
+            } else {
+                VATList = FXCollections.observableArrayList(loadedVATs);
+            }
+            table.setItems(VATList);
+        });
     }
 
+    @SuppressWarnings("unchecked")
     private void prepareTable() {
         ObservableList<MFXTableColumn<VAT>> columns = table.getTableColumns();
 
@@ -180,7 +214,6 @@ public class VATController extends AbstractPanelContentController {
             MFXTableColumn<VAT> labelColumn = new MFXTableColumn<>("Typ daně", true, Comparator.comparing(VAT::getLabel));
             MFXTableColumn<VAT> percentageColumn = new MFXTableColumn<>("Sazba v procentech", true, Comparator.comparing(VAT::getPercentage));
             MFXTableColumn<VAT> validFromColumn = new MFXTableColumn<>("Platost od", true, Comparator.comparing(VAT::getValidFrom));
-            MFXTableColumn<VAT> validToColumn = new MFXTableColumn<>("Platnostd do", true, Comparator.comparing(VAT::getValidTo));
 
             idColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(VAT::getId));
             labelColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(VAT::getLabel));
@@ -190,24 +223,27 @@ public class VATController extends AbstractPanelContentController {
             validFromColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(val -> Utils.formatDate(val.getValidFrom())) {{
                 setAlignment(Pos.CENTER);
             }});
-            validToColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(val -> (val.getValidTo() == null ? "" : Utils.formatDate(val.getValidTo()))) {{
-                setAlignment(Pos.CENTER);
-            }});
 
             idColumn.setMinWidth(100);
             labelColumn.setMinWidth(250);
             percentageColumn.setMinWidth(150);
             validFromColumn.setMinWidth(150);
-            validToColumn.setMinWidth(150);
 
             table.autosizeColumnsOnInitialization();
             columns.add(idColumn);
             columns.add(labelColumn);
             columns.add(percentageColumn);
             columns.add(validFromColumn);
-            columns.add(validToColumn);
 
-            table.setFooterVisible(false);
+            table.getFilters().addAll(
+                    new IntegerFilter<>("Číslo položky", VAT::getId),
+                    new StringFilter<>("Typ daně", VAT::getLabel),
+                    new BigDecimalFilter<>("Sazba v procentech", VAT::getPercentage)
+                    //TODO vymyslet něco na date filter
+                    /*new DateFil<>("Platost od", Country::getCurrencyIsoCode)*/
+            );
+
+            table.setFooterVisible(true);
             table.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             table.getStyleClass().add("content-panel");
             table.getSelectionModel().setAllowsMultipleSelection(false);

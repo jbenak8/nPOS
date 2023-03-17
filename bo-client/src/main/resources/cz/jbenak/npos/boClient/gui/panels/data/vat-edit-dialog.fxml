@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="348.0" prefWidth="482.0" styleClass="panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.VATEditingController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="301.0" prefWidth="482.0" styleClass="panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.VATEditingController">
     <top>
         <FlowPane prefHeight="55.0" prefWidth="590.0" styleClass="menu-panel">
             <children>
@@ -50,7 +50,7 @@
         </FlowPane>
     </top>
     <center>
-        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="498.0">
+        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="498.0">
             <top>
                 <Label fx:id="title" styleClass="panel-title" text="Label" BorderPane.alignment="CENTER">
                     <BorderPane.margin>
@@ -59,16 +59,15 @@
                 </Label>
             </top>
             <center>
-                <GridPane prefHeight="157.0" prefWidth="448.0" BorderPane.alignment="CENTER">
+                <GridPane prefHeight="106.0" prefWidth="448.0" BorderPane.alignment="CENTER">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="165.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="423.0" minWidth="10.0" prefWidth="283.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="91.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="210.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="91.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label text="Typ sazby daně:">
@@ -86,15 +85,9 @@
                                 <Insets left="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <Label text="Platnost do:" GridPane.rowIndex="3">
-                            <padding>
-                                <Insets left="10.0" />
-                            </padding>
-                        </Label>
                         <MFXTextField fx:id="fieldVATPercentage" floatMode="DISABLED" measureUnit="\%" prefHeight="29.0" prefWidth="151.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <MFXComboBox fx:id="selectorVATType" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="150.0" GridPane.columnIndex="1" />
                   <MFXDatePicker fx:id="datePickerValidFrom" maxHeight="38.0" minWidth="30.0" prefHeight="38.0" prefWidth="151.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <MFXDatePicker fx:id="datePickerValidTo" prefHeight="38.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     </children>
                     <BorderPane.margin>
                         <Insets bottom="25.0" left="25.0" right="25.0" />

@@ -32,7 +32,6 @@ public class Connection {
     private String baseURIBoServer;
     private HttpClient boHttpClient;
 
-    //TODO přepsat na singleton - pouze jedne klient
     private Connection() {
         createBasicAuthStrings();
         createBaseURIs();
