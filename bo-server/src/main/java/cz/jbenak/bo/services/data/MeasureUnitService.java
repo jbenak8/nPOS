@@ -46,7 +46,7 @@ public class MeasureUnitService {
                 })
                 .switchIfEmpty(measureUnitsRepository.save(mapNewModel(unit)))
                 .doOnSuccess(saved -> {
-                    LOGGER.info("Measure unit with id '{}' has been deleted.", saved.getUnit());
+                    LOGGER.info("Measure unit with number '{}' has been deleted.", saved.getUnit());
                     resultOK.setResultType(CRUDResult.ResultType.OK);
                 })
                 .thenReturn(resultOK)
@@ -66,7 +66,7 @@ public class MeasureUnitService {
             CRUDResult resultError = new CRUDResult();
             return measureUnitsRepository.deleteById(id)
                     .doOnSuccess(result -> {
-                        LOGGER.info("Measure unit with id '{}' has been deleted.", id);
+                        LOGGER.info("Measure unit with number '{}' has been deleted.", id);
                         resultOK.setResultType(CRUDResult.ResultType.OK);
                     })
                     .thenReturn(resultOK)

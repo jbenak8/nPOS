@@ -41,7 +41,7 @@ public class UserService {
     public Mono<LoginStatus> doLogin(LoginAttempt attempt) {
         final StringEncryptor encryptor = apiUtils.getStringEncryptor();
         int id = attempt.userId();
-        LOGGER.info("Login for user with id {} requested.", id);
+        LOGGER.info("Login for user with number {} requested.", id);
         String password = encryptor.decrypt(attempt.password());
         BoUser user = userRepository.findById(id).toFuture().join();
         if (user == null) {

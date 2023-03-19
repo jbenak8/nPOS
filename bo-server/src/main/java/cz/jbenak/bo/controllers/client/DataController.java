@@ -1,14 +1,8 @@
 package cz.jbenak.bo.controllers.client;
 
-import cz.jbenak.bo.services.data.CountryService;
-import cz.jbenak.bo.services.data.CurrencyService;
-import cz.jbenak.bo.services.data.MeasureUnitService;
-import cz.jbenak.bo.services.data.VATService;
+import cz.jbenak.bo.services.data.*;
 import cz.jbenak.npos.api.client.CRUDResult;
-import cz.jbenak.npos.api.data.Country;
-import cz.jbenak.npos.api.data.Currency;
-import cz.jbenak.npos.api.data.MeasureUnit;
-import cz.jbenak.npos.api.data.VAT;
+import cz.jbenak.npos.api.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +17,7 @@ public class DataController {
     private CurrencyService currencyService;
     private CountryService countryService;
     private VATService vatService;
+    private DocumentNumberingsService documentNumberingsService;
 
     @Autowired
     public void setMeasureUnitService(MeasureUnitService measureUnitService) {
@@ -44,6 +39,12 @@ public class DataController {
         this.vatService = vatService;
     }
 
+    @Autowired
+    public void setDocumentNumberingsService(DocumentNumberingsService documentNumberingsService) {
+        this.documentNumberingsService = documentNumberingsService;
+    }
+
+    // Measure units
     @GetMapping("/measure_units/getAll")
     public Flux<MeasureUnit> getAllMeasureUnits() {
         return measureUnitService.getMeasureUnits();
@@ -64,6 +65,7 @@ public class DataController {
         return measureUnitService.deleteMeasureUnit(id);
     }
 
+    // Currencies
     @GetMapping("/currencies/getAll")
     public Flux<Currency> getAllCurrencies() {
         return currencyService.getAllCurrencies();
@@ -84,6 +86,7 @@ public class DataController {
         return currencyService.deleteCurrency(isoCode);
     }
 
+    // Countries
     @GetMapping("/countries/getAll")
     public Flux<Country> getAllCountries() {
         return countryService.getAllCountries();
@@ -104,6 +107,7 @@ public class DataController {
         return countryService.deleteCountry(isoCode);
     }
 
+    // VAT
     @GetMapping("/vat/getAll")
     public Flux<VAT> getAllVAT() {
         return vatService.getAllVAT();
@@ -127,6 +131,32 @@ public class DataController {
     @DeleteMapping("/vat/delete/{id}")
     public Mono<CRUDResult> deleteVAT(@PathVariable int id) {
         return vatService.deleteVAT(id);
+    }
+
+    // Document numbering series
+    @GetMapping("/documentNumberings/getAll")
+    public Flux<DocumentNumbering> getAllNumberings() {
+        return documentNumberingsService.getAllNumberings();
+    }
+
+    @GetMapping("/documentNumberings/getAllValid")
+    public Flux<DocumentNumbering> getAllValidNumberings() {
+        return documentNumberingsService.getAllValidNumberings();
+    }
+
+    @GetMapping("/documentNumbering/get/{number}")
+    public Mono<DocumentNumbering> getNumberingByNumber(@PathVariable int number) {
+        return documentNumberingsService.getNumberingByNumber(number);
+    }
+
+    @PostMapping("/documentNumberings/store")
+    public Mono<CRUDResult> storeNumbering(@RequestBody DocumentNumbering numbering) {
+        return documentNumberingsService.saveNumbering(numbering);
+    }
+
+    @DeleteMapping("/documentNumberings/delete/{number}")
+    public Mono<CRUDResult> deleteNumbering(@PathVariable int number) {
+        return documentNumberingsService.deleteNumbering(number);
     }
 
 }

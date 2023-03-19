@@ -44,12 +44,14 @@ public class VATService {
         CRUDResult result = new CRUDResult();
         VATModel model = VATtoModel(vat);
         if (vat.getValidFrom().isBefore(LocalDate.now())) {
+            LOGGER.error("VAT {} could not be stored because valid from is in past.", vat);
             result.setResultType(CRUDResult.ResultType.GENERAL_ERROR);
             result.setMessage("Server odmítl uložit DPH - datum platnosti od je v minulosti.");
             return Mono.just(result);
         }
         if (repository.getVatCountByVATType(vat.getType(), vat.getValidFrom()).toFuture().join() > 0) {
-            result.setResultType(CRUDResult.ResultType.GENERAL_ERROR);
+            LOGGER.error("VAT {} could not be stored because selected VAT type with selected validity already exists.", vat);
+            result.setResultType(CRUDResult.ResultType.ALREADY_EXISTS);
             result.setMessage("Server odmítl uložit DPH - již existuje DPH ve vybraném typu sazby se stejným datem platnosti Od.");
             return Mono.just(result);
         }
