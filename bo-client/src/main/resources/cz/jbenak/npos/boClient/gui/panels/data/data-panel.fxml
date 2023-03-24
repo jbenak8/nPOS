@@ -29,7 +29,7 @@
                      <FlowPane.margin>
                         <Insets left="5.0" />
                      </FlowPane.margin></Button>
-                        <Button fx:id="btnMenuNumberings" mnemonicParsing="false" text="Číselné řady">
+                        <Button fx:id="btnMenuNumberings" mnemonicParsing="false" onAction="#btnMenuNumberingsPressed" text="Číselné řady">
                      <FlowPane.margin>
                         <Insets left="5.0" />
                      </FlowPane.margin></Button>

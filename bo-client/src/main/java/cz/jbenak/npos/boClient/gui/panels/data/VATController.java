@@ -153,7 +153,7 @@ public class VATController extends AbstractPanelContentController {
             CRUDResult result = (CRUDResult) evt.getSource().getValue();
             if (result.getResultType() == CRUDResult.ResultType.OK) {
                 LOGGER.info("VAT with ID '{}' has been deleted successfully.", VATid);
-                BoClient.getInstance().getMainController().setSystemStatus("Měrná jednotka smazána");
+                BoClient.getInstance().getMainController().setSystemStatus("DPH smazána");
             }
             if (result.getResultType() == CRUDResult.ResultType.HAS_BOUND_RECORDS) {
                 LOGGER.error("VAT with ID {} could not be deleted because it has bound records.", VATid);

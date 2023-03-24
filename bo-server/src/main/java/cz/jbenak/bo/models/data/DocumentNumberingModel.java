@@ -7,5 +7,11 @@ import cz.jbenak.npos.api.data.DocumentNumbering.DocumentType;
 import java.time.LocalDate;
 
 @Table("numbering_series")
-public record DocumentNumberingModel(@Id int number, String definition, DocumentType type, int sequenceNumberLength, LocalDate validFrom) {
+public record DocumentNumberingModel(@Id int number,
+                                     String definition,
+                                     DocumentType document_type,
+                                     int sequence_number_length,
+                                     LocalDate valid_from,
+                                     int start_serial_from,
+                                     String label) {
 }

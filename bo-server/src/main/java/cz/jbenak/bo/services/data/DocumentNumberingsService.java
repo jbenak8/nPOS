@@ -79,10 +79,12 @@ public class DocumentNumberingsService {
     private DocumentNumbering modelToNumbering(DocumentNumberingModel model) {
         DocumentNumbering numbering = new DocumentNumbering();
         numbering.setNumber(model.number());
-        numbering.setDocumentType(model.type());
+        numbering.setDocumentType(model.document_type());
+        numbering.setLabel(model.label());
         numbering.setDefinition(model.definition());
-        numbering.setSequenceNumberLength(model.sequenceNumberLength());
-        numbering.setValidFrom(model.validFrom());
+        numbering.setSequenceNumberLength(model.sequence_number_length());
+        numbering.setValidFrom(model.valid_from());
+        numbering.setStartFrom(model.start_serial_from());
         return numbering;
     }
 
@@ -91,6 +93,8 @@ public class DocumentNumberingsService {
                 numbering.getDefinition(),
                 numbering.getDocumentType(),
                 numbering.getSequenceNumberLength(),
-                numbering.getValidFrom());
+                numbering.getValidFrom(),
+                numbering.getStartFrom(),
+                numbering.getLabel());
     }
 }
