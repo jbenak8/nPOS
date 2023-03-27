@@ -85,8 +85,8 @@
                                 <Insets left="10.0" />
                             </GridPane.margin>
                         </Label>
-                        <MFXTextField fx:id="fieldVATPercentage" floatMode="DISABLED" measureUnit="\%" prefHeight="29.0" prefWidth="151.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <MFXComboBox fx:id="selectorVATType" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <MFXTextField fx:id="fieldVATPercentage" floatMode="DISABLED" measureUnit="\%" prefHeight="29.0" prefWidth="151.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <MFXDatePicker fx:id="datePickerValidFrom" maxHeight="38.0" minWidth="30.0" prefHeight="38.0" prefWidth="151.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     </children>
                     <BorderPane.margin>

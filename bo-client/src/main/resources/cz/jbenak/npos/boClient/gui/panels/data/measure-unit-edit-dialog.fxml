@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -14,6 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyPressed" prefHeight="340.0" prefWidth="600.0" styleClass="panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.MeasureUnitEditingController">
     <top>
         <FlowPane prefHeight="55.0" prefWidth="590.0" styleClass="menu-panel">
@@ -93,7 +93,7 @@
                         <MFXTextField fx:id="fieldUnit" floatMode="DISABLED" prefHeight="29.0" prefWidth="94.0" GridPane.columnIndex="1" />
                         <MFXTextField fx:id="fieldName" floatMode="DISABLED" prefHeight="29.0" prefWidth="177.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <MFXTextField fx:id="fieldRatio" floatMode="DISABLED" prefHeight="29.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <MFXComboBox fx:id="selectorBaseUnit" minHeight="29.0" prefHeight="24.0" prefWidth="179.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <MFXFilterComboBox fx:id="selectorBaseUnit" minHeight="29.0" prefHeight="24.0" prefWidth="179.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     </children>
                     <BorderPane.margin>
                         <Insets bottom="25.0" left="25.0" right="25.0" />

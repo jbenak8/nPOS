@@ -100,8 +100,8 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <MFXToggleButton fx:id="btnIsMain" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <MFXFilterComboBox fx:id="currencySelector" minHeight="29.0" prefHeight="24.0" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <MFXToggleButton fx:id="btnIsMain" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     </children>
                     <BorderPane.margin>
                         <Insets bottom="25.0" left="25.0" right="25.0" />

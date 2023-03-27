@@ -7,9 +7,10 @@ import cz.jbenak.npos.boClient.api.DataOperations;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialogController;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.InfoDialog;
 import cz.jbenak.npos.boClient.gui.helpers.Helpers;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.utils.StringUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -20,8 +21,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import static cz.jbenak.npos.api.data.DocumentNumbering.DocumentType.*;
 
@@ -38,20 +41,12 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
     @FXML
     private MFXTextField fieldStartFrom;
     @FXML
-    private MFXComboBox<DocumentTypeSelectionItem> selectorDocumentType;
+    private MFXFilterComboBox<DocumentTypeSelectionItem> selectorDocumentType;
     private final ObservableList<DocumentTypeSelectionItem> numberingTypeObservableList = FXCollections.observableArrayList();
     private final static Logger LOGGER = LogManager.getLogger(VATEditingController.class);
 
     @Override
     public void setDataEdited(DocumentNumbering dataEdited) {
-        title.setText("Úprava číselné řady");
-        this.dataEdited = dataEdited;
-        Optional<DocumentTypeSelectionItem> setValue = numberingTypeObservableList.stream().filter(itm -> itm.type.equals(dataEdited.getDocumentType())).findFirst();
-        setValue.ifPresent(itm -> selectorDocumentType.selectItem(itm));
-        fieldDefinition.setText(dataEdited.getDefinition());
-        fieldSeqNumberLength.setText(Integer.toString(dataEdited.getSequenceNumberLength()));
-        fieldStartFrom.setText(Integer.toString(dataEdited.getStartFrom()));
-        datePickerValidFrom.setValue(dataEdited.getValidFrom());
     }
 
     @Override
@@ -120,8 +115,8 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
                 InfoDialog definitionTooLong = new InfoDialog(InfoDialog.InfoDialogType.WARNING, dialog, true);
                 definitionTooLong.setDialogTitle("Příliš velká definice řady");
                 definitionTooLong.setDialogSubtitle("Výsledné číslo bude příliš velké");
-                definitionTooLong.setDialogMessage("Zadaná kombinace definice řady " + fieldDefinition.getText() + " a počet míst pořadového čísla" + fieldSeqNumberLength.getText() + "\n"
-                        + "vytvoří řadu ");
+                definitionTooLong.setDialogMessage("Zadaná kombinace definice řady " + fieldDefinition.getText() + " a počet míst pořadového čísla " + fieldSeqNumberLength.getText() + "\n"
+                        + "vytvoří řadu, jejíž délka je více, než maximálně povolených 25 znaků.");
                 definitionTooLong.showDialog();
                 fieldDefinition.requestFocus();
             } else {
@@ -137,6 +132,8 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
         fieldSeqNumberLength.setText("0");
         fieldStartFrom.setText("1");
         initSelectorValues();
+        Function<String, Predicate<DocumentTypeSelectionItem>> filterFunction = s -> documentTypeSelectionItem -> StringUtils.containsIgnoreCase(documentTypeSelectionItem.translation, s);
+        selectorDocumentType.setFilterFunction(filterFunction);
         Helpers.getEmptyTextConstraint(fieldDefinition, false, "Vyplňte definici číselné řady", validationLabel);
         Helpers.getEmptyTextConstraint(datePickerValidFrom, false, "Zadejte datum začátku platnosti sazby definice.", validationLabel);
         Helpers.getNoItemSelectedConstraint(selectorDocumentType, "Vyberte typ dokladu.", validationLabel);
@@ -164,10 +161,15 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
                 dialog.setEdited(true);
             }
         });
-        selectorDocumentType.selectedItemProperty().addListener((observable, oldVal, newVal)->{
-
+        selectorDocumentType.selectedItemProperty().addListener((observable, oldVal, newVal) -> {
+            DocumentNumbering.DocumentType type = null;
+            if (dataEdited != null) {
+                type = dataEdited.getDocumentType() == null ? null : dataEdited.getDocumentType();
+            }
+            if (dataEdited == null || (Objects.requireNonNull(type).compareTo(newVal.getType()) != 0)) {
+                dialog.setEdited(true);
+            }
         });
-        //TODO - udělat kontrolu, kde se vezme definition a sequence number a délka výsledného stringu nesmí být víc jak 25
     }
 
     private boolean validateFields() {

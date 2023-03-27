@@ -12,23 +12,18 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<FlowPane prefHeight="115.0" prefWidth="759.0" styleClass="menu-panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.NumberingSeriesController">
-    <VBox alignment="CENTER" maxHeight="111.0" prefHeight="111.0" prefWidth="305.0">
+<FlowPane prefHeight="115.0" prefWidth="664.0" styleClass="menu-panel" stylesheets="@../../styles/panels.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jbenak.npos.boClient.gui.panels.data.NumberingSeriesController">
+    <VBox alignment="CENTER" maxHeight="111.0" prefHeight="111.0" prefWidth="208.0">
         <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </padding>
         <FlowPane.margin>
             <Insets top="4.0" />
         </FlowPane.margin>
-        <HBox alignment="CENTER" prefHeight="95.0" prefWidth="295.0">
+        <HBox alignment="CENTER" prefHeight="81.0" prefWidth="257.0">
             <MFXButton onAction="#btnNewPressed" prefHeight="32.0" prefWidth="100.0" text="Nová">
                 <graphic>
                     <FontIcon iconColor="#008a1a" iconLiteral="fltral-document-add-24" iconSize="24" />
-                </graphic>
-            </MFXButton>
-            <MFXButton onAction="#btnEditPressed" prefWidth="100.0" text="Upravit">
-                <graphic>
-                    <FontIcon iconColor="#104c73" iconLiteral="fltral-document-edit-24" iconSize="24" />
                 </graphic>
             </MFXButton>
             <MFXButton onAction="#btnDeletePressed" prefHeight="32.0" prefWidth="100.0" text="Smazat">

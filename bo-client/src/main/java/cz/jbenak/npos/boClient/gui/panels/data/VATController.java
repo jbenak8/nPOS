@@ -25,10 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class VATController extends AbstractPanelContentController {
 
@@ -95,31 +92,6 @@ public class VATController extends AbstractPanelContentController {
         if (dialog.openNewDialog()) {
             loadData();
         }
-    }
-
-    @FXML
-    private void btnEditPressed() {
-        if (table.getSelectionModel().getSelectedValues().size() == 1) {
-            VAT selectedVAT = table.getSelectionModel().getSelectedValues().get(0);
-            if (isVatValid(selectedVAT)) {
-                EditDialog<VAT, VATEditingController> dialog = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/vat-edit-dialog.fxml", "Nová DPH", this);
-                dialog.preloadDialog();
-                if (dialog.openEditDialog(table.getSelectionModel().getSelectedValues().get(0))) {
-                    loadData();
-                }
-            } else {
-                InfoDialog inf = new InfoDialog(InfoDialog.InfoDialogType.INFO, BoClient.getInstance().getMainStage(), true);
-                inf.setDialogMessage("Zadaná DPH je již neplatná a není možné ji upravovat.");
-                inf.setDialogTitle("Nelze upravit");
-                inf.setDialogSubtitle("Zadanou DPH nelze upravit");
-                inf.showDialog();
-            }
-        }
-    }
-
-    private boolean isVatValid(VAT selectedVAT) {
-        loadedVATs.sort(Comparator.comparing(VAT::getValidFrom));
-        return loadedVATs.indexOf(selectedVAT) == loadedVATs.size() - 1;
     }
 
     @FXML

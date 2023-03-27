@@ -7,7 +7,6 @@ import cz.jbenak.npos.boClient.api.DataOperations;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialogController;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.InfoDialog;
 import cz.jbenak.npos.boClient.gui.helpers.Helpers;
-import cz.jbenak.npos.boClient.gui.helpers.Utils;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -23,7 +22,6 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class VATEditingController extends EditDialogController<VAT> {
@@ -42,12 +40,6 @@ public class VATEditingController extends EditDialogController<VAT> {
 
     @Override
     public void setDataEdited(VAT dataEdited) {
-        title.setText("Úprava DPH");
-        this.dataEdited = dataEdited;
-        Optional<VATTypeSelectionItem> setValue = vatTypeObservableList.stream().filter(itm -> itm.type.equals(dataEdited.getType())).findFirst();
-        setValue.ifPresent(itm -> selectorVATType.selectItem(itm));
-        fieldVATPercentage.setText(Utils.formatDecimalCZPlain(dataEdited.getPercentage()));
-        datePickerValidFrom.setValue(dataEdited.getValidFrom());
     }
 
     @Override

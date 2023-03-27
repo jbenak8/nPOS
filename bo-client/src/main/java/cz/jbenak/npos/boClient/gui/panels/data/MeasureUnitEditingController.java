@@ -7,7 +7,7 @@ import cz.jbenak.npos.boClient.api.DataOperations;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialogController;
 import cz.jbenak.npos.boClient.gui.helpers.Helpers;
 import cz.jbenak.npos.boClient.gui.helpers.Utils;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,7 +32,7 @@ public class MeasureUnitEditingController extends EditDialogController<MeasureUn
     @FXML
     private MFXTextField fieldName;
     @FXML
-    private MFXComboBox<String> selectorBaseUnit;
+    private MFXFilterComboBox<String> selectorBaseUnit;
     @FXML
     private MFXTextField fieldRatio;
     private ObservableList<String> baseUnits = FXCollections.emptyObservableList();

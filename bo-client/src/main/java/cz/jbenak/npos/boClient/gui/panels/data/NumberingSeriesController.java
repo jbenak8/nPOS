@@ -56,26 +56,6 @@ public class NumberingSeriesController extends AbstractPanelContentController {
     }
 
     @FXML
-    private void btnEditPressed() {
-        if (table.getSelectionModel().getSelectedValues().size() == 1) {
-            DocumentNumbering selected = table.getSelectionModel().getSelectedValues().get(0);
-            if (isNumberingValid(selected)) {
-                EditDialog<DocumentNumbering, NumberingSeriesEditingControler> dialog = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/document-numbering-series-edit-dialog.fxml", "Úprava číselné řady", this);
-                dialog.preloadDialog();
-                if (dialog.openEditDialog(table.getSelectionModel().getSelectedValues().get(0))) {
-                    loadData();
-                }
-            } else {
-                InfoDialog inf = new InfoDialog(InfoDialog.InfoDialogType.INFO, BoClient.getInstance().getMainStage(), true);
-                inf.setDialogMessage("Zadaná definice číselné řady je již neplatná a není možné ji upravovat.");
-                inf.setDialogTitle("Nelze upravit");
-                inf.setDialogSubtitle("Zadanou definici číselné řady nelze upravit");
-                inf.showDialog();
-            }
-        }
-    }
-
-    @FXML
     private void btnDeletePressed() {
         if (table.getSelectionModel().getSelectedValues().size() == 1) {
             DocumentNumbering selected = table.getSelectionModel().getSelectedValues().get(0);
@@ -86,11 +66,6 @@ public class NumberingSeriesController extends AbstractPanelContentController {
                 deleteNumbering(selected.getNumber());
             }
         }
-    }
-
-    private boolean isNumberingValid(DocumentNumbering numbering) {
-        loadedNumberings.sort(Comparator.comparing(DocumentNumbering::getValidFrom));
-        return loadedNumberings.indexOf(numbering) == loadedNumberings.size() - 1;
     }
 
     @Override
@@ -237,10 +212,11 @@ public class NumberingSeriesController extends AbstractPanelContentController {
              numberColumn.setMinWidth(100);
              documentTypeColumn.setMinWidth(250);
              definitionColumn.setMinWidth(150);
-             sequenceNumberCountColumn.setMinWidth(150);
              startFromColumn.setMinWidth(100);
              validFromColumn.setMinWidth(150);
             */
+            documentTypeColumn.setMinWidth(200);
+            definitionColumn.setMinWidth(200);
 
             table.autosizeColumnsOnInitialization();
             columns.add(numberColumn);
