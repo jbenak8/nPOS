@@ -1,18 +1,15 @@
 package cz.jbenak.npos.api.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import cz.jbenak.npos.api.shared.enums.VATType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class VAT {
 
-    public enum Type {
-        BASE, LOWERED_1, LOWERED_2, ZERO
-    }
-
     private int id;
-    private Type type;
+    private VATType type;
     private BigDecimal percentage;
     private String label;
     private LocalDate validFrom;
@@ -27,11 +24,11 @@ public class VAT {
     }
 
     @JsonProperty("type")
-    public Type getType() {
+    public VATType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(VATType type) {
         this.type = type;
     }
 

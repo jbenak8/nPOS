@@ -2,6 +2,7 @@ package cz.jbenak.npos.boClient.gui.panels.data;
 
 import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.VAT;
+import cz.jbenak.npos.api.shared.enums.VATType;
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.api.DataOperations;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialogController;
@@ -139,10 +140,10 @@ public class VATEditingController extends EditDialogController<VAT> {
             }
         });
         selectorVATType.selectedItemProperty().addListener((observable, oldVal, newVal) -> {
-            if (newVal.getType() == VAT.Type.ZERO) {
+            if (newVal.getType() == VATType.ZERO) {
                 fieldVATPercentage.setText("0");
             }
-            VAT.Type VATType = null;
+            VATType VATType = null;
             if (dataEdited != null) {
                 VATType = dataEdited.getType() == null ? null : dataEdited.getType();
             }
@@ -153,24 +154,24 @@ public class VATEditingController extends EditDialogController<VAT> {
     }
 
     private void initSelectorValues() {
-        vatTypeObservableList.add(new VATTypeSelectionItem(VAT.Type.BASE, "Základní"));
-        vatTypeObservableList.add(new VATTypeSelectionItem(VAT.Type.LOWERED_1, "Snížená 1"));
-        vatTypeObservableList.add(new VATTypeSelectionItem(VAT.Type.LOWERED_2, "Snížená 2"));
-        vatTypeObservableList.add(new VATTypeSelectionItem(VAT.Type.ZERO, "Nulová"));
+        vatTypeObservableList.add(new VATTypeSelectionItem(VATType.BASE, "Základní"));
+        vatTypeObservableList.add(new VATTypeSelectionItem(VATType.LOWERED_1, "Snížená 1"));
+        vatTypeObservableList.add(new VATTypeSelectionItem(VATType.LOWERED_2, "Snížená 2"));
+        vatTypeObservableList.add(new VATTypeSelectionItem(VATType.ZERO, "Nulová"));
         selectorVATType.setItems(vatTypeObservableList);
 
     }
 
     private static class VATTypeSelectionItem {
-        VAT.Type type;
+        VATType type;
         String translation;
 
-        public VATTypeSelectionItem(VAT.Type type, String translation) {
+        public VATTypeSelectionItem(VATType type, String translation) {
             this.type = type;
             this.translation = translation;
         }
 
-        VAT.Type getType() {
+        VATType getType() {
             return type;
         }
 

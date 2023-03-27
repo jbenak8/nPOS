@@ -1,14 +1,11 @@
 package cz.jbenak.npos.api.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import cz.jbenak.npos.api.shared.enums.DocumentType;
 
 import java.time.LocalDate;
 
 public class DocumentNumbering {
-
-    public enum DocumentType {
-        INVOICE, RECEIPT, DELIVERY_NOTE, CREDIT_NOTE, RETURN, DEPOSIT, DISBURSEMENT, WAREHOUSE_RECEIPT, WAREHOUSE_ISSUE
-    }
 
     private int number;
     private String definition;

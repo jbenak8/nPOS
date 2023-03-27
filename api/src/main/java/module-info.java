@@ -12,4 +12,6 @@ module api {
     exports cz.jbenak.npos.api.client;
     exports cz.jbenak.npos.api.shared;
     exports cz.jbenak.npos.api.data;
+    exports cz.jbenak.npos.api.shared.enums;
+    opens cz.jbenak.npos.api.shared.enums;
 }

@@ -1,7 +1,7 @@
 package cz.jbenak.bo.repositories.data;
 
 import cz.jbenak.bo.models.data.VATModel;
-import cz.jbenak.npos.api.data.VAT;
+import cz.jbenak.npos.api.shared.enums.VATType;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
@@ -20,6 +20,6 @@ public interface VATRepository extends ReactiveCrudRepository<VATModel, Integer>
     Flux<VATModel> getAllVAT();
 
     @Query("SELECT count(*) FROM vat WHERE vat_type = :type AND valid_from = :validFrom;")
-    Mono<Integer> getVatCountByVATType(VAT.Type type, LocalDate validFrom);
+    Mono<Integer> getVatCountByVATType(VATType type, LocalDate validFrom);
 
 }

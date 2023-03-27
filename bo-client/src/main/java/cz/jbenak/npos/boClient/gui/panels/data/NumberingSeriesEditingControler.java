@@ -2,6 +2,7 @@ package cz.jbenak.npos.boClient.gui.panels.data;
 
 import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.DocumentNumbering;
+import cz.jbenak.npos.api.shared.enums.DocumentType;
 import cz.jbenak.npos.boClient.BoClient;
 import cz.jbenak.npos.boClient.api.DataOperations;
 import cz.jbenak.npos.boClient.gui.dialogs.generic.EditDialogController;
@@ -26,7 +27,7 @@ import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static cz.jbenak.npos.api.data.DocumentNumbering.DocumentType.*;
+import static cz.jbenak.npos.api.shared.enums.DocumentType.*;
 
 public class NumberingSeriesEditingControler extends EditDialogController<DocumentNumbering> {
 
@@ -162,7 +163,7 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
             }
         });
         selectorDocumentType.selectedItemProperty().addListener((observable, oldVal, newVal) -> {
-            DocumentNumbering.DocumentType type = null;
+            DocumentType type = null;
             if (dataEdited != null) {
                 type = dataEdited.getDocumentType() == null ? null : dataEdited.getDocumentType();
             }
@@ -202,15 +203,15 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
     }
 
     private static class DocumentTypeSelectionItem {
-        DocumentNumbering.DocumentType type;
+        DocumentType type;
         String translation;
 
-        public DocumentTypeSelectionItem(DocumentNumbering.DocumentType type, String translation) {
+        public DocumentTypeSelectionItem(DocumentType type, String translation) {
             this.type = type;
             this.translation = translation;
         }
 
-        DocumentNumbering.DocumentType getType() {
+        DocumentType getType() {
             return type;
         }
 

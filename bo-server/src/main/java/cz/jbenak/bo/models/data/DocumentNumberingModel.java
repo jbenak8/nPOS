@@ -2,7 +2,7 @@ package cz.jbenak.bo.models.data;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
-import cz.jbenak.npos.api.data.DocumentNumbering.DocumentType;
+import cz.jbenak.npos.api.shared.enums.DocumentType;
 
 import java.time.LocalDate;
 
