@@ -37,7 +37,7 @@
                      <FlowPane.margin>
                         <Insets left="5.0" />
                      </FlowPane.margin></Button>
-                        <Button fx:id="btnMenuDepositsDisbursements" mnemonicParsing="false" text="Pohyby">
+                        <Button fx:id="btnMenuDepositsDisbursements" mnemonicParsing="false" onAction="#btnMenuDepositsDisbursementsPressed" text="Pohyby">
                      <FlowPane.margin>
                         <Insets left="5.0" />
                      </FlowPane.margin></Button>

@@ -7,21 +7,20 @@ import java.time.LocalDate;
 
 public class DocumentNumbering {
 
-    private int number;
+    private int id;
     private String definition;
     private DocumentType documentType;
-    private String label;
     private int sequenceNumberLength;
     private LocalDate validFrom;
     private int startFrom;
 
-    @JsonProperty("number")
-    public int getNumber() {
-        return number;
+    @JsonProperty("id")
+    public int getId() {
+        return id;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @JsonProperty("definition")
@@ -40,15 +39,6 @@ public class DocumentNumbering {
 
     public void setDocumentType(DocumentType type) {
         this.documentType = type;
-    }
-
-    @JsonProperty("label")
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
     }
 
     @JsonProperty("sequenceNumberLength")
@@ -80,10 +70,9 @@ public class DocumentNumbering {
 
     @Override
     public String toString() {
-        return "Document numbering = {number=" + number
+        return "Document numbering = {id=" + id
                 + ", definition=" + definition
                 + ", type=" + documentType
-                + ", label=" + label
                 + ", sequenceNumberLength=" + sequenceNumberLength
                 + ", validFrom=" + validFrom
                 + ", startSerialFrom=" + startFrom + "}";

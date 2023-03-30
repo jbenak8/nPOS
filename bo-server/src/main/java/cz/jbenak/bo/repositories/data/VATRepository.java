@@ -16,7 +16,7 @@ public interface VATRepository extends ReactiveCrudRepository<VATModel, Integer>
     @Query("SELECT DISTINCT ON (vat_type) * FROM vat ORDER BY vat_type, valid_from DESC;")
     Flux<VATModel> getValidVAT();
 
-    @Query("SELECT * FROM vat ORDER BY vat_type, valid_from ASC;")
+    @Query("SELECT * FROM vat ORDER BY vat_type, valid_from;")
     Flux<VATModel> getAllVAT();
 
     @Query("SELECT count(*) FROM vat WHERE vat_type = :type AND valid_from = :validFrom;")

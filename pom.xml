@@ -17,6 +17,7 @@
         <module>communicator</module>
         <module>comm-tester</module>
         <module>config-manager</module>
+        <module>i18n</module>
     </modules>
 
     <properties>

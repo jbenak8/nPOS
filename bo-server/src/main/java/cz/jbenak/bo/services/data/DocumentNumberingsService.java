@@ -48,7 +48,7 @@ public class DocumentNumberingsService {
             return Mono.just(result);
         }
         return repository.save(model).doOnSuccess(saved -> {
-                    LOGGER.info("Document numbering {} was successfully stored under sequence number {}", numbering, saved.number());
+                    LOGGER.info("Document numbering {} was successfully stored under sequence number {}", numbering, saved.id());
                     result.setResultType(CRUDResult.ResultType.OK);
                 })
                 .thenReturn(result)
@@ -78,9 +78,8 @@ public class DocumentNumberingsService {
 
     private DocumentNumbering modelToNumbering(DocumentNumberingModel model) {
         DocumentNumbering numbering = new DocumentNumbering();
-        numbering.setNumber(model.number());
+        numbering.setId(model.id());
         numbering.setDocumentType(model.document_type());
-        numbering.setLabel(model.label());
         numbering.setDefinition(model.definition());
         numbering.setSequenceNumberLength(model.sequence_number_length());
         numbering.setValidFrom(model.valid_from());
@@ -89,12 +88,11 @@ public class DocumentNumberingsService {
     }
 
     private DocumentNumberingModel numberingToModel(DocumentNumbering numbering) {
-        return new DocumentNumberingModel(numbering.getNumber(),
+        return new DocumentNumberingModel(numbering.getId(),
                 numbering.getDefinition(),
                 numbering.getDocumentType(),
                 numbering.getSequenceNumberLength(),
                 numbering.getValidFrom(),
-                numbering.getStartFrom(),
-                numbering.getLabel());
+                numbering.getStartFrom());
     }
 }

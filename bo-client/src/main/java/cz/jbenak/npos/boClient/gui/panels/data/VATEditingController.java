@@ -22,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -32,11 +33,11 @@ public class VATEditingController extends EditDialogController<VAT> {
     @FXML
     private MFXTextField fieldVATPercentage;
     @FXML
-    private MFXComboBox<VATTypeSelectionItem> selectorVATType;
+    private MFXComboBox<String> selectorVATType;
     @FXML
     private MFXDatePicker datePickerValidFrom;
 
-    private final ObservableList<VATTypeSelectionItem> vatTypeObservableList = FXCollections.observableArrayList();
+    private final ObservableList<String> vatTypeObservableList = FXCollections.observableArrayList();
     private final static Logger LOGGER = LogManager.getLogger(VATEditingController.class);
 
     @Override
@@ -88,8 +89,7 @@ public class VATEditingController extends EditDialogController<VAT> {
             dataEdited = new VAT();
             dataEdited.setId(vatId);
             dataEdited.setPercentage(new BigDecimal(fieldVATPercentage.getText().trim().replace(',', '.')));
-            dataEdited.setType(selectorVATType.getValue().getType());
-            dataEdited.setLabel(selectorVATType.getValue().toString());
+            dataEdited.setType(VATType.get(selectorVATType.getValue()));
             dataEdited.setValidFrom(datePickerValidFrom.getValue());
             if (datePickerValidFrom.getValue().isBefore(LocalDate.now())) {
                 InfoDialog validityInPastInfo = new InfoDialog(InfoDialog.InfoDialogType.WARNING, dialog, true);
@@ -140,44 +140,21 @@ public class VATEditingController extends EditDialogController<VAT> {
             }
         });
         selectorVATType.selectedItemProperty().addListener((observable, oldVal, newVal) -> {
-            if (newVal.getType() == VATType.ZERO) {
+            VATType type = VATType.get(newVal);
+            if (type == VATType.ZERO) {
                 fieldVATPercentage.setText("0");
             }
-            VATType VATType = null;
             if (dataEdited != null) {
-                VATType = dataEdited.getType() == null ? null : dataEdited.getType();
+                type = dataEdited.getType() == null ? null : dataEdited.getType();
             }
-            if (dataEdited == null || (Objects.requireNonNull(VATType).compareTo(newVal.getType()) != 0)) {
+            if (dataEdited == null || (Objects.requireNonNull(type).getLabel().compareTo(newVal) != 0)) {
                 dialog.setEdited(true);
             }
         });
     }
 
     private void initSelectorValues() {
-        vatTypeObservableList.add(new VATTypeSelectionItem(VATType.BASE, "Základní"));
-        vatTypeObservableList.add(new VATTypeSelectionItem(VATType.LOWERED_1, "Snížená 1"));
-        vatTypeObservableList.add(new VATTypeSelectionItem(VATType.LOWERED_2, "Snížená 2"));
-        vatTypeObservableList.add(new VATTypeSelectionItem(VATType.ZERO, "Nulová"));
+        Arrays.stream(VATType.values()).forEach(type -> vatTypeObservableList.add(type.getLabel()));
         selectorVATType.setItems(vatTypeObservableList);
-
-    }
-
-    private static class VATTypeSelectionItem {
-        VATType type;
-        String translation;
-
-        public VATTypeSelectionItem(VATType type, String translation) {
-            this.type = type;
-            this.translation = translation;
-        }
-
-        VATType getType() {
-            return type;
-        }
-
-        @Override
-        public String toString() {
-            return translation;
-        }
     }
 }

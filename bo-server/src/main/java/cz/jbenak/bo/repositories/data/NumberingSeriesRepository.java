@@ -11,7 +11,7 @@ public interface NumberingSeriesRepository extends ReactiveCrudRepository<Docume
     @Query("SELECT DISTINCT ON (document_type) * FROM numbering_series ORDER BY document_type, valid_from DESC;")
     Flux<DocumentNumberingModel> getValidNumberings();
 
-    @Query("SELECT * FROM numbering_series ORDER BY document_type, valid_from ASC;")
+    @Query("SELECT * FROM numbering_series ORDER BY document_type, valid_from;")
     Flux<DocumentNumberingModel> getAllNumberings();
 
     @Query("SELECT CASE WHEN count(*) > 0 THEN true ELSE false END AS numbering_exists FROM numbering_series WHERE definition = :definition;")

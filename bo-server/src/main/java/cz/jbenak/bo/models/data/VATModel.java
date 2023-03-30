@@ -8,5 +8,5 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Table("vat")
-public record VATModel(@Id int id, VATType vat_type, BigDecimal percentage, String label, LocalDate valid_from) {
+public record VATModel(@Id int id, VATType vat_type, BigDecimal percentage, LocalDate valid_from) {
 }

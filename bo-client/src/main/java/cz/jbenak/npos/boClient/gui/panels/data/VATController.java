@@ -99,8 +99,8 @@ public class VATController extends AbstractPanelContentController {
         if (table.getSelectionModel().getSelectedValues().size() == 1) {
             VAT selected = table.getSelectionModel().getSelectedValues().get(0);
             YesNoDialog question = new YesNoDialog(BoClient.getInstance().getMainStage());
-            YesNoDialog.Choice answer = question.showDialog("Smazat DPH?", "Přejete si opravdu smazat vybranou DPH " + selected.getId() + "" +
-                    " - " + selected.getLabel() + " " + selected.getPercentage() + "% ?");
+            YesNoDialog.Choice answer = question.showDialog("Smazat DPH?", "Přejete si opravdu smazat vybranou DPH " + selected.getId() +
+                    " - " + selected.getType().getLabel() + " " + selected.getPercentage() + "% ?");
             if (answer == YesNoDialog.Choice.YES) {
                 deleteVAT(selected.getId());
             }
@@ -164,7 +164,7 @@ public class VATController extends AbstractPanelContentController {
                 List<VAT> filtered = loadedVATs.stream().filter(itm -> {
                     final String value = newVal.trim().toLowerCase();
                     String sb = itm.getId() + ";"
-                            + itm.getLabel() + ";"
+                            + itm.getType().getLabel() + ";"
                             + Utils.formatDecimalCZPlain(itm.getPercentage()) + ";"
                             + Utils.formatDate(itm.getValidFrom()) + ";";
                     return sb.toLowerCase().contains(value);
@@ -183,12 +183,12 @@ public class VATController extends AbstractPanelContentController {
 
         if (columns.isEmpty()) {
             MFXTableColumn<VAT> idColumn = new MFXTableColumn<>("Číslo položky", true, Comparator.comparing(VAT::getId));
-            MFXTableColumn<VAT> labelColumn = new MFXTableColumn<>("Typ daně", true, Comparator.comparing(VAT::getLabel));
+            MFXTableColumn<VAT> labelColumn = new MFXTableColumn<>("Typ daně", true, Comparator.comparing(itm -> itm.getType().getLabel()));
             MFXTableColumn<VAT> percentageColumn = new MFXTableColumn<>("Sazba v procentech", true, Comparator.comparing(VAT::getPercentage));
             MFXTableColumn<VAT> validFromColumn = new MFXTableColumn<>("Platost od", true, Comparator.comparing(VAT::getValidFrom));
 
             idColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(VAT::getId));
-            labelColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(VAT::getLabel));
+            labelColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(itm -> itm.getType().getLabel()));
             percentageColumn.setRowCellFactory(vat -> new MFXTableRowCell<>(val -> Utils.formatDecimalCZPlain(val.getPercentage())) {{
                 setAlignment(Pos.CENTER_RIGHT);
             }});
@@ -209,7 +209,7 @@ public class VATController extends AbstractPanelContentController {
 
             table.getFilters().addAll(
                     new IntegerFilter<>("Číslo položky", VAT::getId),
-                    new StringFilter<>("Typ daně", VAT::getLabel),
+                    new StringFilter<>("Typ daně", vat -> vat.getType().getLabel()),
                     new BigDecimalFilter<>("Sazba v procentech", VAT::getPercentage)
                     //TODO vymyslet něco na date filter
                     /*new DateFil<>("Platost od", Country::getCurrencyIsoCode)*/

@@ -27,9 +27,7 @@ import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static cz.jbenak.npos.api.shared.enums.DocumentType.*;
-
-public class NumberingSeriesEditingControler extends EditDialogController<DocumentNumbering> {
+public class NumberingSeriesEditingController extends EditDialogController<DocumentNumbering> {
 
     @FXML
     private Label validationLabel;
@@ -42,8 +40,8 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
     @FXML
     private MFXTextField fieldStartFrom;
     @FXML
-    private MFXFilterComboBox<DocumentTypeSelectionItem> selectorDocumentType;
-    private final ObservableList<DocumentTypeSelectionItem> numberingTypeObservableList = FXCollections.observableArrayList();
+    private MFXFilterComboBox<String> selectorDocumentType;
+    private final ObservableList<String> numberingTypeObservableList = FXCollections.observableArrayList();
     private final static Logger LOGGER = LogManager.getLogger(VATEditingController.class);
 
     @Override
@@ -91,11 +89,10 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
     @Override
     protected void savePressed() {
         if (validateFields()) {
-            int number = dataEdited == null ? 0 : dataEdited.getNumber();
+            int id = dataEdited == null ? 0 : dataEdited.getId();
             dataEdited = new DocumentNumbering();
-            dataEdited.setNumber(number);
-            dataEdited.setDocumentType(selectorDocumentType.getSelectedItem().getType());
-            dataEdited.setLabel(selectorDocumentType.getValue().translation);
+            dataEdited.setId(id);
+            dataEdited.setDocumentType(DocumentType.get(selectorDocumentType.getSelectedItem()));
             dataEdited.setDefinition(fieldDefinition.getText().trim());
             dataEdited.setSequenceNumberLength(Integer.parseInt(fieldSeqNumberLength.getText().trim()));
             dataEdited.setStartFrom(Integer.parseInt(fieldStartFrom.getText().trim()));
@@ -133,7 +130,7 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
         fieldSeqNumberLength.setText("0");
         fieldStartFrom.setText("1");
         initSelectorValues();
-        Function<String, Predicate<DocumentTypeSelectionItem>> filterFunction = s -> documentTypeSelectionItem -> StringUtils.containsIgnoreCase(documentTypeSelectionItem.translation, s);
+        Function<String, Predicate<String>> filterFunction = searchFor -> value -> StringUtils.containsIgnoreCase(value, searchFor);
         selectorDocumentType.setFilterFunction(filterFunction);
         Helpers.getEmptyTextConstraint(fieldDefinition, false, "Vyplňte definici číselné řady", validationLabel);
         Helpers.getEmptyTextConstraint(datePickerValidFrom, false, "Zadejte datum začátku platnosti sazby definice.", validationLabel);
@@ -167,7 +164,7 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
             if (dataEdited != null) {
                 type = dataEdited.getDocumentType() == null ? null : dataEdited.getDocumentType();
             }
-            if (dataEdited == null || (Objects.requireNonNull(type).compareTo(newVal.getType()) != 0)) {
+            if (dataEdited == null || (Objects.requireNonNull(type).getLabel().compareTo(newVal) != 0)) {
                 dialog.setEdited(true);
             }
         });
@@ -190,35 +187,11 @@ public class NumberingSeriesEditingControler extends EditDialogController<Docume
     }
 
     private void initSelectorValues() {
-        numberingTypeObservableList.add(new DocumentTypeSelectionItem(INVOICE, "Faktura"));
-        numberingTypeObservableList.add(new DocumentTypeSelectionItem(RECEIPT, "Paragon"));
-        numberingTypeObservableList.add(new DocumentTypeSelectionItem(DELIVERY_NOTE, "Dodací list"));
-        numberingTypeObservableList.add(new DocumentTypeSelectionItem(CREDIT_NOTE, "Dobropis"));
-        numberingTypeObservableList.add(new DocumentTypeSelectionItem(RETURN, "Vratka"));
-        numberingTypeObservableList.add(new DocumentTypeSelectionItem(DEPOSIT, "Vklad"));
-        numberingTypeObservableList.add(new DocumentTypeSelectionItem(DISBURSEMENT, "Výběr"));
-        numberingTypeObservableList.add(new DocumentTypeSelectionItem(WAREHOUSE_RECEIPT, "Příjemka"));
-        numberingTypeObservableList.add(new DocumentTypeSelectionItem(WAREHOUSE_ISSUE, "výdejka"));
+        for (DocumentType type: DocumentType.values()) {
+            numberingTypeObservableList.add(type.getLabel());
+        }
+        FXCollections.sort(numberingTypeObservableList);
         selectorDocumentType.setItems(numberingTypeObservableList);
-    }
-
-    private static class DocumentTypeSelectionItem {
-        DocumentType type;
-        String translation;
-
-        public DocumentTypeSelectionItem(DocumentType type, String translation) {
-            this.type = type;
-            this.translation = translation;
-        }
-
-        DocumentType getType() {
-            return type;
-        }
-
-        @Override
-        public String toString() {
-            return translation;
-        }
     }
 }
 

@@ -88,7 +88,6 @@ public class VATService {
         vat.setId(model.id());
         vat.setType(model.vat_type());
         vat.setPercentage(model.percentage());
-        vat.setLabel(model.label());
         vat.setValidFrom(model.valid_from());
         return vat;
     }
@@ -98,7 +97,6 @@ public class VATService {
                 vat.getId(),
                 vat.getType(),
                 vat.getPercentage(),
-                vat.getLabel(),
                 vat.getValidFrom() == null ? LocalDate.now() : vat.getValidFrom());
     }
 }

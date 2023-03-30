@@ -48,7 +48,7 @@ public class NumberingSeriesController extends AbstractPanelContentController {
 
     @FXML
     private void btnNewPressed() {
-        EditDialog<DocumentNumbering, NumberingSeriesEditingControler> newItem = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/document-numbering-series-edit-dialog.fxml", "Nová číselná řada", this);
+        EditDialog<DocumentNumbering, NumberingSeriesEditingController> newItem = new EditDialog<>("/cz/jbenak/npos/boClient/gui/panels/data/document-numbering-series-edit-dialog.fxml", "Nová číselná řada", this);
         newItem.preloadDialog();
         if (newItem.openNewDialog()) {
             loadData();
@@ -60,10 +60,10 @@ public class NumberingSeriesController extends AbstractPanelContentController {
         if (table.getSelectionModel().getSelectedValues().size() == 1) {
             DocumentNumbering selected = table.getSelectionModel().getSelectedValues().get(0);
             YesNoDialog question = new YesNoDialog(BoClient.getInstance().getMainStage());
-            YesNoDialog.Choice answer = question.showDialog("Smazat definici řady?", "Přejete si opravdu smazat vybranou definici\nčíselné řady číslo " + selected.getNumber() +
-                    " - " + selected.getLabel() + " " + selected.getDefinition() + " platnost od " + Utils.formatDate(selected.getValidFrom()) + "?");
+            YesNoDialog.Choice answer = question.showDialog("Smazat definici řady?", "Přejete si opravdu smazat vybranou definici\nčíselné řady číslo " + selected.getId() +
+                    " - " + selected.getDocumentType().getLabel() + " " + selected.getDefinition() + " platnost od " + Utils.formatDate(selected.getValidFrom()) + "?");
             if (answer == YesNoDialog.Choice.YES) {
-                deleteNumbering(selected.getNumber());
+                deleteNumbering(selected.getId());
             }
         }
     }
@@ -165,8 +165,8 @@ public class NumberingSeriesController extends AbstractPanelContentController {
             if (newVal != null && !newVal.isBlank()) {
                 List<DocumentNumbering> filtered = loadedNumberings.stream().filter(itm -> {
                     final String value = newVal.trim().toLowerCase();
-                    String toFilter = itm.getNumber() + ";"
-                            + itm.getLabel() + ";"
+                    String toFilter = itm.getId() + ";"
+                            + itm.getDocumentType().getLabel() + ";"
                             + itm.getDefinition() + ";"
                             + itm.getSequenceNumberLength() + ";"
                             + itm.getStartFrom() + ";"
@@ -186,15 +186,15 @@ public class NumberingSeriesController extends AbstractPanelContentController {
         ObservableList<MFXTableColumn<DocumentNumbering>> columns = table.getTableColumns();
 
         if (columns.isEmpty()) {
-            MFXTableColumn<DocumentNumbering> numberColumn = new MFXTableColumn<>("Číslo položky", true, Comparator.comparing(DocumentNumbering::getNumber));
-            MFXTableColumn<DocumentNumbering> documentTypeColumn = new MFXTableColumn<>("Typ dokladu", true, Comparator.comparing(DocumentNumbering::getLabel));
+            MFXTableColumn<DocumentNumbering> numberColumn = new MFXTableColumn<>("Číslo položky", true, Comparator.comparing(DocumentNumbering::getId));
+            MFXTableColumn<DocumentNumbering> documentTypeColumn = new MFXTableColumn<>("Typ dokladu", true, Comparator.comparing(content -> content.getDocumentType().getLabel()));
             MFXTableColumn<DocumentNumbering> definitionColumn = new MFXTableColumn<>("Definice řady", true, Comparator.comparing(DocumentNumbering::getDefinition));
             MFXTableColumn<DocumentNumbering> sequenceNumberCountColumn = new MFXTableColumn<>("Délka pořadového čísla", true, Comparator.comparing(DocumentNumbering::getSequenceNumberLength));
             MFXTableColumn<DocumentNumbering> startFromColumn = new MFXTableColumn<>("Začít od", true, Comparator.comparing(DocumentNumbering::getStartFrom));
             MFXTableColumn<DocumentNumbering> validFromColumn = new MFXTableColumn<>("Platost od", true, Comparator.comparing(DocumentNumbering::getValidFrom));
 
-            numberColumn.setRowCellFactory(numbering -> new MFXTableRowCell<>(DocumentNumbering::getNumber));
-            documentTypeColumn.setRowCellFactory(numbering -> new MFXTableRowCell<>(DocumentNumbering::getLabel));
+            numberColumn.setRowCellFactory(numbering -> new MFXTableRowCell<>(DocumentNumbering::getId));
+            documentTypeColumn.setRowCellFactory(numbering -> new MFXTableRowCell<>(itm -> itm.getDocumentType().getLabel()));
             definitionColumn.setRowCellFactory(numbering -> new MFXTableRowCell<>(DocumentNumbering::getDefinition));
             sequenceNumberCountColumn.setRowCellFactory(numbering -> new MFXTableRowCell<>(DocumentNumbering::getSequenceNumberLength) {{
                 setAlignment(Pos.CENTER);
@@ -227,8 +227,8 @@ public class NumberingSeriesController extends AbstractPanelContentController {
             columns.add(validFromColumn);
 
             table.getFilters().addAll(
-                    new IntegerFilter<>("Číslo položky", DocumentNumbering::getNumber),
-                    new StringFilter<>("Typ dokumentu", DocumentNumbering::getLabel),
+                    new IntegerFilter<>("Číslo položky", DocumentNumbering::getId),
+                    new StringFilter<>("Typ dokumentu", itm -> itm.getDocumentType().getLabel()),
                     new StringFilter<>("Definice řady", DocumentNumbering::getDefinition),
                     new IntegerFilter<>("Délka pořadového čísla", DocumentNumbering::getSequenceNumberLength),
                     new IntegerFilter<>("Začít od", DocumentNumbering::getStartFrom)

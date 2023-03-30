@@ -97,4 +97,20 @@ public class DataOperations extends AbstractClientOperations {
         LOGGER.info("Given document numbering with number {} will be deleted.", number);
         return httpClientOperations.deleteData(URI.create(baseURI + "/documentNumberings/delete/" + number));
     }
+
+    public CompletableFuture<List<FinanceOperation>> getAllFinanceOperations() {
+        LOGGER.info("List of all finance operations definitions will be loaded from server.");
+        return httpClientOperations.getData(URI.create(baseURI + "/financeOperations/getAll"), new TypeReference<>() {
+        });
+    }
+
+    public CompletableFuture<CRUDResult> storeFinanceOperation(FinanceOperation operation) {
+        LOGGER.info("Given finance operations definition {} will be saved.", operation);
+        return httpClientOperations.postData(URI.create(baseURI + "/financeOperations/store"), operation);
+    }
+
+    public CompletableFuture<CRUDResult> deleteFinanceOperation(int number) {
+        LOGGER.info("Given finance operations definition with number {} will be deleted.", number);
+        return httpClientOperations.deleteData(URI.create(baseURI + "/financeOperations/delete/" + number));
+    }
 }

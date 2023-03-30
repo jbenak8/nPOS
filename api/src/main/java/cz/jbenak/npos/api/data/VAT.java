@@ -11,7 +11,6 @@ public class VAT {
     private int id;
     private VATType type;
     private BigDecimal percentage;
-    private String label;
     private LocalDate validFrom;
 
     @JsonProperty("id")
@@ -41,15 +40,6 @@ public class VAT {
         this.percentage = percentage;
     }
 
-    @JsonProperty("label")
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
     @JsonProperty("validFrom")
     public LocalDate getValidFrom() {
         return validFrom;
@@ -65,7 +55,6 @@ public class VAT {
                 "id=" + id +
                 ", type=" + type +
                 ", percentage=" + percentage +
-                ", label='" + label + '\'' +
                 ", validFrom=" + validFrom +
                 '}';
     }

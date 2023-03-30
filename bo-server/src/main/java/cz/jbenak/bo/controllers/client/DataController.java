@@ -18,6 +18,7 @@ public class DataController {
     private CountryService countryService;
     private VATService vatService;
     private DocumentNumberingsService documentNumberingsService;
+    private FinanceOperationService financeOperationService;
 
     @Autowired
     public void setMeasureUnitService(MeasureUnitService measureUnitService) {
@@ -42,6 +43,11 @@ public class DataController {
     @Autowired
     public void setDocumentNumberingsService(DocumentNumberingsService documentNumberingsService) {
         this.documentNumberingsService = documentNumberingsService;
+    }
+
+    @Autowired
+    public void setFinanceOperationService(FinanceOperationService financeOperationService) {
+        this.financeOperationService = financeOperationService;
     }
 
     // Measure units
@@ -157,6 +163,26 @@ public class DataController {
     @DeleteMapping("/documentNumberings/delete/{number}")
     public Mono<CRUDResult> deleteNumbering(@PathVariable int number) {
         return documentNumberingsService.deleteNumbering(number);
+    }
+
+    @GetMapping("/financeOperations/getAll")
+    public Flux<FinanceOperation> getAllFinanceOperations() {
+        return financeOperationService.getAllFinanceOperations();
+    }
+
+    @GetMapping("/financeOperations/get/{number}")
+    public Mono<FinanceOperation> getFinanceOperationByNumber(@PathVariable int number) {
+        return financeOperationService.getFinanceOperationByNumber(number);
+    }
+
+    @PostMapping("/financeOperations/store")
+    public Mono<CRUDResult> storeFinanceOperation(@RequestBody FinanceOperation operation) {
+        return financeOperationService.saveFinanceOperation(operation);
+    }
+
+    @DeleteMapping("/financeOperations/delete/{number}")
+    public Mono<CRUDResult> deleteFinanceOperation(@PathVariable int number) {
+        return financeOperationService.deleteFinanceOperation(number);
     }
 
 }

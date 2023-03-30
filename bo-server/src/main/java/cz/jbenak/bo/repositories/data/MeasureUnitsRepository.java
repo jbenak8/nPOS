@@ -9,6 +9,6 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface MeasureUnitsRepository extends ReactiveCrudRepository<MeasureUnitModel, String> {
 
-    @Query("SELECT * FROM measure_units WHERE base_unit = :baseUnit ORDER BY unit ASC;")
+    @Query("SELECT * FROM measure_units WHERE base_unit = :baseUnit ORDER BY unit;")
     Flux<MeasureUnitModel> getUnitsByBaseUnit(String baseUnit);
 }

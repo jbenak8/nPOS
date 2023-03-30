@@ -70,6 +70,11 @@ public class DataPanelController extends PanelController implements Initializabl
         changeContentMenuPane("document-numbering-series-menu.fxml", btnMenuNumberings);
     }
 
+    @FXML
+    private void btnMenuDepositsDisbursementsPressed() {
+        changeContentMenuPane("finance-operations-menu.fxml", btnMenuDepositsDisbursements);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnPreviouslySelected = btnMenuAccountingPeriods;
