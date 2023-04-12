@@ -40,9 +40,9 @@ public class UserService {
 
     public Mono<LoginStatus> doLogin(LoginAttempt attempt) {
         final StringEncryptor encryptor = apiUtils.getStringEncryptor();
-        int id = attempt.userId();
+        int id = attempt.getUserId();
         LOGGER.info("Login for user with number {} requested.", id);
-        String password = encryptor.decrypt(attempt.password());
+        String password = encryptor.decrypt(attempt.getPassword());
         BoUser user = userRepository.findById(id).toFuture().join();
         if (user == null) {
             LOGGER.info("User with ID {} has not been found in the database.", id);

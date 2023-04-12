@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import cz.jbenak.npos.api.client.LoginAttempt;
 import cz.jbenak.npos.api.client.LoginStatus;
 import cz.jbenak.npos.api.client.User;
-import cz.jbenak.npos.boClient.engine.Connection;
-import cz.jbenak.npos.boClient.engine.HttpClientOperations;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

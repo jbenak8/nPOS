@@ -1,11 +1,20 @@
 package cz.jbenak.npos.api.data;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.jbenak.npos.api.shared.enums.VATType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Jacksonized
 public class VAT {
 
     private int id;
@@ -13,49 +22,4 @@ public class VAT {
     private BigDecimal percentage;
     private LocalDate validFrom;
 
-    @JsonProperty("id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @JsonProperty("type")
-    public VATType getType() {
-        return type;
-    }
-
-    public void setType(VATType type) {
-        this.type = type;
-    }
-
-    @JsonProperty("percentage")
-    public BigDecimal getPercentage() {
-        return percentage;
-    }
-
-    public void setPercentage(BigDecimal percentage) {
-        this.percentage = percentage;
-    }
-
-    @JsonProperty("validFrom")
-    public LocalDate getValidFrom() {
-        return validFrom;
-    }
-
-    public void setValidFrom(LocalDate validFrom) {
-        this.validFrom = validFrom;
-    }
-
-    @Override
-    public String toString() {
-        return "VAT {" +
-                "id=" + id +
-                ", type=" + type +
-                ", percentage=" + percentage +
-                ", validFrom=" + validFrom +
-                '}';
-    }
 }

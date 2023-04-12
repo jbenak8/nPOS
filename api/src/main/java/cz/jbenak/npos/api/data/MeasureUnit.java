@@ -1,10 +1,18 @@
 package cz.jbenak.npos.api.data;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Jacksonized
 public class MeasureUnit implements Comparable<MeasureUnit> {
 
     private String unit;
@@ -12,41 +20,6 @@ public class MeasureUnit implements Comparable<MeasureUnit> {
     private String baseUnit;
     private BigDecimal ratio;
 
-    @JsonProperty(value = "unit", required = true)
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    @JsonProperty("name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonProperty("baseUnit")
-    public String getBaseUnit() {
-        return baseUnit;
-    }
-
-    public void setBaseUnit(String baseUnit) {
-        this.baseUnit = baseUnit;
-    }
-
-    @JsonProperty("ratio")
-    public BigDecimal getRatio() {
-        return ratio;
-    }
-
-    public void setRatio(BigDecimal ratio) {
-        this.ratio = ratio;
-    }
 
     @Override
     public int compareTo(MeasureUnit o) {
@@ -64,15 +37,5 @@ public class MeasureUnit implements Comparable<MeasureUnit> {
     @Override
     public int hashCode() {
         return Objects.hash(unit);
-    }
-
-    @Override
-    public String toString() {
-        return "Measure unit = {"
-                + "unit: " + unit
-                + ", name: " + name
-                + ", base unit: " + baseUnit
-                + ", ratio to base unit: " + (ratio == null ? "null" : ratio.toPlainString())
-                + "}";
     }
 }

@@ -1,7 +1,16 @@
 package cz.jbenak.npos.api.client;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Jacksonized
 public class CRUDResult {
 
     public enum ResultType {
@@ -10,22 +19,4 @@ public class CRUDResult {
 
     private ResultType resultType;
     private String message;
-
-    @JsonProperty(value = "resultType", required = true)
-    public ResultType getResultType() {
-        return resultType;
-    }
-
-    public void setResultType(ResultType resultType) {
-        this.resultType = resultType;
-    }
-
-    @JsonProperty("message")
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

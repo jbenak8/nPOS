@@ -1,32 +1,27 @@
 package cz.jbenak.npos.api.client;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * DTO for sending login data to Backoffice server.
  *
- * @param userId   ID of the user (number - as used on POS)
- * @param password password of the user - can be numeric (like on POS) or string.
  * @author Jan Benák
- * @version 1.0.0.0
- * @since 2022-08-31
+ * @version 1.1.0.0
+ * @since 2023-04-12
  */
-public record LoginAttempt(int userId, String password) {
 
-    @JsonCreator
-    public LoginAttempt {
-    }
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Jacksonized
+public class LoginAttempt {
 
-    @Override
-    @JsonProperty
-    public int userId() {
-        return userId;
-    }
+    private int userId;
+    private String password;
 
-    @Override
-    @JsonProperty
-    public String password() {
-        return password;
-    }
 }

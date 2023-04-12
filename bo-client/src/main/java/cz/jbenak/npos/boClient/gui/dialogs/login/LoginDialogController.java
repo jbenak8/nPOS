@@ -90,7 +90,7 @@ public class LoginDialogController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        info.setText("nBO Backoffice klient verze " + BoClient.getInstance().getAppProperties().getProperty("app.version", "<N/A>") + " \u00a9 Jan Benák " + Year.now());
+        info.setText("nBO Backoffice klient verze " + BoClient.getInstance().getAppProperties().getProperty("app.version", "<N/A>") + " © Jan Benák " + Year.now());
         Helpers.getEmptyTextConstraint(fieldUserName, false, "Uživatelské jméno nemůže být prázdné.", validationText);
         Helpers.getEmptyTextConstraint(fieldPassword, false, "Heslo nemůže být prázdné", validationText);
         progressSpinner.setVisible(false);
@@ -169,25 +169,25 @@ public class LoginDialogController implements Initializable {
     }
 
     private void handleLoginStatus(LoginStatus status) {
-        switch (status.status()) {
+        switch (status.getStatus()) {
             case OK -> {
-                LOGGER.info("User with ID {} has been successfully logged in.", status.user().getUserId());
-                BoClient.getInstance().showMainWindow(status.user());
+                LOGGER.info("User with ID {} has been successfully logged in.", status.getUser().getUserId());
+                BoClient.getInstance().showMainWindow(status.getUser());
             }
             case FAILED -> {
-                LOGGER.warn("Login of user with ID {} has failed.", status.user().getUserId());
+                LOGGER.warn("Login of user with ID {} has failed.", status.getUser().getUserId());
                 InfoDialog dialog = new InfoDialog(InfoDialogType.WARNING, dialogStage, false);
                 dialog.setDialogTitle("Přihlášení selhalo");
                 dialog.setDialogSubtitle("Bylo zadáno nesprávné heslo.");
-                String message = status.user().getRestLoginAttempts() > 0
+                String message = status.getUser().getRestLoginAttempts() > 0
                         ?
-                        "Nebylo možné přihlásit uživatele " + status.user().getUserId()
-                                + " - " + status.user().getUserName() + " " + status.user().getUserSurname()
-                                + " jelikož bylo zadáno nesprávné heslo. \n\n Máte ještě " + status.user().getRestLoginAttempts()
-                                + (status.user().getRestLoginAttempts() > 1 ? " pokusy" : " pokus")
+                        "Nebylo možné přihlásit uživatele " + status.getUser().getUserId()
+                                + " - " + status.getUser().getUserName() + " " + status.getUser().getUserSurname()
+                                + " jelikož bylo zadáno nesprávné heslo. \n\n Máte ještě " + status.getUser().getRestLoginAttempts()
+                                + (status.getUser().getRestLoginAttempts() > 1 ? " pokusy" : " pokus")
                                 + " než bude tento uživatel zablokován."
                         :
-                        "Pro uživatele " + status.user().getUserId()
+                        "Pro uživatele " + status.getUser().getUserId()
                                 + " byly vyčerpány všechny dostupné pokusy o přihlášení, takže uživatel byl zablokován.\n\n" +
                                 "Obraťte se prosím na svého systémového administrátora o odblokování.";
                 dialog.setDialogMessage(message);
@@ -202,13 +202,13 @@ public class LoginDialogController implements Initializable {
                 dialog.showDialog();
             }
             case USER_LOCKED -> {
-                LOGGER.warn("User with ID {} has been locked.", status.user().getUserId());
+                LOGGER.warn("User with ID {} has been locked.", status.getUser().getUserId());
                 InfoDialog dialog = new InfoDialog(InfoDialogType.ERROR, dialogStage, false);
                 dialog.setDialogTitle("Přihlášení selhalo");
                 dialog.setDialogSubtitle("Uživatel byl zablokován.");
                 dialog.setDialogMessage("Zadaný uživatel "
-                        + status.user().getUserId()
-                        + " - " + status.user().getUserName() + " " + status.user().getUserSurname()
+                        + status.getUser().getUserId()
+                        + " - " + status.getUser().getUserName() + " " + status.getUser().getUserSurname()
                         + " byl zablokován z důvodu vyčerpání možných pokusů o přihlášení.\n\n" +
                         "Obraťte se prosím na svého systémového administrátora o odblokování.");
                 dialog.showDialog();

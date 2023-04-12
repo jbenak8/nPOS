@@ -1,7 +1,15 @@
 package cz.jbenak.npos.api.data;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 
+@Getter
+@ToString
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Jacksonized
 public class Country implements Comparable<Country> {
 
     private String isoCode;
@@ -9,51 +17,6 @@ public class Country implements Comparable<Country> {
     private String fullName;
     private String currencyIsoCode;
     private boolean main;
-
-    @JsonProperty(value = "isoCode", required = true)
-    public String getIsoCode() {
-        return isoCode;
-    }
-
-    public void setIsoCode(String isoCode) {
-        this.isoCode = isoCode;
-    }
-
-    @JsonProperty("commonName")
-    public String getCommonName() {
-        return commonName;
-    }
-
-    public void setCommonName(String commonName) {
-        this.commonName = commonName;
-    }
-
-    @JsonProperty("fullName")
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    @JsonProperty("currencyIsoCode")
-    public String getCurrencyIsoCode() {
-        return currencyIsoCode;
-    }
-
-    public void setCurrencyIsoCode(String currencyIsoCode) {
-        this.currencyIsoCode = currencyIsoCode;
-    }
-
-    @JsonProperty("main")
-    public boolean isMain() {
-        return main;
-    }
-
-    public void setMain(boolean main) {
-        this.main = main;
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -66,16 +29,5 @@ public class Country implements Comparable<Country> {
     @Override
     public int compareTo(Country o) {
         return o.isoCode.compareTo(this.isoCode);
-    }
-
-    @Override
-    public String toString() {
-        return "Currency = {" +
-                "ISO code: " + isoCode
-                + ", common name: " + commonName
-                + ", full name: " + fullName
-                + ", currency ISO code: " + currencyIsoCode
-                + ", main country: " + main
-                + "}";
     }
 }

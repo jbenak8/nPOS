@@ -1,19 +1,22 @@
 package cz.jbenak.npos.api.client;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
-public record LoginStatus(@JsonProperty("login_status") Status status,
-                          @JsonProperty("user") User user) {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Jacksonized
+public class LoginStatus {
 
     public enum Status {
         OK, FAILED, USER_LOCKED, ID_UNKNOWN
     }
 
-    @Override
-    public String toString() {
-        return "LoginStatus{" +
-                "status=" + status +
-                ", user=" + user +
-                '}';
-    }
+    private Status status;
+    private User user;
 }

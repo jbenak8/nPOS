@@ -9,6 +9,7 @@ module cz.jbenak.npos.pos {
     requires jasperreports;
     requires org.apache.commons.lang3;
     requires api;
+    requires lombok;
 
     exports cz.jbenak.npos.pos.system;
     exports cz.jbenak.npos.pos.system.util;
