@@ -21,10 +21,10 @@
     </modules>
 
     <properties>
-        <java.version>19</java.version>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
-        <javafx.version>19</javafx.version>
+        <java.version>20</java.version>
+        <maven.compiler.source>20</maven.compiler.source>
+        <maven.compiler.target>20</maven.compiler.target>
+        <javafx.version>20</javafx.version>
         <!-- JavaFX classifiers: win, linux, mac -->
         <javafx.classifier>win</javafx.classifier>
         <javafx.excludeClassifier>linux</javafx.excludeClassifier>
@@ -130,7 +130,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.20.1</version>
+            <version>6.20.4</version>
         </dependency>
         <dependency>
             <!-- barcodes -->
