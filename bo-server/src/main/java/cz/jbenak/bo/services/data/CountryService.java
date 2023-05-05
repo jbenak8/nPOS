@@ -1,11 +1,13 @@
 package cz.jbenak.bo.services.data;
 
 import cz.jbenak.bo.models.data.CountryModel;
+import cz.jbenak.bo.models.data.mappers.CountryMapper;
 import cz.jbenak.bo.repositories.data.CountryRepository;
 import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.Country;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -16,6 +18,7 @@ public class CountryService {
 
     private final static Logger LOGGER = LogManager.getLogger(CountryService.class);
     private CountryRepository repository;
+    private final CountryMapper mapper = Mappers.getMapper(CountryMapper.class);
 
     @Autowired
     public void setRepository(CountryRepository repository) {
@@ -24,12 +27,12 @@ public class CountryService {
 
     public Flux<Country> getAllCountries() {
         LOGGER.info("List of all countries will be loaded.");
-        return repository.findAll().map(this::modelToCountry);
+        return repository.getAllOrdered().map(mapper::fromModel);
     }
 
     public Mono<Country> getCountry(String isCode) {
         LOGGER.info("Country with ISO code {} will be loaded", isCode);
-        return repository.findById(isCode).map(this::modelToCountry);
+        return repository.findById(isCode).map(mapper::fromModel);
     }
 
     public Mono<CRUDResult> storeCountry(Country country) {
@@ -75,7 +78,7 @@ public class CountryService {
                     model.setMain(country.isMain());
                     return repository.save(model);
                 })
-                .switchIfEmpty(repository.save(mapNewModel(country)))
+                .switchIfEmpty(repository.save(mapper.toModel(country).saveAsNew()))
                 .doOnSuccess(saved -> {
                     LOGGER.info("This country has been saved successfully.");
                     result.setResultType(CRUDResult.ResultType.OK);
@@ -87,25 +90,5 @@ public class CountryService {
                     result.setMessage(err.getLocalizedMessage());
                 })
                 .onErrorReturn(result);
-    }
-
-    private CountryModel mapNewModel(Country country) {
-        CountryModel model = new CountryModel();
-        model.setIso_code(country.getIsoCode());
-        model.setCommon_name(country.getCommonName());
-        model.setFull_name(country.getFullName());
-        model.setCurrency_code(country.getCurrencyIsoCode());
-        model.setMain(country.isMain());
-        return model.saveAsNew();
-    }
-
-    private Country modelToCountry(CountryModel model) {
-        Country country = new Country();
-        country.setIsoCode(model.getIso_code());
-        country.setCommonName(model.getCommon_name());
-        country.setFullName(model.getFull_name());
-        country.setCurrencyIsoCode(model.getCurrency_code());
-        country.setMain(model.isMain());
-        return country;
     }
 }

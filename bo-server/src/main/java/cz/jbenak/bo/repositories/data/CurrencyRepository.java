@@ -9,6 +9,9 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface CurrencyRepository extends ReactiveCrudRepository<CurrencyModel, String> {
 
+    @Query("SELECT * FROM currencies ORDER BY iso_code;")
+    Flux<CurrencyModel> getAllOrdered();
+
     @Query("SELECT * FROM currencies WHERE main = true;")
     Flux<CurrencyModel> mainCurrencyExists();
 }

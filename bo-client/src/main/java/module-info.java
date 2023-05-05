@@ -18,6 +18,7 @@ module cz.jbenak.npos.boClient {
     requires api;
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
+    requires lombok;
 
     uses org.apache.logging.log4j.spi.Provider;
 

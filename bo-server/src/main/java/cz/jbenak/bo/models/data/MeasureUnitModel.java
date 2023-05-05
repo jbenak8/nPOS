@@ -1,5 +1,7 @@
 package cz.jbenak.bo.models.data;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
@@ -8,7 +10,8 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.math.BigDecimal;
 
 @Table("measure_units")
-
+@Getter
+@Setter
 public class MeasureUnitModel implements Persistable<String> {
 
     @Id
@@ -18,38 +21,6 @@ public class MeasureUnitModel implements Persistable<String> {
     private BigDecimal ratio;
     @Transient
     private transient boolean saveNew;
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBase_unit(String base_unit) {
-        this.base_unit = base_unit;
-    }
-
-    public void setRatio(BigDecimal ratio) {
-        this.ratio = ratio;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getBase_unit() {
-        return base_unit;
-    }
-
-    public BigDecimal getRatio() {
-        return ratio;
-    }
 
     public MeasureUnitModel asNew() {
         this.saveNew = true;
@@ -67,5 +38,3 @@ public class MeasureUnitModel implements Persistable<String> {
         return this.saveNew;
     }
 }
-/*public record MeasureUnitModel(@Id String unit, String name, String base_unit, BigDecimal ratio)  {
-}*/

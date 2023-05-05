@@ -9,6 +9,9 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface CountryRepository extends ReactiveCrudRepository<CountryModel, String> {
 
+    @Query("SELECT * FROM countries ORDER BY iso_code;")
+    Flux<CountryModel> getAllOrdered();
+
     @Query("SELECT * FROM countries WHERE main = true;")
     Flux<CountryModel> mainCountryExists();
 }

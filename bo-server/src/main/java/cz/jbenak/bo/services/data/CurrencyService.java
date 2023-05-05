@@ -1,11 +1,12 @@
 package cz.jbenak.bo.services.data;
 
-import cz.jbenak.bo.models.data.CurrencyModel;
+import cz.jbenak.bo.models.data.mappers.CurrencyMapper;
 import cz.jbenak.bo.repositories.data.CurrencyRepository;
 import cz.jbenak.npos.api.client.CRUDResult;
 import cz.jbenak.npos.api.data.Currency;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -16,6 +17,7 @@ public class CurrencyService {
 
     private final static Logger LOGGER = LogManager.getLogger(CurrencyService.class);
     private CurrencyRepository repository;
+    private final CurrencyMapper mapper = Mappers.getMapper(CurrencyMapper.class);
 
     @Autowired
     public void setRepository(CurrencyRepository repository) {
@@ -24,12 +26,12 @@ public class CurrencyService {
 
     public Flux<Currency> getAllCurrencies() {
         LOGGER.info("All currencies will be loaded.");
-        return repository.findAll().map(this::modelToCurrency);
+        return repository.getAllOrdered().map(mapper::fromModel);
     }
 
     public Mono<Currency> getCurrency(String isoCode) {
         LOGGER.info("Currency with given ISO code '{}' will be loaded.", isoCode);
-        return repository.findById(isoCode).map(this::modelToCurrency);
+        return repository.findById(isoCode).map(mapper::fromModel);
     }
 
     public Mono<CRUDResult> storeCurrency(Currency currency) {
@@ -50,14 +52,9 @@ public class CurrencyService {
         return repository.findById(currency.getIsoCode())
                 .flatMap(model -> {
                     LOGGER.info("This currency has been found, so there will be done update in the database.");
-                    model.setIso_code(currency.getIsoCode());
-                    model.setName(model.getName());
-                    model.setSymbol(currency.getSymbol());
-                    model.setAcceptable(currency.isAcceptable());
-                    model.setMain(currency.isMain());
-                    return repository.save(model);
+                    return repository.save(mapper.toModel(currency));
                 })
-                .switchIfEmpty(repository.save(mapNewModel(currency)))
+                .switchIfEmpty(repository.save(mapper.toModel(currency).saveAsNew()))
                 .doOnSuccess(saved -> {
                     LOGGER.info("This currency has been saved successfully.");
                     result.setResultType(CRUDResult.ResultType.OK);
@@ -87,25 +84,5 @@ public class CurrencyService {
                     result.setMessage(err.getLocalizedMessage());
                 })
                 .onErrorReturn(result);
-    }
-
-    private Currency modelToCurrency(CurrencyModel model) {
-        Currency currency = new Currency();
-        currency.setIsoCode(model.getIso_code());
-        currency.setName(model.getName());
-        currency.setSymbol(model.getSymbol());
-        currency.setAcceptable(model.isAcceptable());
-        currency.setMain(model.isMain());
-        return currency;
-    }
-
-    private CurrencyModel mapNewModel(Currency currency) {
-        CurrencyModel model = new CurrencyModel();
-        model.setIso_code(currency.getIsoCode());
-        model.setName(currency.getName());
-        model.setSymbol(currency.getSymbol());
-        model.setAcceptable(currency.isAcceptable());
-        model.setMain(currency.isMain());
-        return model.saveAsNew();
     }
 }
