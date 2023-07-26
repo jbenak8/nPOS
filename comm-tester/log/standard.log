@@ -38,3 +38,5 @@ java.lang.IllegalStateException: Location is not set.
 11.02.2023 21:05:55.887 INFO  CommTester: Application version ${project.version} is starting
 11.02.2023 21:08:03.603 INFO  CommTester: Application nBOS BO client is starting. Loading application settings.
 11.02.2023 21:08:03.607 INFO  CommTester: Application version ${project.version} is starting
+18.06.2023 23:06:40.341 INFO  CommTester: Application nBOS BO client is starting. Loading application settings.
+18.06.2023 23:06:40.344 INFO  CommTester: Application version ${project.version} is starting

@@ -10,7 +10,7 @@
     <artifactId>communicator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>communicator</name>
-    <description>Special POS technology communicator.</description>
+    <description>Special POS technology communicator. WILL BE DISCONTINUED.</description>
     <dependencyManagement>
         <dependencies>
             <dependency>
